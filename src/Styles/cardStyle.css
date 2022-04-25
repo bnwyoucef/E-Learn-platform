@@ -1,0 +1,43 @@
+body {
+  background: #f0e5e1;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+img {
+  width: 80px;
+}
+
+/**
+    Component
+  **/
+
+label {
+  width: 100%;
+}
+
+.card-input-element {
+  display: none;
+}
+
+.card-input {
+  margin: 10px;
+  padding: 00px;
+}
+
+.card-input:hover {
+  cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+  box-shadow: 0 0 1px 1px #3f3086;
+}
