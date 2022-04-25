@@ -5,7 +5,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import {Avatar,Typography,Divider} from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -13,6 +12,7 @@ import axios from '../../Api/Axios'
 import { useState,useEffect } from 'react'
 import useStyles from '../Style'
 import AddTeacherForm from './AddTeacherForm'
+import RemoveTeacher from './RemoveTeacher'
 
 export default function TeacherList() {
 
@@ -21,11 +21,21 @@ export default function TeacherList() {
   const [searchedValue,setSearchedValue] = useState('')
   const [searchedList,setSearchedList] = useState([])
 
+  function compare( a, b ) {
+    if ( a.name.toUpperCase() < b.name.toUpperCase() ){
+      return -1;
+    }
+    if ( a.name.toUpperCase() > b.name.toUpperCase() ){
+      return 1;
+    }
+    return 0;
+  }
+
   async function getTeachers() {
     try {
       const response = await axios.get('http://localhost:5000/teacher/all')
-      setTeacherList(response.data.message)
-      setSearchedList(response.data.message)
+      setTeacherList(response.data.message.sort(compare))
+      setSearchedList(response.data.message.sort(compare))
     }catch(err) {
       console.log(err.message);
     }
@@ -35,7 +45,8 @@ export default function TeacherList() {
   /** get the searched teacher by name when the user typing in the search field **/
   useEffect(() => {
     const handleSearch = (inputValue) => {
-      const resultSearch = teacherList.filter((item) => item.name.includes(inputValue))
+      const resultSearch = teacherList.filter((item) => { return (item.name.toUpperCase().includes(inputValue.toUpperCase() )
+      || item.lastName.toUpperCase().includes(inputValue.toUpperCase()))})
       setSearchedList([...resultSearch])
     }
     handleSearch(searchedValue)
@@ -84,7 +95,7 @@ export default function TeacherList() {
         return (
           <ListItem
             key={value.id}
-            secondaryAction={<MoreVertIcon />}
+            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} />}
             disablePadding
             
           >
@@ -92,7 +103,7 @@ export default function TeacherList() {
               <ListItemAvatar>
                 <Avatar>{value.name.charAt(0).toUpperCase()}</Avatar>
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`${value.name}`} />
+              <ListItemText id={labelId} primary={`${value.name + ' ' + value.lastName}`} />
             </ListItemButton>
           </ListItem>
         );
