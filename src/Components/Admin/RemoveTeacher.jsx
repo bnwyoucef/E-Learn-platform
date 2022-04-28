@@ -21,7 +21,7 @@ export default function RemoveTeacher({ teacherId,fullName }) {
 
   const handleRemove = async () => {
       try {
-          const response = await axios.delete(`http://localhost:5000/teacher/delete/${teacherId}`)
+          await axios.delete(`teacher/delete/${teacherId}`)
           handleClose();
           window.location.reload();
       } catch (error) {

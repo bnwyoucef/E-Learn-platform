@@ -20,7 +20,7 @@ const AdminSign = () => {
         event.preventDefault();
         try {
             const user = {email, password}
-            const response = await axios.post('http://localhost:5000/admin/login',user
+            const response = await axios.post('admin/login',user
             ,{
                 headers: { 'Content-Type': 'application/json' },   
             })

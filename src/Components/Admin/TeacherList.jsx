@@ -14,7 +14,7 @@ import useStyles from '../Style'
 import AddTeacherForm from './AddTeacherForm'
 import RemoveTeacher from './RemoveTeacher'
 
-export default function TeacherList() {
+export default function TeacherList( {setTeacherObj} ) {
 
   const classes = useStyles()
   const [teacherList,setTeacherList] = useState([])
@@ -33,7 +33,7 @@ export default function TeacherList() {
 
   async function getTeachers() {
     try {
-      const response = await axios.get('http://localhost:5000/teacher/all')
+      const response = await axios.get('teacher/all')
       setTeacherList(response.data.message.sort(compare))
       setSearchedList(response.data.message.sort(compare))
     }catch(err) {
@@ -85,7 +85,7 @@ export default function TeacherList() {
       sx={{ width: "100%",height: "85%",overflow: "auto",bgcolor: "background.paper",
       //change the background color of item when it clicked
         '& .MuiListItemButton-root:focus': {
-          bgcolor: '#266fff',
+          bgcolor: '#7da9ff',
             color: 'white',
         },
       }}
@@ -95,6 +95,7 @@ export default function TeacherList() {
         return (
           <ListItem
             key={value.id}
+            onClick={e => setTeacherObj(value)}
             secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} />}
             disablePadding
             

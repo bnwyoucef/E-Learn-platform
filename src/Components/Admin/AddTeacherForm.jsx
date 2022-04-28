@@ -7,6 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Alert from '@mui/material/Alert';
 import { useState,useEffect } from 'react';
 import axios from '../../Api/Axios'
+import BasicSelect from './WilayaChose'
 
 export default function AddTeacherForm() {
   const [open, setOpen] = React.useState(false);
@@ -29,8 +30,9 @@ export default function AddTeacherForm() {
   const handleConfirm = async (event) => {
     event.preventDefault();
     const teacher = {name:firstName,lastName,email,password,wilaya}
+    console.log(teacher);
     try {
-        const response = await axios.post('http://localhost:5000/teacher/create',teacher,{
+        const response = await axios.post('teacher/create',teacher,{
             headers: { 'Content-Type': 'application/json' }})
             setCreateSuccess(response.data.success)
             setDisplayMsg(true)
@@ -54,65 +56,55 @@ export default function AddTeacherForm() {
         <DialogContent>
             {displayMsg && createSuccess && <Alert severity="success">Teacher created successfully</Alert>}
             {displayMsg && !createSuccess && <Alert severity="error">Oops Something went wrong!</Alert>}
-            <form>
-            <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="First name"
-                type="text"
-                fullWidth
-                variant="standard"
-                required
-                value= {firstName}
-                onChange= {e => setFirstName(e.target.value)}
-            />
-            <TextField
-                margin="dense"
-                id="name"
-                label="Last name"
-                type="text"
-                fullWidth
-                variant="standard"
-                required
-                value= {lastName}
-                onChange= {e => setLastName(e.target.value)}
-            />
-            <TextField
-                margin="dense"
-                id="name"
-                label="Email Address"
-                type="email"
-                fullWidth
-                variant="standard"
-                required
-                value= {email}
-                onChange= {e => setEmail(e.target.value)}
-            />
-            <TextField
-                margin="dense"
-                id="name"
-                label="Password"
-                type="password"
-                fullWidth
-                variant="standard"
-                required
-                value= {password}
-                onChange= {e => setPassword(e.target.value)}
-            />
-            <TextField
-                margin="dense"
-                id="name"
-                label="Wilaya"
-                type="text"
-                fullWidth
-                variant="standard"
-                required
-                value= {wilaya}
-                onChange= {e => setWilaya(e.target.value)}
-            />
-            <Button type="submit" onClick={handleConfirm} style={{float:'right',marginTop:'30px'}}>Confirme</Button>
-            <Button onClick={handleClose} style={{float:'right',marginTop:'30px'}}>Cancel</Button>
+            <form onSubmit={handleConfirm}>
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="First name"
+                  type="text"
+                  fullWidth
+                  variant="outlined"
+                  required
+                  value= {firstName}
+                  onChange= {e => setFirstName(e.target.value)}
+              />
+              <TextField
+                  margin="dense"
+                  id="name"
+                  label="Last name"
+                  type="text"
+                  fullWidth
+                  variant="outlined"
+                  required
+                  value= {lastName}
+                  onChange= {e => setLastName(e.target.value)}
+              />
+              <TextField
+                  margin="dense"
+                  id="name"
+                  label="Email Address"
+                  type="email"
+                  fullWidth
+                  variant="outlined"
+                  required
+                  value= {email}
+                  onChange= {e => setEmail(e.target.value)}
+              />
+              <TextField
+                  margin="dense"
+                  id="name"
+                  label="Password"
+                  type="password"
+                  fullWidth
+                  variant="outlined"
+                  required
+                  value= {password}
+                  onChange= {e => setPassword(e.target.value)}
+              />
+              <BasicSelect wilaya = { wilaya } setWilaya = {setWilaya}/>
+              <Button type="submit" style={{float:'right',marginTop:'30px'}}>Confirme</Button>
+              <Button onClick={handleClose} style={{float:'right',marginTop:'30px'}}>Cancel</Button>
             </form>
         </DialogContent>
       </Dialog>

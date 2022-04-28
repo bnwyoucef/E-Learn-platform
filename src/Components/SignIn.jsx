@@ -51,11 +51,10 @@ const SignIn = () => {
       const user = {email,password}
       let userType = '';
       isTeacher ? userType = 'teacher/login' : userType = 'student/login'
-      const response = await axios.post(`http://localhost:5000/${userType}`, user,{
+      const response = await axios.post(`${userType}`, user,{
         headers: { 'Content-Type': 'application/json' },
       });
-      // const user = {id:1,levelId:3,semester:1,name:'Analyse Numerique',shortName:'ANUM',description:'',imageUrl:'',created_at:'',updated_at:''};
-      //const response = await axios.post('http://localhost:5000/module/create',user)
+      
       setIsOk(response.data.success)
       const loginSucceeded = response.data.success
       localStorage.setItem('loginStatus',JSON.stringify({loginSucceeded,isTeacher}));

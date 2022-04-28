@@ -10,14 +10,17 @@ import { useState,useEffect } from 'react'
 import BookIcon from '@mui/icons-material/Book';
 import useStyles from '../Style'
 
-const ModuleList = () => {
+const ModuleList = ( {teacherObj} ) => {
     const classes = useStyles()
     const [moduleList,setModuleList] = useState([])
 
   async function getModules() {
     try {
-      const response = await axios.get('http://localhost:5000/module/all')
-      setModuleList(response.data.message)
+      console.log(teacherObj);
+      if(!teacherObj) {
+        const response = await axios.get(`teacher/modulesOfTeacher/${teacherObj.id}`)
+        setModuleList(response.data.message)
+      }
     }catch(err) {
       console.log(err.message);
     }
