@@ -1,7 +1,8 @@
 import React from 'react'
 import { Grid } from '@mui/material'
 import AdminSideBar from './AdminSideBar'
-import AdminContent from './AdminContent'
+import TeacherContent from './TeacherContent'
+import StudentContent from './StudentManage/StudentContent'
 
 const AdminDashBord = () => {
   return (
@@ -11,7 +12,7 @@ const AdminDashBord = () => {
           <AdminSideBar />
         </Grid>
         <Grid item xs={9.9} >
-          <AdminContent />
+          <StudentContent />
         </Grid>
       </Grid>
     </div>

@@ -9,7 +9,7 @@ import { useState,useEffect } from 'react';
 import axios from '../../Api/Axios'
 import BasicSelect from './WilayaChose'
 
-export default function AddTeacherForm() {
+export default function AddTeacherForm( {userType} ) {
   const [open, setOpen] = React.useState(false);
   const [firstName,setFirstName] = useState('');
   const [lastName,setLastName] = useState('');
@@ -32,7 +32,7 @@ export default function AddTeacherForm() {
     const teacher = {name:firstName,lastName,email,password,wilaya}
     console.log(teacher);
     try {
-        const response = await axios.post('teacher/create',teacher,{
+        const response = await axios.post(`${userType}/create`,teacher,{
             headers: { 'Content-Type': 'application/json' }})
             setCreateSuccess(response.data.success)
             setDisplayMsg(true)

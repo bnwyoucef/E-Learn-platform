@@ -75,7 +75,7 @@ export default function TeacherList( {setTeacherObj} ) {
           onChange={e => setSearchedValue(e.target.value)}
         />
         <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-          <AddTeacherForm />
+          <AddTeacherForm userType = {'teacher'}/>
         </div>
       </div>
       <Divider />

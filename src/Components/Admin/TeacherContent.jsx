@@ -6,7 +6,7 @@ import { Grid,Typography  } from '@mui/material'
 import { useState,useEffect } from 'react'
 import axios from '../../Api/Axios'
 
-const AdminContent = () => {
+const TeacherContent = () => {
   const [teacherObj,setTeacherObj] = useState({})
 
   function compare( a, b ) {
@@ -56,4 +56,4 @@ const AdminContent = () => {
   )
 }
 
-export default AdminContent
+export default TeacherContent
