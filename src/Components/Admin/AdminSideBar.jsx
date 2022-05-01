@@ -34,7 +34,7 @@ const AdminSideBar = () => {
         <Drawer
           PaperProps={{
             sx: {
-            backgroundColor: "#266fff",
+            backgroundColor: "#007AFF",
             color: "white",
             }
         }}

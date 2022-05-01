@@ -1,6 +1,6 @@
 import React from 'react'
 import useStyles from '../../Style'
-import {Button,Typography,Divider} from "@mui/material";
+import {Button,Typography,TextField} from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -26,20 +26,22 @@ const StudentManagement = () => {
         </div>
       </div>
       <Box sx={{ minWidth: 120 }}>
-      <FormControl sx={{ width: 250 }} >
-        <InputLabel id="demo-simple-select-label">Group</InputLabel>
-        <Select
+        <TextField
+          size='small'
+          sx={{ width: '300px',marginLeft:'10px' }}
+          style={{ backgroundColor:'rgba(15,76,117,0.07)',borderRadius:'20px',color:'rgba(15, 76, 117, 0.6)'}}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={group}
+          select
           label="group"
           onChange={handleChange}
         >
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
+        </TextField>
+
     </Box>
     </div>
   )
