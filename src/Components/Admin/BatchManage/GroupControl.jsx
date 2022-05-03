@@ -56,7 +56,7 @@ const GroupControl = () => {
         return (
           <ListItem
             key={value.id}
-            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'level'}/>}
+            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'group'} name= {value.name}/>}
             disablePadding  
           >
             <ListItemButton>

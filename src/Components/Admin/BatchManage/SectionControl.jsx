@@ -55,7 +55,7 @@ const SectionControl = () => {
         return (
           <ListItem
             key={value.id}
-            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'level'}/>}
+            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'section'} name= {value.name}/>}
             disablePadding  
           >
             <ListItemButton>

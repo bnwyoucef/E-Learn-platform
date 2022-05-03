@@ -55,7 +55,7 @@ function BatchesControl() {
         return (
           <ListItem
             key={value.id}
-            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'level'}/>}
+            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'batch'} name= {value.name}/>}
             disablePadding  
           >
             <ListItemButton>

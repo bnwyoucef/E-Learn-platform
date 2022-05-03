@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from '@mui/material';
 import axios from '../../../Api/Axios'
 
-const RemoveConfirm = () => {
+const RemoveConfirm = ( {removeId,type,name} ) => {
 
     const [open, setOpen] = React.useState(false);
 
@@ -23,7 +23,7 @@ const RemoveConfirm = () => {
   
     const handleRemove = async () => {
         try {
-            //await axios.delete(`teacher/delete/${teacherId}`)
+            await axios.delete(`${type}/delete/${removeId}`)
             handleClose();
             window.location.reload();
         } catch (error) {
@@ -47,7 +47,7 @@ const RemoveConfirm = () => {
         </DialogTitle>
         <DialogContent>
             <DialogContentText id="alert-dialog-description">
-                Are you sure to delete  ?
+                Are you sure to delete {name}?
             </DialogContentText>
         </DialogContent>
         <DialogActions>

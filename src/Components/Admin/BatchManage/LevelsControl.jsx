@@ -13,7 +13,7 @@ import axios from '../../../Api/Axios'
 
 const LevelsControl = () => {
     const classes = useStyles()
-    const [levelList,setLevelList] = useState([{id:2,name:'ahmed',lastName:'HELLO'}])
+    const [levelList,setLevelList] = useState([])
 
     useEffect(() => {
         const getLevels = async () => {
@@ -54,7 +54,7 @@ const LevelsControl = () => {
         return (
           <ListItem
             key={value.id}
-            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'level'}/>}
+            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'level'} name= {value.name}/>}
             disablePadding  
           >
             <ListItemButton>
