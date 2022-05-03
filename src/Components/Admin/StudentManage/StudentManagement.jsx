@@ -1,11 +1,7 @@
 import React from 'react'
-import useStyles from '../../Style'
 import {Button,Typography,TextField} from "@mui/material";
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { useState } from 'react'
 
 const StudentManagement = () => {
@@ -14,7 +10,7 @@ const StudentManagement = () => {
   const handleChange = (event) => {
     setGroup(event.target.value);
   };
-  const classes = useStyles()
+  
   return (
     <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '28vh'}}>
       <div style={{height: '25%',display:'flex',alignItems: 'center',marginLeft: 10,}}>

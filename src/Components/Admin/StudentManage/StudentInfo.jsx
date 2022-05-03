@@ -1,10 +1,9 @@
 import React from 'react'
-import useStyles from '../../Style'
-import {Button,Typography,Divider} from "@mui/material";
+import {Typography} from "@mui/material";
 
 
 const StudentInfo = () => {
-  const classes = useStyles()
+
   return (
     <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '28vh'}}>
       <div style={{height: '25%',display:'flex',alignItems: 'center',marginLeft: 10,}}>
