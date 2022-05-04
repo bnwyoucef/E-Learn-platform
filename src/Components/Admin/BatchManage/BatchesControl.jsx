@@ -36,7 +36,7 @@ function BatchesControl() {
                 Batches
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <Button variant="contained" style={{marginRight: 10,backgroundColor:'#007AFF'}}>add Batch</Button>
+                <Button variant="contained" size="small" style={{marginRight: 10,backgroundColor:'#007AFF'}}>add Batch</Button>
             </div>
         </div>
     <List

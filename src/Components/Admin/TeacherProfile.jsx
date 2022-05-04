@@ -8,7 +8,10 @@ const TeacherProfile = ({teacherObj: recievedObj}) => {
 
   return (
     <div className={classes.teacherprofile}>
-      <Avatar sx={{ bgcolor: '#266fff',color: 'white',marginTop:'20px',height:'90px',width:'90px'}} alt="Remy Sharp" src={`https://1sc-project-backend-production.up.railway.app/teacher/profile-image/${recievedObj.profileImage}`} />
+      <Avatar 
+        sx={{ bgcolor: '#266fff',color: 'white',marginTop:'20px',height:'90px',width:'90px'}}     alt="Remy Sharp"
+        src={`https://1sc-project-backend-production.up.railway.app/teacher/profile-image/${recievedObj.profileImage}`}
+      />
       <div style={{backgroundColor:'rgba(15,76,117,0.07)',width:'90%',borderRadius:'5px',marginTop:'20px'}}>
         <Typography variant="subtitle1" style={{marginLeft:'10px',color:'#266fff'}}>
             First name

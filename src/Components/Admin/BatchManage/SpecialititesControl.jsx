@@ -35,7 +35,7 @@ const SpecialititesControl = () => {
                 Specialitites
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <Button variant="contained" style={{marginRight: 10,backgroundColor:'#007AFF'}}>add Speciality</Button>
+                <Button variant="contained" size="small" style={{marginRight: 10,backgroundColor:'#007AFF'}}>add Speciality</Button>
             </div>
         </div>
     <List

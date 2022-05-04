@@ -12,7 +12,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 const optionListTop = ["gestion des enseignants","gestion des étudiants","Gestion des Salles","Emploi du temps"]
 const optionListBtm = ["Logs","Chat","Paramètres","Exit"] 
 
-const AdminSideBar = () => {
+const AdminSideBar = ( {setBrowse} ) => {
 
     function optionIcon(list,index) {
         switch(index) {
@@ -72,7 +72,7 @@ const AdminSideBar = () => {
                 }}
             >
                 {optionListTop.map((text, index) => (
-                    <ListItem button key={text}>
+                    <ListItem button key={text} onClick={() => setBrowse(text)}>
                     <ListItemIcon >
                         {optionIcon(true,index)}
                     </ListItemIcon>

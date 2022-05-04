@@ -48,7 +48,7 @@ export default function AddTeacherForm( {userType} ) {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen} style= {{marginRight: 10}}>
+      <Button variant="contained" onClick={handleClickOpen} size="small" style= {{marginRight: 10}}>
         Add Teacher
       </Button>
       <Dialog open={open} onClose={handleClose}>
