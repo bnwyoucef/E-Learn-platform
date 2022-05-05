@@ -8,12 +8,13 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import ChatIcon from '@mui/icons-material/Chat';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const optionListTop = ["gestion des enseignants","gestion des étudiants","Gestion des Salles","Emploi du temps"]
 const optionListBtm = ["Logs","Chat","Paramètres","Exit"] 
 
 const AdminSideBar = ( {setBrowse} ) => {
-
+    const [isHim,setIsHim] = React.useState(true)
     function optionIcon(list,index) {
         switch(index) {
             case 0:
@@ -64,15 +65,27 @@ const AdminSideBar = ( {setBrowse} ) => {
                 //change the background color of item when it clicked
                 '& .MuiListItem-root:focus': {
                     bgcolor: 'white',
-                    borderRadius: 2,
+                    borderRadius: 3,
                     '&, & .MuiListItemIcon-root': {
                         color: '#266fff',
                     },
                 },
                 }}
             >
+                <ListItem button
+                    autoFocus
+                    onClick={() => setBrowse('dashboard') }
+                >
+                <ListItemIcon >
+                    <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Dashboard'} />
+                </ListItem>
+
                 {optionListTop.map((text, index) => (
-                    <ListItem button key={text} onClick={() => setBrowse(text)}>
+                    <ListItem button key={text}   
+                        onClick={() => setBrowse(text) }
+                    >
                     <ListItemIcon >
                         {optionIcon(true,index)}
                     </ListItemIcon>

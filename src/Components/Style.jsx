@@ -28,7 +28,20 @@ const useStyles = makeStyles((theme) => ({
     },
     chosenTeacher: {
         
-    } 
+    },
+    nouvelHeader: {
+        backgroundColor: 'white',
+        width: '340px',
+        height: '140px',
+        borderRadius: '4px',
+        '&:hover': {
+            backgroundColor: '#2196F3',
+        },
+        display:'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    }
 }))
 
 export default useStyles;

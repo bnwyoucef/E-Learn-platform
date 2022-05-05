@@ -4,12 +4,15 @@ import AdminSideBar from './AdminSideBar'
 import TeacherContent from './TeacherContent'
 import StudentContent from './StudentManage/StudentContent'
 import BatchContent from './BatchManage/BatchContent'
+import DashBoardContent from './DashBoardManage/DashBoardContent'
 import { useState } from 'react'
 
 const AdminDashBord = () => {
-  const [browse,setBrowse] = useState('gestion des enseignants')
+  const [browse,setBrowse] = useState('dashboard')
   function broswsingPage(page) {
     switch(page) {
+      case 'dashboard':
+        return  <DashBoardContent />
       case 'gestion des enseignants':
         return  <TeacherContent />
       case 'gestion des étudiants':
