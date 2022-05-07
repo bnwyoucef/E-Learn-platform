@@ -3,6 +3,7 @@ import { Grid } from '@mui/material'
 import NouvelHeader from './NouvelHeader'
 import SeanceEnCours from './SeanceEnCours'
 import Calendar from './Calendar'
+import NouvelAprove from './NouvelAprove'
 
 const DashBoardContent = () => {
   return (
@@ -14,17 +15,13 @@ const DashBoardContent = () => {
             description = {'description'}
           />
         </Grid>
-        <Grid item xs={12} sm={4} 
-          style={{display: 'flex',justifyContent: 'center'}}
-        >
+        <Grid item xs={12} sm={4}>
           <NouvelHeader
             nouvel = {'Nouvelle'}
             description = {'description'}
           />
         </Grid>
-        <Grid item xs={12} sm={4}
-          style={{display: 'flex',justifyContent: 'flex-end'}}
-        >
+        <Grid item xs={12} sm={4}>
           <NouvelHeader             
             nouvel = {'Nouvelle'}
             description = {'description'}
@@ -36,8 +33,8 @@ const DashBoardContent = () => {
         <Grid item xs={12} sm={4}>
           <Calendar />
         </Grid>
-        <Grid item xs={12} sm={4}>
-          nouvel a aprove
+        <Grid item xs={12} sm={12}>
+          <NouvelAprove />
         </Grid>
       </Grid>
     </div>

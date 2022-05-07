@@ -8,10 +8,9 @@ import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 const Calendar = () => {
     const [date, setDate] = React.useState(new Date());
   return (
-    <div>
+    <div style={{width:'100%', height:'400px',backgroundColor: 'white',borderRadius:'4px'}}>
         <LocalizationProvider dateAdapter={AdapterDateFns} >
-            <CalendarPicker date={date} onChange={(newDate) => setDate(newDate)} 
-            style={{width:'100%', height:'400px',backgroundColor: 'white',borderRadius:'4px'}}/>
+            <CalendarPicker date={date} onChange={(newDate) => setDate(newDate)} />
         </LocalizationProvider>
     </div>
 

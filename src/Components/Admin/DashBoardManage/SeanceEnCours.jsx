@@ -1,9 +1,64 @@
 import React from 'react'
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import {Typography,Divider} from "@mui/material";
+import Brightness1Icon from '@mui/icons-material/Brightness1';
+import axios from '../../../Api/Axios'
+import { useState,useEffect } from 'react'
+import useStyles from '../../Style'
 
-const SeanceEnCours = () => {
+const SeanceEnCours = ( {teacherObj} ) => {
+    const classes = useStyles()
+    const [moduleList,setModuleList] = useState([])
+
+  async function getModules() {
+    try {
+      console.log(teacherObj);
+      if(!teacherObj) {
+        const response = await axios.get(`teacher/all`)
+        setModuleList(response.data.message)
+      }
+    }catch(err) {
+      console.log(err.message);
+    }
+  }
+
+  useEffect(getModules,[])
+
   return (
     <div style={{width:'100%', height:'400px',backgroundColor: 'white',borderRadius:'4px'}}>
-      
+    <div className={classes.teacherListHeader}>
+      <Typography variant="h6" style={{flex: 1}}>
+        Séances en cours
+      </Typography>
+    </div>
+    <Divider />
+  <List
+    dense
+    disablePadding
+    sx={{ width: "100%",height: "85%",overflow: "auto",bgcolor: "background.paper"}}
+  >
+    {moduleList.map((value) => {
+      const labelId = `checkbox-list-secondary-label-${value.id}`;
+      return (
+        <div key={value.id} >
+            <ListItem
+                key={value.id}
+                disablePadding
+            >
+                <ListItemButton>
+                    <Brightness1Icon style={{color:'#36A324DE',width:'15px',height:'15px'}}/>
+                    <ListItemText id={labelId} primary={`${value.name}`}  secondary="Mr.Amroune" style = {{marginLeft: '10px'}}/>
+                    <ListItemText id={labelId} primary={`${value.lastName}`} />  
+                </ListItemButton>
+                </ListItem>
+            
+        </div>
+      );
+    })}
+    </List>
     </div>
   )
 }

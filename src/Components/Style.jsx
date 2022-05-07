@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
     nouvelHeader: {
         backgroundColor: 'white',
-        width: '340px',
+        width: '100%',
         height: '140px',
         borderRadius: '4px',
         '&:hover': {
