@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://1sc-project-backend-production.up.railway.app/",
+  baseURL: "https://schoolsystemmanagement-production.up.railway.app/",
 });

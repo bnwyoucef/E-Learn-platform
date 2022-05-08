@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
     },
     teacherListHeader: {
-        height: '15%',
+        height: '70px',
         display: 'flex',
         alignItems: "center",
         marginLeft: 10,

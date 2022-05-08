@@ -5,6 +5,7 @@ import TeacherContent from './TeacherContent'
 import StudentContent from './StudentManage/StudentContent'
 import BatchContent from './BatchManage/BatchContent'
 import DashBoardContent from './DashBoardManage/DashBoardContent'
+import SalleContent from './SalleManage/SalleContent'
 import { useState } from 'react'
 
 const AdminDashBord = () => {
@@ -18,7 +19,7 @@ const AdminDashBord = () => {
       case 'gestion des étudiants':
         return <StudentContent />
       case 'Gestion des Salles':
-        return <BatchContent />
+        return <SalleContent />
       default: 
         return
     }
