@@ -33,7 +33,7 @@ const StudentContent = () => {
 
   return (
     <div>
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
             <Grid item xs={12}>
                 <div style={{backgroundColor:'white',borderRadius: '10px',height:'15vh',display: 'flex',alignItems: 'center'}}>
                 <img src={`${require('../../../images/Logo_png.png')}`} alt="logo classtek" style={{marginLeft:'10px'}}/>

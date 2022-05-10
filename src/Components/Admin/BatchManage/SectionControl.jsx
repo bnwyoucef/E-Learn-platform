@@ -18,7 +18,7 @@ const SectionControl = () => {
     useEffect(() => {
         const getSections = async () => {
             try {
-                const response = await axios.get('section/all')
+                const response = await axios.get('level/all')
                 setLevelList(response.data.message)
                 console.log('section : ',response.data);
             }catch (e) {

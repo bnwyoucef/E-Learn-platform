@@ -10,6 +10,7 @@ import RemoveConfirm from '../BatchManage/RemoveConfirm'
 import { useState,useEffect } from 'react'
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import axios from '../../../Api/Axios'
+import AddRoom from './AddRoom'
 
 const RoomStatus = () => {
     const classes = useStyles()
@@ -20,7 +21,7 @@ const RoomStatus = () => {
             try {
                 const response = await axios.get('sale/all')
                 setSaleList(response.data.message)
-                console.log(response.data.message)
+                console.log(response.data.message)  
             }catch (e) {
                 console.log(e.message);
             }
@@ -36,7 +37,7 @@ const RoomStatus = () => {
                 Rooms
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <Button variant="contained" size="small" style={{marginRight: 10,backgroundColor:'#007AFF'}}>add Room</Button>
+                <AddRoom />
             </div>
         </div>
         <Divider />
@@ -51,19 +52,19 @@ const RoomStatus = () => {
             },
         }}
         >
-        {saleList.map((value) => {
-            const labelId = `checkbox-list-secondary-label-${value.id}`;
+        {saleList.map((room) => {
+            const labelId = `checkbox-list-secondary-label-${room.id}`;
             return (
             <ListItem
-                key={value.id}
-                secondaryAction={<RemoveConfirm removeId = {value.id} type= {'level'} name= {value.name}/>}
+                key={room.id}
+                secondaryAction={<RemoveConfirm removeId = {room.id} type= {'sale'} name= {room.name}/>}
                 disablePadding  
             >
                 <ListItemButton>
                 <ListItemAvatar>
                     <MeetingRoomIcon style = {{color:'#3282B8',marginLeft:'10px'}}/>
                 </ListItemAvatar>
-                <ListItemText id={labelId} primary={`${value.name}`} />
+                <ListItemText id={labelId} primary={`${room.name}`} />
                 </ListItemButton>
             </ListItem>
             );

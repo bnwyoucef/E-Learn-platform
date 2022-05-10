@@ -10,22 +10,21 @@ import useStyles from '../../Style'
 
 const NouvelAprove = ( {teacherObj} ) => {
     const classes = useStyles()
-    const [moduleList,setModuleList] = useState([])
+    const [nouvelList,setNouvelList] = useState([])
 
-  async function getModules() {
+  async function getNouvelsAprove() {
     try {
       console.log(teacherObj);
       if(!teacherObj) {
         const response = await axios.get(`news/news_to_approve`)
-        console.log(response.data.message);
-        setModuleList(response.data.message)
+        setNouvelList(response.data.message)
       }
     }catch(err) {
       console.log(err.message);
     }
   }
 
-  useEffect(getModules,[])
+  useEffect(getNouvelsAprove,[])
 
   return (
     <div style={{width:'100%', height:'400px',border: '1px solid #E5E5E5',
@@ -42,16 +41,16 @@ const NouvelAprove = ( {teacherObj} ) => {
             disablePadding
             sx={{ width: "100%",height: "85%",overflow: "auto",bgcolor: "background.paper"}}
         >
-            {moduleList.map((value) => {
-                const labelId = `checkbox-list-secondary-label-${value.id}`;
+            {nouvelList.map((nouvel) => {
+                const labelId = `checkbox-list-secondary-label-${nouvel.new_Id}`;
                 return (
-                    <div key={value.id} style={{border: "1px solid #E5E5E5",margin:'5px',borderRadius:'4px'}}>
+                    <div key={nouvel.new_Id} style={{border: "1px solid #E5E5E5",margin:'5px',borderRadius:'4px'}}>
                         <ListItem
-                            key={value.id}
+                            key={nouvel.new_Id}
                             disablePadding
                         >
                             <ListItemButton>
-                                <ListItemText id={labelId} primary={`${value.name}`}  secondary="Discription" /> 
+                                <ListItemText id={labelId} primary={`${nouvel.message}`}  secondary="Discription" /> 
                             </ListItemButton>
                             <img src={'https://picsum.photos/200'} alt='nouvel' style={{margin:'5px'}} />
                         </ListItem>

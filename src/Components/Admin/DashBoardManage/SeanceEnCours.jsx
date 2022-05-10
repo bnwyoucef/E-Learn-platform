@@ -17,7 +17,7 @@ const SeanceEnCours = ( {teacherObj} ) => {
     try {
       console.log(teacherObj);
       if(!teacherObj) {
-        const response = await axios.get(`teacher/all`)
+        const response = await axios.get(`student/all`)
         setModuleList(response.data.message)
       }
     }catch(err) {
@@ -46,7 +46,7 @@ const SeanceEnCours = ( {teacherObj} ) => {
         <div key={value.id} >
             <ListItem
                 key={value.id}
-                disablePadding
+                disablePadding  
             >
                 <ListItemButton>
                     <Brightness1Icon style={{color:'#36A324DE',width:'15px',height:'15px'}}/>
