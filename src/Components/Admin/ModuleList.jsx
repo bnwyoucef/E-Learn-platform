@@ -28,7 +28,7 @@ const ModuleList = ( {teacherObj} ) => {
 
   useEffect(getModules,[])
   return (
-    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '40vh'}}>
+    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '40vh',border:'1px solid #E5E5E5'}}>
     <div className={classes.teacherListHeader}>
       <Typography variant="h6" style={{flex: 1}}>
         Modules

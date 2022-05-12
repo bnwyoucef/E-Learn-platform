@@ -3,6 +3,7 @@ import StudentsList from './StudentsList'
 import TeacherProfile from '../TeacherProfile'
 import StudentManagement from './StudentManagement'
 import StudentInfo from './StudentInfo'
+import Header from '../Header'
 import { Grid,Typography  } from '@mui/material'
 import { useState,useEffect } from 'react'
 import axios from '../../../Api/Axios'
@@ -35,12 +36,7 @@ const StudentContent = () => {
     <div>
         <Grid container spacing={1}>
             <Grid item xs={12}>
-                <div style={{backgroundColor:'white',borderRadius: '10px',height:'15vh',display: 'flex',alignItems: 'center'}}>
-                <img src={`${require('../../../images/Logo_png.png')}`} alt="logo classtek" style={{marginLeft:'10px'}}/>
-                <Typography variant="h5" style={{marginLeft:'auto',marginRight: '20px',color:'#266fff'}}>
-                    CLASSTEK
-                </Typography>
-                </div>
+                <Header/>
             </Grid>
             <Grid item xs={8} >
                 <StudentsList  setStudentObj = {setStudentObj}/>

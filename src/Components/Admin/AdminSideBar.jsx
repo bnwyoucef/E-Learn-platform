@@ -40,6 +40,7 @@ const AdminSideBar = ( {setBrowse} ) => {
           PaperProps={{
             sx: {
             backgroundColor: "#007AFF",
+            background: 'linear-gradient(177.14deg, #007AFF 78.29%, #BBE1FA 105.35%)',
             color: "white",
             }
         }}
@@ -58,9 +59,10 @@ const AdminSideBar = ( {setBrowse} ) => {
                     user name
                 </Typography>
             </Toolbar>
-            <Divider />
             <List 
                 sx={{marginTop:'20px',
+                    paddingLeft:'10px',
+                    paddingRight:'10px',
                 '& .MuiListItem-root': {
                     '&, & .MuiListItemIcon-root': {
                         color: 'white',
@@ -69,7 +71,7 @@ const AdminSideBar = ( {setBrowse} ) => {
                 //change the background color of item when it clicked
                 '& .MuiListItem-root:focus': {
                     bgcolor: 'white',
-                    borderRadius: 3,
+                    borderRadius: '10px',
                     '&, & .MuiListItemIcon-root': {
                         color: '#266fff',
                     },
@@ -98,7 +100,7 @@ const AdminSideBar = ( {setBrowse} ) => {
                 ))}
             </List>
             
-            <List style={{ marginTop:'auto',marginBottom:'10px' }}
+            <List style={{ marginTop:'auto',marginBottom:'10px',paddingRight:'10px',paddingLeft:'10px' }}
               sx={{marginTop:'20px',
               '& .MuiListItem-root': {
                   '&, & .MuiListItemIcon-root': {

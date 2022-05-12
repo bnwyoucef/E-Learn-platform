@@ -49,7 +49,7 @@ export default function ChangePasswordDialog({teacherId}) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} style={{marginTop:'30px'}}>
+      <Button variant="contained" onClick={handleClickOpen} style={{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginTop: 30}}>
         Change Password
       </Button>
       <Dialog open={open} onClose={handleClose} fullWidth>

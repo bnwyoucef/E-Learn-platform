@@ -31,7 +31,7 @@ const RoomStatus = () => {
     },[])
 
   return (
-    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '600px',overflow:'auto'}}>
+    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '600px',overflow:'auto',border:'1px solid #E5E5E5'}}>
         <div className={classes.teacherListHeader}>
             <Typography variant="h6" style={{flex: 1}}>
                 Rooms

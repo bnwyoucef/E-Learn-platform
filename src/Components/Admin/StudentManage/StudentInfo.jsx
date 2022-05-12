@@ -5,7 +5,7 @@ import {Typography} from "@mui/material";
 const StudentInfo = () => {
 
   return (
-    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '28vh'}}>
+    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '28vh',border:'1px solid #E5E5E5'}}>
       <div style={{height: '25%',display:'flex',alignItems: 'center',marginLeft: 10,}}>
           <Typography variant="h6">
             Student Info

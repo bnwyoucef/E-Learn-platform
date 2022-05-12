@@ -57,7 +57,7 @@ const StudentsList = ( {setStudentObj} ) => {
     },[searchedValue])
 
   return (
-    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh'}}>
+    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh',border:'1px solid #E5E5E5'}}>
       <div className={classes.teacherListHeader}>
         <Typography variant="h6" style={{flex: 1}}>
           Students

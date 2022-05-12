@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: "center",
         borderRadius: 10,
+        border : '1px solid #E5E5E5'
     },
     teacherListHeader: {
         height: '70px',

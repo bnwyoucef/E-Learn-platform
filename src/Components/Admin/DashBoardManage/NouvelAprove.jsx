@@ -27,7 +27,7 @@ const NouvelAprove = ( {teacherObj} ) => {
   useEffect(getNouvelsAprove,[])
 
   return (
-    <div style={{width:'100%', height:'400px',border: '1px solid #E5E5E5',
+    <div style={{border:'1px solid #E5E5E5',width:'100%' ,height:'400px',border: '1px solid #E5E5E5',
         backgroundColor: 'white',     borderRadius:'4px'}}
     >
         <div className={classes.teacherListHeader}>
