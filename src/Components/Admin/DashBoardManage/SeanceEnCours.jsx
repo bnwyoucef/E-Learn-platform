@@ -12,6 +12,10 @@ import useStyles from '../../Style'
 const SeanceEnCours = ( {teacherObj} ) => {
     const classes = useStyles()
     const [moduleList,setModuleList] = useState([])
+    const courList = [{module:"Algorithme",teacher:"Mr.Simoh",salle:"salle A1"}
+  ,{module:"Reseaux",teacher:"Mr.Azza",salle:"salle S2"}
+  ,{module:"IGL",teacher:"Mr.Bensliman",salle:"salle S3"}
+  ,{module:"Analyse",teacher:"Mr.Amroune",salle:"salle A2"}]
 
   async function getModules() {
     try {
@@ -40,18 +44,18 @@ const SeanceEnCours = ( {teacherObj} ) => {
     disablePadding
     sx={{ width: "100%",height: "85%",overflow: "auto",bgcolor: "background.paper"}}
   >
-    {moduleList.map((value) => {
+    {courList.map((value) => {
       const labelId = `checkbox-list-secondary-label-${value.id}`;
       return (
-        <div key={value.id} >
+        <div key={value.salle} >
             <ListItem
                 key={value.id}
                 disablePadding  
             >
                 <ListItemButton>
                     <Brightness1Icon style={{color:'#36A324DE',width:'15px',height:'15px'}}/>
-                    <ListItemText id={labelId} primary={`${value.name}`}  secondary="Mr.Amroune" style = {{marginLeft: '10px'}}/>
-                    <ListItemText id={labelId} primary={`${value.lastName}`} />  
+                    <ListItemText id={labelId} primary={`${value.module}`}  secondary={value.teacher} style = {{marginLeft: '10px',width:'60px'}}/>
+                    <ListItemText id={labelId} style={{textAlign: 'center'}} primary={`${value.salle}`} />  
                 </ListItemButton>
                 </ListItem>
             

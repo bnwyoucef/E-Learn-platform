@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function BasicSelect( {ChoseList,choseType,setLevel,setBatch,setSection} ) {
+export default function BasicSelect( {ChoseList,choseType,setLevel,setSpeciality,setSection} ) {
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -16,8 +16,8 @@ export default function BasicSelect( {ChoseList,choseType,setLevel,setBatch,setS
         case 'Section':
             setSection(event.target.value)
             break;
-        case 'Batches':
-            setBatch(event.target.value)
+        case 'speciality':
+            setSpeciality(event.target.value)
             break;
         default:
             break;
@@ -37,7 +37,7 @@ export default function BasicSelect( {ChoseList,choseType,setLevel,setBatch,setS
             onChange={handleChange}
         >
            {ChoseList.map((item,index) => {
-                return <MenuItem value={item} key={index}>{item}</MenuItem>
+                return <MenuItem value={item.name} key={index}>{item.name}</MenuItem>
             })}
         </Select>
       </FormControl>

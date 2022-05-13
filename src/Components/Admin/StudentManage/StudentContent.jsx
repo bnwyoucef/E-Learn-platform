@@ -46,7 +46,7 @@ const StudentContent = () => {
                 <StudentsList  setStudentObj = {setStudentObj}/>
             </Grid>
             <Grid item xs={4}>
-                <TeacherProfile teacherObj = {studentObj}/>
+                <TeacherProfile teacherObj = {studentObj} type = {"student"}/>
             </Grid>
             <Grid item xs={8}>
                 <StudentManagement />

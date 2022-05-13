@@ -96,7 +96,7 @@ export default function TeacherList( {setTeacherObj} ) {
           <ListItem
             key={value.id}
             onClick={e => setTeacherObj(value)}
-            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} />}
+            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} type = {"teacher"}/>}
             disablePadding
             
           >

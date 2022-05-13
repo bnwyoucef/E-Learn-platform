@@ -9,6 +9,7 @@ import axios from '../../../Api/Axios'
 import { useState,useEffect } from 'react'
 import useStyles from '../../Style'
 import AddTeacherForm from '../AddTeacherForm'
+import AddStudentForm from './AddStudentForm'
 import RemoveTeacher from '../RemoveTeacher'
 import Select from './Select'
 
@@ -17,12 +18,21 @@ const StudentsList = ( {setStudentObj} ) => {
     const [studentsList,setStudentsList] = useState([])
     const [searchedValue,setSearchedValue] = useState('')
     const [searchedList,setSearchedList] = useState([])
-    const listBatch = [2019,2020,2021,2022]
-    const listLevel = ['1CP','2CP','1CS','2CS','3CS']
-    const listSection = ['A','B']
+    const [listSpeciality,setListSpeciality] = useState([])
+    const [listLevel,setListLevel] = useState([])
+    const [listSection,setListSection] = useState([])
     const [level,setLevel] = useState('')
-    const [batch,setBatch] = useState('')
+    const [speciality,setSpeciality] = useState('')
     const [section,setSection] = useState('')
+    const [bacthId,setBatchId] = useState(-1)
+    const [currentLevel,setCurrentLevel] = useState({})
+    const [hasSpeciality,setHasSpeciality] = useState(false)
+    const [displaySection,setDisplaySection] = useState(false)
+    const [counter,setCouter] = useState(1)
+    const [specialityId,setSpecialityId] = useState(-1)
+    const [groupList,setGroupList] = useState([])
+    
+
 
     function compare( a, b ) {
       if ( a.name.toUpperCase() < b.name.toUpperCase() ){
@@ -33,7 +43,7 @@ const StudentsList = ( {setStudentObj} ) => {
       }
       return 0;
     }
-    console.log(level,batch,section);
+
     async function getStudents() {
       try {
         const response = await axios.get('student/all')
@@ -43,8 +53,81 @@ const StudentsList = ( {setStudentObj} ) => {
         console.log(err.message);
       }
     }
+
+    async function getLevels() {
+      try {
+        const response = await axios.get('level/all')
+        console.log(response.data.message)
+        setListLevel(response.data.message)
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+
+    async function getSpecialities() {
+      try {
+        const response = await axios.get(`batch/${bacthId}`)
+        setHasSpeciality(response.data.message.hasSpecialities)
+        if(response.data.message.hasSpecialities) {
+          setListSpeciality(response.data.message.specialities)
+          setDisplaySection(false)
+          console.log(">>>>>>>>>>>>>.",response.data.message);
+        }else { 
+          console.log(response.data.message.sections);
+          if(response.data.message.sections) {
+            setListSection(response.data.message.sections)
+          }
+        }
+      } catch (error) {
+        
+      }
+    }
+// handle the first time choice and get the data
+    useEffect(() => {
+      if(counter == 1) {
+        setCouter(counter + 1);
+        return
+      }
+      let currentLevel = listLevel.find(item => item.name === level)
+      setCurrentLevel(currentLevel)
+      if(currentLevel) {
+        setBatchId(currentLevel.currentBatch.id)
+        getSpecialities()
+      }
+    },[level])
+
+    useEffect(() => {
+      if(counter == 1) {
+        setCouter(counter + 1);
+        return
+      }
+      console.log("exxxxxxxxxxxxxxx",displaySection);
+      let currentCpeciality = listSpeciality.find(item => item.name === speciality)
+      if(currentCpeciality) {
+        setSpecialityId()
+        getSectionOfSpecialities()
+      }
+      setDisplaySection(true)
+    },[speciality]) 
   
-    useEffect(getStudents,[]) //get teacher from DB when reload the page
+    useEffect(() => {
+
+    },[section])
+
+    async function getSectionOfSpecialities() {
+      try {
+        const response = await axios.get(`section/all/batch_Id=${bacthId}&speciality_Id=${specialityId}`)
+        //setGroup(response.data.message)
+        console.log("fjjjadsfdkfajdfSJKfsfjksd",response.data.message);
+      } catch (error) {
+        console.log("error iin group fetch",error.message);
+      }
+    }
+
+    useEffect(() => {
+      getLevels()
+      getStudents()
+    },[]) //get teacher from DB when reload the page
 
     /** get the searched teacher by name when the user typing in the search field **/
     useEffect(() => {
@@ -64,11 +147,11 @@ const StudentsList = ( {setStudentObj} ) => {
         </Typography>
         <div style={{flex: 2,display: 'flex',justifyContent: 'space-around'}}>
             <Select ChoseList = {listLevel} choseType= {'Levels'} setLevel = {setLevel}/>
-            <Select ChoseList = {listBatch} choseType={'Batches'} setBatch = {setBatch}/>
-            <Select ChoseList = {listSection} choseType={'Section'} setSection = {setSection}/>
+            {hasSpeciality && <Select ChoseList = {listSpeciality} choseType={'speciality'} setSpeciality = {setSpeciality}/>}
+            {(displaySection || !hasSpeciality) && <Select ChoseList = {listSection} choseType={'Section'} setSection = {setSection}/>}
         </div>
         <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-          <AddTeacherForm />
+          <AddStudentForm groupList = {groupList}/>
         </div>
       </div>
       <Divider />
@@ -89,7 +172,7 @@ const StudentsList = ( {setStudentObj} ) => {
           <ListItem
             key={value.id}
             onClick={e => setStudentObj(value)}
-            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} />}
+            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} type = {"student"}/>}
             disablePadding
             
           >

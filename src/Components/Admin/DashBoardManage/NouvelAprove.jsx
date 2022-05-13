@@ -24,6 +24,14 @@ const NouvelAprove = ( {teacherObj} ) => {
     }
   }
 
+  async function handleAprove(id) {
+    try {
+      const response = await axios.get(`news/approve/${id}`)
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   useEffect(getNouvelsAprove,[])
 
   return (
@@ -32,7 +40,7 @@ const NouvelAprove = ( {teacherObj} ) => {
     >
         <div className={classes.teacherListHeader}>
         <Typography variant="h6" style={{flex: 1}}>
-            Nouvelles à apprové
+            news to approve
         </Typography>
         </div>
         <Divider />
@@ -50,11 +58,12 @@ const NouvelAprove = ( {teacherObj} ) => {
                             disablePadding
                         >
                             <ListItemButton>
-                                <ListItemText id={labelId} primary={`${nouvel.message}`}  secondary="Discription" /> 
+                                <ListItemText id={labelId} primary={`${nouvel.object}`}  
+                                secondary={`${nouvel.message}`} /> 
                             </ListItemButton>
-                            <img src={'https://picsum.photos/200'} alt='nouvel' style={{margin:'5px'}} />
+                            <img src={`http://192.168.43.32:3000/news/files/${nouvel.fileUrl}`} alt='nouvel' style={{margin:'5px'}} />
                         </ListItem>
-                        <Button style={{color:'#2196F3',margin:'5px'}}>APPROVé</Button>
+                        <Button style={{color:'#2196F3',margin:'5px'}} onClick={() => handleAprove(nouvel.new_Id)}>APPROVE</Button>
                     </div>
                 );
             })}

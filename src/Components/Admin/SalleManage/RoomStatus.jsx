@@ -64,7 +64,8 @@ const RoomStatus = () => {
                 <ListItemAvatar>
                     <MeetingRoomIcon style = {{color:'#3282B8',marginLeft:'10px'}}/>
                 </ListItemAvatar>
-                <ListItemText id={labelId} primary={`${room.name}`} />
+                <ListItemText id={labelId} primary={`${room.name}`} secondary={`capacity: ${room.capacity}`}/>
+                <ListItemText id={labelId} primary={`Has Datashow: ${room.hasDataShow}`}/>
                 </ListItemButton>
             </ListItem>
             );

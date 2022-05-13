@@ -46,7 +46,7 @@ const TeacherContent = () => {
           <TeacherList setTeacherObj = {setTeacherObj} />
         </Grid>
         <Grid item xs={4}>
-          <TeacherProfile teacherObj = {teacherObj} />
+          <TeacherProfile teacherObj = {teacherObj} type = {"teacher"} />
         </Grid>
         <Grid item xs={12}>
           <ModuleList teacherObj = {teacherObj}/>

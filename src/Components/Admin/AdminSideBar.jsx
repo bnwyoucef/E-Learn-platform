@@ -12,7 +12,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import StackedBarChartIcon from '@mui/icons-material/StackedBarChart';
 
 
-const optionListTop = ["Gestion des enseignants","Gestion des étudiants","Gestion des Salles","Emploi du temps","Batch management"]
+const optionListTop = ["Gestion des enseignants","Gestion des étudiants","Gestion des Salles","Batch management","Emploi du temps"]
 const optionListBtm = ["Logs","Chat","Paramètres","Exit"] 
 
 const AdminSideBar = ( {setBrowse} ) => {

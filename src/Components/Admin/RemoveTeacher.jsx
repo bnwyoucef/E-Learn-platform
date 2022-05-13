@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from '../../Api/Axios'
 
-export default function RemoveTeacher({ teacherId,fullName }) {
+export default function RemoveTeacher({ teacherId,fullName,type }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -21,7 +21,7 @@ export default function RemoveTeacher({ teacherId,fullName }) {
 
   const handleRemove = async () => {
       try {
-          await axios.delete(`teacher/delete/${teacherId}`)
+          await axios.delete(`${type}/delete/${teacherId}`)
           handleClose();
           window.location.reload();
       } catch (error) {

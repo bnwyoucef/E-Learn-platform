@@ -62,7 +62,7 @@ function BatchesControl() {
               <ListItemAvatar>
                 <GroupsIcon style = {{color:'#3282B8'}}/>
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`${value.name}`} />
+              <ListItemText id={labelId} primary={`${value.name}`} secondary={value.level.name}/>
             </ListItemButton>
           </ListItem>
         );

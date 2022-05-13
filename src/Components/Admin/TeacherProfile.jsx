@@ -3,15 +3,15 @@ import {Avatar,Typography} from "@mui/material";
 import useStyles from '../Style'
 import ChangePasswordDialog from './ChangePasswordDialog'
 
-const TeacherProfile = ({teacherObj: recievedObj}) => {
+const TeacherProfile = ({teacherObj: recievedObj,type}) => {
     const classes = useStyles();
-    console.log(recievedObj.profileImage)
+    
 
   return (
     <div className={classes.teacherprofile}>
       <Avatar 
         sx={{ bgcolor: '#266fff',color: 'white',marginTop:'20px',height:'90px',width:'90px'}}     alt="Remy Sharp"
-        src={`https://schoolsystemmanagement-production.up.railway.app/student/profile-images/${recievedObj.profileImage}`}
+        src={recievedObj?`http://192.168.43.32:3000/${type}/profile-images/${recievedObj.profileImage}`:''}
       />
       <div style={{backgroundColor:'rgba(15,76,117,0.07)',width:'90%',borderRadius:'5px',marginTop:'20px'}}>
         <Typography variant="subtitle1" style={{marginLeft:'10px',color:'#266fff'}}>

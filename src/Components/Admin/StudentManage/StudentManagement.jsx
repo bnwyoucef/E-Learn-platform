@@ -26,7 +26,7 @@ const StudentManagement = () => {
           size='small'
           sx={{ width: '300px',marginLeft:'10px' }}
           style={{ backgroundColor:'rgba(15,76,117,0.07)',borderRadius:'20px',color:'rgba(15, 76, 117, 0.6)'}}
-          labelId="demo-simple-select-label"
+          labelid="demo-simple-select-label"
           id="demo-simple-select"
           value={group}
           select

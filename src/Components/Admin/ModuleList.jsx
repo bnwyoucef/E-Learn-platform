@@ -16,8 +16,7 @@ const ModuleList = ( {teacherObj} ) => {
 
   async function getModules() {
     try {
-      console.log(teacherObj);
-      if(!teacherObj) {
+      if(Object.keys(teacherObj).length !== 0) {
         const response = await axios.get(`teacher/modulesOfTeacher/${teacherObj.id}`)
         setModuleList(response.data.message)
       }
@@ -26,7 +25,7 @@ const ModuleList = ( {teacherObj} ) => {
     }
   }
 
-  useEffect(getModules,[])
+  useEffect(getModules,[teacherObj])
   return (
     <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '40vh'}}>
     <div className={classes.teacherListHeader}>
@@ -47,7 +46,7 @@ const ModuleList = ( {teacherObj} ) => {
         <div key={value.id}>
             <ListItem
                 key={value.id}
-                secondaryAction={<MoreVertIcon />}
+                // secondaryAction={<MoreVertIcon />}
                 disablePadding
             >
                 <ListItemButton>
