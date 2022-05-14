@@ -1,13 +1,14 @@
 import React from 'react'
 import { Grid } from '@mui/material'
 import AdminSideBar from './AdminSideBar'
-import TeacherContent from './TeacherContent'
+import TeacherContent from './TeacherMange/TeacherContent'
 import StudentContent from './StudentManage/StudentContent'
 import BatchContent from './BatchManage/BatchContent'
 import DashBoardContent from './DashBoardManage/DashBoardContent'
 import SalleContent from './SalleManage/SalleContent'
 import EmploiContent from './EmploiTempMange/EmploiContent'
 import { useState } from 'react'
+import { DashboardRounded } from '@mui/icons-material'
 
 const AdminDashBord = () => {
   const [browse,setBrowse] = useState('dashboard')
@@ -35,8 +36,9 @@ const AdminDashBord = () => {
         <Grid item xs={2.1} >
           <AdminSideBar setBrowse={setBrowse}/>
         </Grid>
-        <Grid item xs={9.9} >
-          {broswsingPage(browse)}
+        <Grid item xs={9.9}>
+          {/* //{broswsingPage(browse)} */}
+          <SalleContent />
         </Grid>
       </Grid>
     </div>

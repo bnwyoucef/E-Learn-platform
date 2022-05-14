@@ -8,9 +8,9 @@ import {Avatar,Typography,Divider} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import axios from '../../Api/Axios'
+import axios from '../../../Api/Axios'
 import { useState,useEffect } from 'react'
-import useStyles from '../Style'
+import useStyles from '../../Style'
 import AddTeacherForm from './AddTeacherForm'
 import RemoveTeacher from './RemoveTeacher'
 
@@ -53,23 +53,24 @@ export default function TeacherList( {setTeacherObj} ) {
   },[searchedValue])
 
   return (
-    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh'}}>
+    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh',border:'1px solid #E5E5E5'}}>
       <div className={classes.teacherListHeader}>
         <Typography variant="h6" style={{flex: 1}}>
           Teachers
         </Typography>
         <TextField
-          style={{backgroundColor: 'rgba(15,76,117,0.07)',flex: 2}}
-          size="small"
+          style={{borderRadius:'10px',backgroundColor: 'rgba(15,76,117,0.07)',flex: 2}}
+          size="normal"
           border="none"
           placeholder="Search..."
-          variant='outlined'
+          variant='standard'
           InputProps={{
             startAdornment: (
-              <InputAdornment position="start">
+              <InputAdornment position="start" sx={{paddingLeft:'10px'}}>
                 <SearchIcon />
               </InputAdornment>
             ),
+            disableUnderline: true,
           }}
           value={searchedValue}
           onChange={e => setSearchedValue(e.target.value)}

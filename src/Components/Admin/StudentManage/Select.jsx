@@ -26,7 +26,7 @@ export default function BasicSelect( {ChoseList,choseType,setLevel,setSpeciality
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ width: 120,marginRight:'13px' }}>
       <FormControl fullWidth  size="small" >
         <InputLabel id="demo-simple-select-label">{choseType}</InputLabel>
         <Select
@@ -37,7 +37,7 @@ export default function BasicSelect( {ChoseList,choseType,setLevel,setSpeciality
             onChange={handleChange}
         >
            {ChoseList.map((item,index) => {
-                return <MenuItem value={item.name} key={index}>{item.name}</MenuItem>
+                return <MenuItem value={item.name} key={index}>{choseType === "speciality" ?item.shortName:item.name}</MenuItem>
             })}
         </Select>
       </FormControl>

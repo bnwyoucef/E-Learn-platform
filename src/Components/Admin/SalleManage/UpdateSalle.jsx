@@ -9,9 +9,11 @@ import { useState,useEffect } from 'react';
 import axios from '../../../Api/Axios'
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import ModeIcon from '@mui/icons-material/Mode';
 
-const AddRoom = () => {
-
+const UpdateSalle = () => {
+       
     const [open, setOpen] = useState(false);
     const [name,setName] = useState('')
     const [capacity,setCapacity] = useState(0)
@@ -52,9 +54,12 @@ const AddRoom = () => {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
+      {/* <Button variant="contained" onClick={handleClickOpen} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
         Add Room
-      </Button>
+      </Button> */}
+      <IconButton aria-label="delete" onClick={handleClickOpen} size="small" style= {{borderRadius:'10px',marginRight: 10,backgroundColor:'blue'}}>
+        <ModeIcon />
+      </IconButton>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Room</DialogTitle>
         <DialogContent>
@@ -103,4 +108,4 @@ const AddRoom = () => {
   )
 }
 
-export default AddRoom
+export default UpdateSalle

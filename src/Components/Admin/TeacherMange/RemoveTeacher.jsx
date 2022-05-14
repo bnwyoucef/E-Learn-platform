@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import DeleteIcon from '@mui/icons-material/Delete';
-import axios from '../../Api/Axios'
+import axios from '../../../Api/Axios'
 
 export default function RemoveTeacher({ teacherId,fullName,type }) {
   const [open, setOpen] = React.useState(false);

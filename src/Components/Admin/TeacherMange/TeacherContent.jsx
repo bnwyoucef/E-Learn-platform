@@ -2,9 +2,10 @@ import React from 'react'
 import TeacherList from './TeacherList'
 import TeacherProfile from './TeacherProfile'
 import ModuleList from './ModuleList'
-import { Grid,Typography  } from '@mui/material'
+import Header from '../Header'
+import { Grid } from '@mui/material'
 import { useState,useEffect } from 'react'
-import axios from '../../Api/Axios'
+import axios from '../../../Api/Axios'
 
 const TeacherContent = () => {
   const [teacherObj,setTeacherObj] = useState({})
@@ -35,12 +36,7 @@ const TeacherContent = () => {
     <div>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <div style={{backgroundColor:'white',borderRadius: '10px',height:'15vh',display: 'flex',alignItems: 'center'}}>
-          <img src={`${require('../../images/Logo_png.png')}`} alt="logo classtek" style={{marginLeft:'10px'}}/>
-          <Typography variant="h5" style={{marginLeft:'auto',marginRight: '20px',color:'#266fff'}}>
-            CLASSTEK
-          </Typography>
-          </div>
+         <Header/>
         </Grid>
         <Grid item xs={8} >
           <TeacherList setTeacherObj = {setTeacherObj} />

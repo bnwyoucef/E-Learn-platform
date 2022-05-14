@@ -6,8 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Alert from '@mui/material/Alert';
 import { useState,useEffect } from 'react';
-import axios from '../../Api/Axios'
-import BasicSelect from './WilayaChose'
+import axios from '../../../Api/Axios'
+import BasicSelect from '../WilayaChose'
 
 export default function AddTeacherForm( {userType} ) {
   const [open, setOpen] = React.useState(false);
@@ -48,7 +48,7 @@ export default function AddTeacherForm( {userType} ) {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen} size="small" style= {{marginRight: 10}}>
+      <Button variant="contained" onClick={handleClickOpen} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
         Add Teacher
       </Button>
       <Dialog open={open} onClose={handleClose}>

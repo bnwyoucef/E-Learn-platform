@@ -29,13 +29,13 @@ const SpecialititesControl = () => {
     },[])
 
   return (
-    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh'}}>
+    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh',border:'1px solid #E5E5E5'}}>
         <div className={classes.teacherListHeader}>
             <Typography variant="h6" style={{flex: 1}}>
                 Specialitites
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <Button variant="contained" size="small" style={{marginRight: 10,backgroundColor:'#007AFF'}}>add Speciality</Button>
+                <Button variant="contained" size="small" style={{borderRadius:'10px',marginRight: 10,backgroundColor:'#007AFF',boxShadow:'0px 4px 8px rgba(0,122,255,0.2)'}}>add Speciality</Button>
             </div>
         </div>
     <List

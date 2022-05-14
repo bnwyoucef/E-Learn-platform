@@ -10,8 +10,7 @@ import axios from '../../../Api/Axios'
 import BasicSelect from '../WilayaChose'
 import SelectGroup from './SelectGroup'
 
-const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Id,section_Id}) => {
-
+const UpdateStudent = () => {
     const [open, setOpen] = React.useState(false);
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
@@ -34,13 +33,7 @@ const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Id,secti
   
     const handleConfirm = async (event) => {
       event.preventDefault();
-      let student = {}
-      let gh = parseInt(speciality_Id)
-      if(speciality_Id === 0) {
-        student = {name:firstName,lastName,email,password,dateOfBirth:"2000-06-12",wilaya,group_Id:groupId,batch_Id,section_Id}
-      }else {
-        student = {name:firstName,lastName,email,password,dateOfBirth:"2000-06-12",wilaya,group_Id:groupId,batch_Id,gh,section_Id}
-      }
+      const student = {name:firstName,lastName,email,password,wilaya,group_Id:groupId}
       console.log(student);
       try {
           const response = await axios.post(`student/create`,student,{
@@ -125,4 +118,4 @@ const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Id,secti
   )
 }
 
-export default AddStudentForm
+export default UpdateStudent

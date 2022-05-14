@@ -16,7 +16,7 @@ const optionListTop = ["Gestion des enseignants","Gestion des étudiants","Gesti
 const optionListBtm = ["Logs","Chat","Paramètres","Exit"] 
 
 const AdminSideBar = ( {setBrowse} ) => {
-    const [isHim,setIsHim] = React.useState(true)
+    
     function optionIcon(list,index) {
         switch(index) {
             case 0:
@@ -40,6 +40,7 @@ const AdminSideBar = ( {setBrowse} ) => {
           PaperProps={{
             sx: {
             backgroundColor: "#007AFF",
+            background: 'linear-gradient(177.14deg, #007AFF 78.29%, #BBE1FA 105.35%)',
             color: "white",
             }
         }}
@@ -55,12 +56,13 @@ const AdminSideBar = ( {setBrowse} ) => {
             <Toolbar style={{ marginTop:'10px',marginBottom:'10px' }}>
                 <Avatar sx={{ bgcolor: 'white',color: '#266fff' }}>N</Avatar>
                 <Typography style={{ marginLeft:'10px'}}>
-                    user name
+                    Admin
                 </Typography>
             </Toolbar>
-            <Divider />
             <List 
                 sx={{marginTop:'20px',
+                    paddingLeft:'5px',
+                    paddingRight:'5px',
                 '& .MuiListItem-root': {
                     '&, & .MuiListItemIcon-root': {
                         color: 'white',
@@ -69,7 +71,7 @@ const AdminSideBar = ( {setBrowse} ) => {
                 //change the background color of item when it clicked
                 '& .MuiListItem-root:focus': {
                     bgcolor: 'white',
-                    borderRadius: 3,
+                    borderRadius: '10px',
                     '&, & .MuiListItemIcon-root': {
                         color: '#266fff',
                     },
@@ -98,7 +100,7 @@ const AdminSideBar = ( {setBrowse} ) => {
                 ))}
             </List>
             
-            <List style={{ marginTop:'auto',marginBottom:'10px' }}
+            <List style={{ marginTop:'auto',marginBottom:'10px'}}
               sx={{marginTop:'20px',
               '& .MuiListItem-root': {
                   '&, & .MuiListItemIcon-root': {

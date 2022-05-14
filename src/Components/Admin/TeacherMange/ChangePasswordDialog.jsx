@@ -3,10 +3,10 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import PasswordView from '../PasswordView'
+import PasswordView from '../../PasswordView'
 import Alert from '@mui/material/Alert';
 import { useState,useEffect } from 'react'
-import axios from '../../Api/Axios'
+import axios from '../../../Api/Axios'
 
 export default function ChangePasswordDialog({teacherId}) {
   const [open, setOpen] = useState(false);
@@ -49,13 +49,13 @@ export default function ChangePasswordDialog({teacherId}) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} style={{marginTop:'30px'}}>
+      <Button variant="contained" onClick={handleClickOpen} style={{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginTop: 30}}>
         Change Password
       </Button>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>Change Password</DialogTitle>
         <DialogContent>
-            {displayMsg && createSuccess && <Alert severity="success">Teacher created successfully</Alert>}
+            {displayMsg && createSuccess && <Alert severity="success">password updated successfully</Alert>}
             {displayMsg && !createSuccess && <Alert severity="error">Oops Something went wrong!</Alert>}
             <form onSubmit={handleConfirm}>
                 <PasswordView newPassword = {newPassword} setNewPassword={setNewPassword} first= {true}/>

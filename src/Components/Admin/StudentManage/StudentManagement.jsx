@@ -12,13 +12,13 @@ const StudentManagement = () => {
   };
   
   return (
-    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '28vh'}}>
+    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '220px',border:'1px solid #E5E5E5'}}>
       <div style={{height: '25%',display:'flex',alignItems: 'center',marginLeft: 10,}}>
         <Typography variant="h6" style={{flex: 1}}>
           Student Management
         </Typography>
         <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-          <Button variant="contained" size="small" style= {{marginRight: 10}}>Apply</Button>
+          <Button variant="contained" size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>Apply</Button>
         </div>
       </div>
       <Box sx={{ minWidth: 120 }}>
@@ -29,6 +29,7 @@ const StudentManagement = () => {
           labelid="demo-simple-select-label"
           id="demo-simple-select"
           value={group}
+          variant='standard'
           select
           label="group"
           onChange={handleChange}

@@ -5,10 +5,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import {Typography,Divider} from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import axios from '../../Api/Axios'
+import axios from '../../../Api/Axios'
 import { useState,useEffect } from 'react'
 import BookIcon from '@mui/icons-material/Book';
-import useStyles from '../Style'
+import useStyles from '../../Style'
 
 const ModuleList = ( {teacherObj} ) => {
     const classes = useStyles()
@@ -27,7 +27,7 @@ const ModuleList = ( {teacherObj} ) => {
 
   useEffect(getModules,[teacherObj])
   return (
-    <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '40vh'}}>
+    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '40vh',border:'1px solid #E5E5E5'}}>
     <div className={classes.teacherListHeader}>
       <Typography variant="h6" style={{flex: 1}}>
         Modules
