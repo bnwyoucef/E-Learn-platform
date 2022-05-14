@@ -2,9 +2,16 @@ import React from 'react'
 import {Avatar,Typography} from "@mui/material";
 import useStyles from '../../Style'
 import ChangePasswordDialog from './ChangePasswordDialog'
+import UpdateTeacher from './UpdateTeacher'
+import { useState,useEffect} from 'react'
 
 const TeacherProfile = ({teacherObj: recievedObj,type}) => {
     const classes = useStyles();
+    const [loaded,setLoaded] = useState(false)
+
+    useEffect(() => {
+      setLoaded(true)
+    },[])
     
 
   return (
@@ -37,7 +44,7 @@ const TeacherProfile = ({teacherObj: recievedObj,type}) => {
             {recievedObj.email}
         </Typography>
       </div>
-      <ChangePasswordDialog teacherId={recievedObj.id}/>
+      {loaded && <UpdateTeacher teacher={recievedObj}/>}
     </div>
   )
 }

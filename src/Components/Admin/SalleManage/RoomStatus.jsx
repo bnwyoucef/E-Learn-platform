@@ -58,7 +58,7 @@ const RoomStatus = () => {
             return (
             <ListItem
                 key={room.id}
-                secondaryAction={<RoomOperations removeId = {room.id} type= {'sale'} name= {room.name}/>}
+                secondaryAction={<RoomOperations room={room} removeId = {room.id} type= {'sale'} name= {room.name}/>}
                 disablePadding  
             >
                 <ListItemButton>

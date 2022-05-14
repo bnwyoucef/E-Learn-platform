@@ -48,7 +48,7 @@ const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Id,secti
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,1000)
-              window.location.reload(); 
+              //window.location.reload(); 
       }  catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)

@@ -2,10 +2,10 @@ import React from 'react'
 import RemoveConfirm from '../BatchManage/RemoveConfirm'
 import UpdateSalle from './UpdateSalle'
 
-const RoomOperations = ({removeId,type,name}) => {
+const RoomOperations = ({room,removeId,type,name}) => {
   return (
     <div style={{display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
-        <UpdateSalle />
+        <UpdateSalle roomId={removeId} roomNew={room}/>
         <RemoveConfirm removeId={removeId} type={type} name={name}/>
     </div>
   )

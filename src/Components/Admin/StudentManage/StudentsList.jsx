@@ -47,6 +47,7 @@ const StudentsList = ( {setStudentObj} ) => {
         const response = await axios.get('student/all')
         setStudentsList(response.data.message.sort(compare))
         setSearchedList(response.data.message.sort(compare))
+        console.log(response.data.message);
       }catch(err) {
         console.log(err.message);
       }

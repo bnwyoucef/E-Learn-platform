@@ -11,8 +11,9 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
 import ModeIcon from '@mui/icons-material/Mode';
+import Tooltip from '@mui/material/Tooltip';  
 
-const UpdateSalle = () => {
+const UpdateSalle = ({roomId,roomNew}) => {
        
     const [open, setOpen] = useState(false);
     const [name,setName] = useState('')
@@ -36,14 +37,19 @@ const UpdateSalle = () => {
     const handleConfirm = async (event) => {
       event.preventDefault();
       const cInt = parseInt(capacity)
-      const room = {name,capacity:cInt,hasDataShow}
+      const room = {}
+      if(name) room.name = name
+      if(capacity) room.capacity = cInt
+      if(hasDataShow) room.hasDataShow = hasDataShow
+      console.log(hasDataShow,roomNew.hasDataShow);
+      if(!hasDataShow && roomNew.hasDataShow) room.hasDataShow = hasDataShow
       try {
-          const response = await axios.post(`sale/create`,room,{
-              headers: { 'Content-Type': 'application/json' }})
+          const response = await axios.patch(`sale/update/${roomId}`,room)
+          console.log(room,response,roomId);
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,1000)
-              window.location.reload(); 
+              //window.location.reload(); 
       } catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)
@@ -54,14 +60,13 @@ const UpdateSalle = () => {
 
   return (
     <div>
-      {/* <Button variant="contained" onClick={handleClickOpen} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
-        Add Room
-      </Button> */}
-      <IconButton aria-label="delete" onClick={handleClickOpen} size="small" style= {{borderRadius:'10px',marginRight: 10,backgroundColor:'blue'}}>
-        <ModeIcon />
-      </IconButton>
+      <Tooltip title="Update">
+        <IconButton aria-label="delete" onClick={handleClickOpen} size="small" style= {{borderRadius:'10px',marginRight: 10,backgroundColor:'#007AFF'}}>
+          <ModeIcon style={{color:"white"}}/>
+        </IconButton>
+      </Tooltip>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Room</DialogTitle>
+        <DialogTitle>Update Room</DialogTitle>
         <DialogContent>
             {displayMsg && createSuccess && <Alert severity="success">Room added successfully</Alert>}
             {displayMsg && !createSuccess && <Alert severity="error">Oops Something went wrong!</Alert>}
@@ -74,7 +79,6 @@ const UpdateSalle = () => {
                   type="text"
                   fullWidth
                   variant="outlined"
-                  required
                   value= {name}
                   onChange= {e => setName(e.target.value)}
               />
@@ -85,7 +89,6 @@ const UpdateSalle = () => {
                   type="text"
                   fullWidth
                   variant="outlined"
-                  required
                   value= {capacity}
                   onChange= {e => setCapacity(e.target.value)}
               />

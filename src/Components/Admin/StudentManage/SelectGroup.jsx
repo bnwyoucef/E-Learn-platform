@@ -7,12 +7,9 @@ import Select from '@mui/material/Select';
 
 export default function SelectGroup({ groupList,group,setGroup,setGroupId }) {
 
-  console.log(">>>>>>>>>>>>>>>>>>> ",groupList,group);
   function handleChange(event) {
-    console.log("ggggggggggggg ", event.target.value);
     setGroup(event.target.value);
     let currentGroup = groupList.find(item => item.name === event.target.value)
-    console.log("<<<<<<<<<<<<<<<>>>>>>>>>>> ",currentGroup.id);
     setGroupId(currentGroup.id) 
   }
 

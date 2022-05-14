@@ -8,6 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from '@mui/material';
 import axios from '../../../Api/Axios'
+import Tooltip from '@mui/material/Tooltip'; 
 
 const RemoveConfirm = ( {removeId,type,name} ) => {
 
@@ -33,9 +34,11 @@ const RemoveConfirm = ( {removeId,type,name} ) => {
 
   return (
     <div>
-        <IconButton aria-label="delete" onClick={handleClickOpen}>
-            <DeleteIcon style = {{color: '#CCCCCC'}}/>
-        </IconButton>
+        <Tooltip title="Delete">
+            <IconButton aria-label="delete" onClick={handleClickOpen} style={{backgroundColor:'#007AFF'}}>
+                <DeleteIcon style={{color:"white",width:"20px",height:"20px"}}/>
+            </IconButton>
+        </Tooltip>
         <Dialog
             open={open}
             onClose={handleClose}
