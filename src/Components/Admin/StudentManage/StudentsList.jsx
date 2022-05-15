@@ -12,7 +12,7 @@ import AddStudentForm from './AddStudentForm'
 import RemoveTeacher from '../TeacherMange/RemoveTeacher'
 import Select from './Select'
 
-const StudentsList = ( {setStudentObj} ) => {
+const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
     const classes = useStyles()
     const [studentsList,setStudentsList] = useState([])
     const [searchedValue,setSearchedValue] = useState('')
@@ -47,7 +47,6 @@ const StudentsList = ( {setStudentObj} ) => {
         const response = await axios.get('student/all')
         setStudentsList(response.data.message.sort(compare))
         setSearchedList(response.data.message.sort(compare))
-        console.log(response.data.message);
       }catch(err) {
         console.log(err.message);
       }
@@ -62,7 +61,6 @@ const StudentsList = ( {setStudentObj} ) => {
       handleSearch(searchedValue)
     },[searchedValue])
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function getLevels() {
       try {
         const response = await axios.get('level/all')
@@ -77,6 +75,7 @@ const StudentsList = ( {setStudentObj} ) => {
         const response = await axios.get(`level/${batchNumber}`)
         setStudentsList(response.data.message.students.sort(compare))
         setSearchedList(response.data.message.students.sort(compare))
+        console.log(response.data.message.students);
         setHasSpeciality(response.data.message.hasSpecialities)
         if(response.data.message.hasSpecialities) {
           setListSpeciality(response.data.message.specialities)
@@ -94,6 +93,7 @@ const StudentsList = ( {setStudentObj} ) => {
     useEffect(() => {
       currentLevel = listLevel.find(item => item.name === level)
       if(currentLevel) {
+        setLevelSelected(currentLevel.name)
         batchNumber = currentLevel.id
         getSpecialities()
         setEnableAddStudent(false)
@@ -143,7 +143,6 @@ const StudentsList = ( {setStudentObj} ) => {
       }
     },[section])
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
     useEffect(() => {
       getLevels()
       getStudents()

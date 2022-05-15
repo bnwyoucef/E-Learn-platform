@@ -38,7 +38,7 @@ const AdminDashBord = () => {
         </Grid>
         <Grid item xs={9.9}>
           {/* //{broswsingPage(browse)} */}
-          <ModuleContent />
+          <StudentContent />
         </Grid>
       </Grid>
     </div>

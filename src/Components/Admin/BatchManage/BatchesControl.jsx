@@ -20,7 +20,6 @@ function BatchesControl() {
         const getBatches = async () => {
             try {
                 const response = await axios.get('batch/all')
-                console.log(response.data.message);
                 setLevelList(response.data.message)
             }catch (e) {
                 console.log(e.message);

@@ -10,6 +10,7 @@ import axios from '../../../Api/Axios'
 
 const StudentContent = () => {
     const [studentObj,setStudentObj] = useState({})
+    const [levelSelected,setLevelSelected] = useState('')
 
     function compare( a, b ) {
         if ( a.name.toUpperCase() < b.name.toUpperCase() ){
@@ -39,16 +40,16 @@ const StudentContent = () => {
                 <Header/>
             </Grid>
             <Grid item xs={8} >
-                <StudentsList  setStudentObj = {setStudentObj}/>
+                <StudentsList  setStudentObj = {setStudentObj} setLevelSelected={setLevelSelected}/>
             </Grid>
             <Grid item xs={4}>
-                <TeacherProfile teacherObj = {studentObj} type = {"student"}/>
+                <TeacherProfile teacherObj = {studentObj} type = {"student"} />
             </Grid>
             <Grid item xs={8}>
                 <StudentManagement />
             </Grid>
             <Grid item xs={4}>
-                <StudentInfo />
+                <StudentInfo studentObj= {studentObj} levelSelected= {levelSelected}/>
             </Grid>
         </Grid>
     </div>
