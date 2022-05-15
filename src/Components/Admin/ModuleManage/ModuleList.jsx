@@ -20,6 +20,7 @@ const ModuleList = () => {
         const getSalles = async () => {
             try {
                 const response = await axios.get('module/all')
+                console.log(response.data.message);
                 setSaleList(response.data.message)  
             }catch (e) {
                 console.log(e.message);
@@ -55,7 +56,7 @@ const ModuleList = () => {
             return (
             <ListItem
                 key={module.id}
-                secondaryAction={<ModuleOperations room={module} removeId = {module.id} type= {'sale'} name= {module.name}/>}
+                secondaryAction={<ModuleOperations module={module} removeId = {module.id} name= {module.name}/>}
                 disablePadding  
             >
                 <ListItemButton>

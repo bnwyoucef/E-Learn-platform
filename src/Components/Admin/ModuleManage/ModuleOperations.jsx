@@ -1,9 +1,12 @@
 import React from 'react'
+import RemoveModule from './RemoveModule'
+import UpdateModule from './UpdateModule'
 
-const ModuleOperations = () => {
+const ModuleOperations = ({module,removeId,name}) => {
   return (
-    <div>
-      ModuleOperations
+    <div style={{display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
+        <UpdateModule moduleId={removeId} newModule={module}/>
+        <RemoveModule removeId={removeId} name={name}/>
     </div>
   )
 }
