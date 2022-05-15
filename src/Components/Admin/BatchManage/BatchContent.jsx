@@ -8,6 +8,9 @@ import SectionControl from './SectionControl'
 import GroupControl from './GroupControl'
 
 function BatchContent() {
+
+    const [currentLevel,setCurrentLevel] = React.useState({}) 
+
   return (
     <div>
         <Grid container spacing = {1}>
@@ -15,16 +18,16 @@ function BatchContent() {
                 <Header />
             </Grid>
             <Grid item sm={4}>
-                <LevelsControl />
+                <LevelsControl setCurrentLevel={setCurrentLevel}/>
             </Grid>
             <Grid item sm={4}>
-                <SpecialititesControl />
+                <SpecialititesControl currentLevel={currentLevel}/>
             </Grid>
             <Grid item sm={4}>
                 <BatchesControl />
             </Grid>
             <Grid item sm={6}>
-                <SectionControl />
+                <SectionControl currentLevel={currentLevel}/>
             </Grid>
             <Grid item sm={6}>
                 <GroupControl />

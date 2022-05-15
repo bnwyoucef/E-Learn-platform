@@ -11,16 +11,17 @@ import { useState,useEffect } from 'react'
 import GroupsIcon from '@mui/icons-material/Groups';
 import axios from '../../../Api/Axios'
 
-const SectionControl = () => {
+const SectionControl = ({currentLevel}) => {
     const classes = useStyles()
     const [levelList,setLevelList] = useState([])
+    console.log("?????? ",currentLevel);
 
     useEffect(() => {
         const getSections = async () => {
             try {
-                const response = await axios.get('level/all')
+                const response = await axios.get(`sections/all/${1}/${4}`)
+                console.log(response.data.message)
                 setLevelList(response.data.message)
-                console.log('section : ',response.data);
             }catch (e) {
                 console.log(e.message);
             }

@@ -10,23 +10,29 @@ import RemoveConfirm from './RemoveConfirm'
 import { useState,useEffect } from 'react'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import axios from '../../../Api/Axios'
+import AddSpeciality from './AddSpeciality'
 
-const SpecialititesControl = () => {
+const SpecialititesControl = ({currentLevel}) => {
     const classes = useStyles()
-    const [levelList,setLevelList] = useState([])
+    const [specialitiesList,setSpecialitiesList] = useState([])
 
     useEffect(() => {
         const getSpecialities = async () => {
             try {
                 const response = await axios.get('speciality/all')
-                setLevelList(response.data.message)
+                setSpecialitiesList(response.data.message)
             }catch (e) {
                 console.log(e.message);
             }
         }
-
         getSpecialities();
     },[])
+
+    useEffect(() => {
+      if(Object.keys(currentLevel).length !== 0){
+        setSpecialitiesList(currentLevel.specialities)
+      } 
+    },[currentLevel])
 
   return (
     <div style= {{overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh',border:'1px solid #E5E5E5'}}>
@@ -35,7 +41,7 @@ const SpecialititesControl = () => {
                 Specialitites
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <Button variant="contained" size="small" style={{borderRadius:'10px',marginRight: 10,backgroundColor:'#007AFF',boxShadow:'0px 4px 8px rgba(0,122,255,0.2)'}}>add Speciality</Button>
+                <AddSpeciality />
             </div>
         </div>
     <List
@@ -49,7 +55,7 @@ const SpecialititesControl = () => {
         },
       }}
     >
-      {levelList.map((value) => {
+      {specialitiesList.map((value) => {
         const labelId = `checkbox-list-secondary-label-${value.id}`;
         return (
           <ListItem
@@ -61,7 +67,7 @@ const SpecialititesControl = () => {
               <ListItemAvatar>
                 <MenuBookIcon style = {{color:'#3282B8'}}/>
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`${value.name}`} />
+              <ListItemText id={labelId} primary={`${value.name}`} secondary={value.description.substring(0,30)}/>
             </ListItemButton>
           </ListItem>
         );

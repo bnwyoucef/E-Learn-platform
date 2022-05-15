@@ -8,7 +8,7 @@ import DashBoardContent from './DashBoardManage/DashBoardContent'
 import SalleContent from './SalleManage/SalleContent'
 import EmploiContent from './EmploiTempMange/EmploiContent'
 import { useState } from 'react'
-import { DashboardRounded } from '@mui/icons-material'
+import ModuleContent from './ModuleManage/ModuleContent'
 
 const AdminDashBord = () => {
   const [browse,setBrowse] = useState('dashboard')
@@ -38,7 +38,7 @@ const AdminDashBord = () => {
         </Grid>
         <Grid item xs={9.9}>
           {/* //{broswsingPage(browse)} */}
-          <BatchContent />
+          <ModuleContent />
         </Grid>
       </Grid>
     </div>

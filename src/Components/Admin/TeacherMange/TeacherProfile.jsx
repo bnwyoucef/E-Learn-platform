@@ -7,13 +7,6 @@ import { useState,useEffect} from 'react'
 
 const TeacherProfile = ({teacherObj: recievedObj,type}) => {
     const classes = useStyles();
-    const [loaded,setLoaded] = useState(false)
-
-    useEffect(() => {
-      setLoaded(true)
-    },[])
-    
-
   return (
     <div className={classes.teacherprofile}>
       <Avatar 
@@ -44,7 +37,7 @@ const TeacherProfile = ({teacherObj: recievedObj,type}) => {
             {recievedObj.email}
         </Typography>
       </div>
-      {loaded && <UpdateTeacher teacher={recievedObj}/>}
+      <UpdateTeacher teacher={recievedObj}/>
     </div>
   )
 }

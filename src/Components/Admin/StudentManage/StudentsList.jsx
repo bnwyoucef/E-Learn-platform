@@ -74,7 +74,7 @@ const StudentsList = ( {setStudentObj} ) => {
 
     async function getSpecialities() {
       try {
-        const response = await axios.get(`batch/${batchNumber}`)
+        const response = await axios.get(`level/${batchNumber}`)
         setStudentsList(response.data.message.students.sort(compare))
         setSearchedList(response.data.message.students.sort(compare))
         setHasSpeciality(response.data.message.hasSpecialities)
@@ -94,7 +94,7 @@ const StudentsList = ( {setStudentObj} ) => {
     useEffect(() => {
       currentLevel = listLevel.find(item => item.name === level)
       if(currentLevel) {
-        batchNumber = currentLevel.currentBatch.id
+        batchNumber = currentLevel.id
         getSpecialities()
         setEnableAddStudent(false)
       }
@@ -103,9 +103,9 @@ const StudentsList = ( {setStudentObj} ) => {
     async function getSectionOfSpecialities() {
       try {
         let levelSelected = listLevel.find(item => item.name === level)
-        batchNumber = levelSelected.currentBatch.id
+        batchNumber = levelSelected.id
         const response = await axios.get(`section/all/batch_Id=${batchNumber}&speciality_Id=${specialityNumber}`)
-        setListSection(response.data.message)
+        setListSection(response.data.message.sections)
         setStudentsList(response.data.message.students.sort(compare))
         setSearchedList(response.data.message.students.sort(compare))
       } catch (error) {
@@ -117,11 +117,8 @@ const StudentsList = ( {setStudentObj} ) => {
       try {
         const response = await axios.get(`section/${sectionNumber}`)
         setGroupList(response.data.message.groups)
-        console.log("<<<<<<<>>>>>>>>> ", response.data.message);
-
         setStudentsList(response.data.message.students.sort(compare))
         setSearchedList(response.data.message.students.sort(compare))
-        console.log(response.data.message);
       } catch (error) {
         console.log(error.message);
       }

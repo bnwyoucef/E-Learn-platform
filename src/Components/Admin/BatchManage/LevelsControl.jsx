@@ -10,8 +10,10 @@ import RemoveConfirm from './RemoveConfirm'
 import { useState,useEffect } from 'react'
 import StackedBarChartIcon from '@mui/icons-material/StackedBarChart';
 import axios from '../../../Api/Axios'
+import AddLevelForm from './AddLevelForm'
 
-const LevelsControl = () => {
+
+const LevelsControl = ( {setCurrentLevel} ) => {
     const classes = useStyles()
     const [levelList,setLevelList] = useState([])
 
@@ -35,7 +37,7 @@ const LevelsControl = () => {
                 Levels
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <Button variant="contained" size="small" style={{borderRadius:'10px',marginRight: 10,backgroundColor:'#007AFF',boxShadow:'0px 4px 8px rgba(0,122,255,0.2)'}}>add level</Button>
+                <AddLevelForm />
             </div>
         </div>
     <List
@@ -56,12 +58,13 @@ const LevelsControl = () => {
             key={value.id}
             secondaryAction={<RemoveConfirm removeId = {value.id} type= {'level'} name= {value.name}/>}
             disablePadding  
+            onClick={() => setCurrentLevel(value)}
           >
             <ListItemButton>
               <ListItemAvatar>
                 <StackedBarChartIcon style = {{color:'#3282B8'}}/>
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`${value.name}`} />
+              <ListItemText id={labelId} primary={`${value.name}`} secondary={`Level:${value.level}`}/>
             </ListItemButton>
           </ListItem>
         );
