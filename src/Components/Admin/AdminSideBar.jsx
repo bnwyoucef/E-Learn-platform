@@ -10,9 +10,10 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import StackedBarChartIcon from '@mui/icons-material/StackedBarChart';
+import BookIcon from '@mui/icons-material/Book';
 
 
-const optionListTop = ["Gestion des enseignants","Gestion des étudiants","Gestion des Salles","Batch management","Emploi du temps"]
+const optionListTop = ["Gestion des enseignants","Gestion des étudiants","Gestion des Salles","Batch management","Emploi du temps","Module management"]
 const optionListBtm = ["Logs","Chat","Paramètres","Exit"] 
 
 const AdminSideBar = ( {setBrowse} ) => {
@@ -29,6 +30,8 @@ const AdminSideBar = ( {setBrowse} ) => {
                 return list ? <CalendarMonthIcon /> : <LogoutIcon />
             case 4:
                 return <StackedBarChartIcon />
+            case 5 :
+                return <BookIcon/>
             default:
                 break;
         }

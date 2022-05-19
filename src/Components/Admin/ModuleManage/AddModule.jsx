@@ -16,7 +16,9 @@ const AddModule = () => {
     const [name,setName] = useState('')
     const [shortName,setShortName] = useState('')
     const [description,setDescription] = useState('')
+    const [coef,setCoef] = useState('')
     const [levelId,setLevelId] = useState(0)
+    const [specialityId,setSpecialityId] = useState(0)
     const [semesterNum,setSemesterNum] = useState(0)
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
@@ -31,9 +33,14 @@ const AddModule = () => {
   
     const handleConfirm = async (event) => {
       event.preventDefault();
-      const level_Id = levelId.toString()
+      const level_Id = parseInt(levelId)
       const semester = parseInt(semesterNum)
-      const newModule = {level_Id:level_Id,semester,name,shortName,description}
+      const coeff = parseInt(coef)
+      const speciality_Id = parseInt(specialityId)
+      let newModule={};
+      if(speciality_Id) newModule = {level_Id:level_Id,semester,name,shortName,description,coef:coeff,speciality_Id:speciality_Id}
+       else newModule = {level_Id:level_Id,semester,name,shortName,description,coef:coeff}
+      console.log(newModule);
       try {
           const response = await axios.post(`module/create`,newModule,{
               headers: { 'Content-Type': 'application/json' }})
@@ -94,8 +101,19 @@ const AddModule = () => {
                   value= {description}
                   onChange= {e => setDescription(e.target.value)}
               />
+              <TextField
+                  margin="dense"
+                  id="coef"
+                  label="Coefficient"
+                  type="text"
+                  fullWidth
+                  variant="outlined"
+                  required
+                  value= {coef}
+                  onChange= {e => setCoef(e.target.value)}
+              />
               <SelectSemestre setSemestreNumber={setSemesterNum}/>
-              <SelectLevel setLevelNumber={setLevelId}/>
+              <SelectLevel setLevelNumber={setLevelId} setSpecialityId={setSpecialityId}/>
               
               <Button type="submit" style={{float:'right',marginTop:'30px'}}>Confirm</Button>
               <Button onClick={handleClose} style={{float:'right',marginTop:'30px'}}>Cancel</Button>

@@ -39,6 +39,9 @@ const TimeTable = () => {
   return (
     <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '500px',border:'1px solid #E5E5E5'}}>
       <div className={classes.teacherListHeader}>
+      <Typography variant="h6" sx={{marginRight:'10px'}}>
+          Schedule
+        </Typography>
         <SelectLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel}/>
         <SelectSpeciality selectedSpeciality={selectedSpeciality} setSelectedSpeciality={setSelectedSpeciality}/>
         <SelectSection selectedSection={selectedSection} setSelectedSection={setSelectedSection}/>
