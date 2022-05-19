@@ -10,7 +10,7 @@ import axios from '../../../Api/Axios'
 import BasicSelect from '../WilayaChose'
 import SelectGroup from './SelectGroup'
 
-const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Id,section_Id}) => {
+const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Idd,section_Id}) => {
 
     const [open, setOpen] = React.useState(false);
     const [firstName,setFirstName] = useState('');
@@ -35,11 +35,11 @@ const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Id,secti
     const handleConfirm = async (event) => {
       event.preventDefault();
       let student = {}
-      let gh = parseInt(speciality_Id)
-      if(speciality_Id === 0) {
+      let gh = parseInt(speciality_Idd)
+      if(speciality_Idd === 0) {
         student = {name:firstName,lastName,email,password,dateOfBirth:"2000-06-12",wilaya,group_Id:groupId,batch_Id,section_Id}
       }else {
-        student = {name:firstName,lastName,email,password,dateOfBirth:"2000-06-12",wilaya,group_Id:groupId,batch_Id,gh,section_Id}
+        student = {name:firstName,lastName,email,password,dateOfBirth:"2000-06-12",wilaya,group_Id:groupId,batch_Id,speciality_Id:gh,section_Id}
       }
       console.log(student);
       try {
@@ -65,7 +65,7 @@ const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Id,secti
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Add Student</DialogTitle>
       <DialogContent>
-          {displayMsg && createSuccess && <Alert severity="success">Teacher created successfully</Alert>}
+          {displayMsg && createSuccess && <Alert severity="success">Student created successfully</Alert>}
           {displayMsg && !createSuccess && <Alert severity="error">Oops Something went wrong!</Alert>}
           <form onSubmit={handleConfirm}>
             <TextField

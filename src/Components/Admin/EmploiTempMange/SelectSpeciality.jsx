@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useState} from 'react'
 
-const SelectSpeciality = ({selectedSpeciality,setSelectedSpeciality}) => {
+const SelectSpeciality = ({selectedSpeciality,setSelectedSpeciality,specialitiesList}) => {
     const [specialityList,setSpecialityList] = useState([])
   return (
     <div>
@@ -16,12 +16,12 @@ const SelectSpeciality = ({selectedSpeciality,setSelectedSpeciality}) => {
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={specialityList}
-                label={selectedSpeciality}
+                value={selectedSpeciality}
+                label={'Speciality'}
                 onChange={event => setSelectedSpeciality(event.target.value)}
             >
-            {specialityList.map((item) => {
-                    return <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
+            {specialitiesList.map((item) => {
+                    return <MenuItem value={item.name} key={item.id}>{item.shortName}</MenuItem>
                 })}
             </Select>
         </FormControl>

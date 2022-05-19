@@ -4,21 +4,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import {Typography,Divider,Button} from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import useStyles from '../../Style'
-import IconButton from '@mui/material/IconButton';
 import './style.css'
+import DeleteSession from './DeleteSession'
+import AddSession from './AddSession'
 
-const DaySessions = ({dayName,dayList}) => {
-    const classes = useStyles()
-
-    let handleAddClick = () => {
-      console.log(dayName + 'clicked...');
-    }
-
-    let handleDeleteClick = (id) => {
-      console.log(dayName + 'Deleted...',id);
-    }
+const DaySessions = ({dayName,dayList,groupsList,modulesList,section_Id,semester}) => {
   
     return (
       <div style= {{height:'100%',width:'20%',backgroundColor: 'white',border:'1px solid #E5E5E5',overflow: 'hidden',position:'relative'}}>
@@ -52,12 +42,8 @@ const DaySessions = ({dayName,dayList}) => {
                   <ListItemText style={{textAlign: 'center',color: '#3282B8'}} id={labelId} primary={`${lesson.startingTime + ' - ' + lesson.endingTime}`} />
                   <div style={{width:'100%',display: 'flex',marginBottom:'10px' }}>
                     <ListItemText style={{textAlign: 'center',color: '#3282B8'}} id={labelId} primary={lesson.sale.name} />
-                    <IconButton aria-label="delete" style={{color:'#3282B8',position: 'absolute',right: '0'}} onClick={() => handleDeleteClick(lesson.id)}>
-                      <DeleteIcon />
-                    </IconButton>
+                    <DeleteSession sessionId={lesson.id}/>
                   </div>
-                  
-
                 </ListItemButton>
               </ListItem>
                 <Divider />
@@ -65,7 +51,15 @@ const DaySessions = ({dayName,dayList}) => {
           );
         })}
       </List>
-      <Button style={{width: '100%',position:'absolute',bottom: '0px',color:'#3282B8'}} onClick={handleAddClick}>Add session</Button>
+      <AddSession 
+        style={{width: '100%',position:'absolute',bottom: '0px',color:'#3282B8'}}
+        groupsList={groupsList}
+        modulesList={modulesList}
+        section_Id={section_Id}
+        semester={1}
+        dayName={dayName}
+      />
+
       </div>
     );
 }

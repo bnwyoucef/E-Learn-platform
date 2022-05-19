@@ -53,12 +53,12 @@ const UpdateStudent = () => {
   return (
     <div>
     <Button variant="contained" disabled = {!enableAddStudent} onClick={handleClickOpen} size="small" style= {{marginRight: 10}}>
-      Add Student
+      Update Student
     </Button>
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Add Student</DialogTitle>
+      <DialogTitle>Update Student</DialogTitle>
       <DialogContent>
-          {displayMsg && createSuccess && <Alert severity="success">Teacher created successfully</Alert>}
+          {displayMsg && createSuccess && <Alert severity="success">Student Updated successfully</Alert>}
           {displayMsg && !createSuccess && <Alert severity="error">Oops Something went wrong!</Alert>}
           <form onSubmit={handleConfirm}>
             <TextField
