@@ -73,6 +73,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
     async function getSpecialities() {
       try {
         const response = await axios.get(`level/${batchNumber}`)
+        console.log(">>>>>>>>>>>>><",response.data.message);
         setStudentsList(response.data.message.students.sort(compare))
         setSearchedList(response.data.message.students.sort(compare))
         console.log(response.data.message.students);
@@ -104,7 +105,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
     async function getSectionOfSpecialities() {
       try {
         let levelSelected = listLevel.find(item => item.name === level)
-        batchNumber = levelSelected.id
+        batchNumber = levelSelected.currentBatch.id
         const response = await axios.get(`section/all/batch_Id=${batchNumber}&speciality_Id=${specialityNumber}`)
         setListSection(response.data.message.sections)
         setStudentsList(response.data.message.students.sort(compare))
@@ -162,7 +163,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
         </div>
         <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
           <AddStudentForm groupList = {groupList} enableAddStudent={enableAddStudent} batch_Id={listLevel.find(item => item.name === level)?listLevel.find(item => item.name === level).currentBatch.id:0}
-          speciality_Id={listSpeciality.find(item => item.name === speciality)?listSpeciality.find(item => item.name === speciality).id:0}
+          speciality_Idd={listSpeciality.find(item => item.name === speciality)?listSpeciality.find(item => item.name === speciality).id:0}
           section_Id={listSection.find(item => item.name === section)?listSection.find(item => item.name === section).id:0}/>
         </div>
       </div>

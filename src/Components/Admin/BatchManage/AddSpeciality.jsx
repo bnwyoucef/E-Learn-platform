@@ -28,7 +28,7 @@ const AddSpeciality = () => {
     const handleConfirm = async (event) => {
       event.preventDefault();
       const levelNumberr = parseInt(levelNumber)
-      const newLevel = {name,description,level_Id:levelNumberr}
+      const newLevel = {name,description,shortName:'AI',level_Id:levelNumberr}
       console.log(newLevel);
       try {
           const response = await axios.post(`speciality/create`,newLevel,{

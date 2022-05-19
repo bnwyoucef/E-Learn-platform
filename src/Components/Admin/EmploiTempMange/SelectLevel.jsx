@@ -4,10 +4,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
+import axios from '../../../Api/Axios'
 
-const SelectLevel = ({setSelectedLevel,selectedLevel}) => {
-    const [levelList,setLevelList] = useState([])
+const SelectLevel = ({setSelectedLevel,selectedLevel,levelList}) => {
+
   return (
     <div>
         <Box sx={{ width: 120,marginRight:'13px' }}>
@@ -16,13 +17,13 @@ const SelectLevel = ({setSelectedLevel,selectedLevel}) => {
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={levelList}
+                value={selectedLevel}
                 label={selectedLevel}
                 onChange={event => setSelectedLevel(event.target.value)}
             >
-            {levelList.map((item) => {
+            {levelList?levelList.map((item) => {
                     return <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
-                })}
+                }):''}
             </Select>
         </FormControl>
         </Box>

@@ -14,8 +14,6 @@ import useStyles from '../../Style'
 import { useState,useEffect} from'react'
 
 const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => {
-  const [age, setAge] = useState('');
-  const [value, setValue] = useState(null);
   const classes = useStyles()
   const [moduleOfSession,setModuleOfSession] = useState('')
   const [startingTime,setStartingTime] = useState(null)
@@ -29,7 +27,7 @@ const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => 
   }
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    
   };
   return (
     <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: 'auto',border:'1px solid #E5E5E5'}}>
@@ -67,7 +65,7 @@ const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={'10px'} style={{ width:'350px',marginTop:'10px',marginBottom:'10px' }}>
               <div style={{display:'flex',flexDirection:'row',width:'100%',alignItems: 'center'}}>
-                <label htmlfor='startTime' style={{width:'50px',marginLeft:'10px',marginRight:'10px'}}>
+                <label htmlFor='startTime' style={{width:'50px',marginLeft:'10px',marginRight:'10px'}}>
                   <Typography variant='subtitle2'>
                     from
                   </Typography>
@@ -90,7 +88,7 @@ const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => 
                 />
               </div>
               <div style={{display:'flex',flexDirection:'row',width:'100%',alignItems: 'center'}}>
-                <label htmlfor='startTime' style={{width:'50px',marginLeft:'10px',marginRight:'10px'}}>
+                <label htmlFor='startTime' style={{width:'50px',marginLeft:'10px',marginRight:'10px'}}>
                 <Typography variant='subtitle2'>
                     to
                   </Typography>
@@ -139,7 +137,7 @@ const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => 
           </div>
 
           <div style={{display:'flex',flexDirection:'row',width:'400px',alignItems: 'center'}}>
-            <label htmlfor='inSalle' style={{width:'40px',marginLeft:'10px',marginRight:'10px'}}>
+            <label htmlFor='inSalle' style={{width:'40px',marginLeft:'10px',marginRight:'10px'}}>
               <Typography variant='subtitle2'>
                     Group
               </Typography>
@@ -162,7 +160,7 @@ const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => 
         </div>
 
         <div style={{display:'flex',flexDirection:'row',width:'350px',alignItems: 'center',marginBottom:'10px',marginTop:'10px'}}>
-            <label htmlfor='inSalle' style={{width: '40px',marginLeft:'10px',marginRight:'10px'}}>
+            <label htmlFor='inSalle' style={{width: '40px',marginLeft:'10px',marginRight:'10px'}}>
             <Typography variant='subtitle2'>
                     In
             </Typography>

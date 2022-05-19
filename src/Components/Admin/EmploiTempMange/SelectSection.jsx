@@ -6,8 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useState} from 'react'
 
-const SelectSection = ({selectedSection,setSelectedSection}) => {
-    const [sectionsList,setSectionsList] = useState([])
+const SelectSection = ({selectedSection,setSelectedSection,sectionsList}) => {
+   
   return (
     <div>
         <Box sx={{ width: 120,marginRight:'13px' }}>
@@ -16,8 +16,8 @@ const SelectSection = ({selectedSection,setSelectedSection}) => {
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={sectionsList}
-                label={selectedSection}
+                value={selectedSection}
+                label={'Section'}
                 onChange={event => setSelectedSection(event.target.value)}
             >
             {sectionsList.map((item) => {
