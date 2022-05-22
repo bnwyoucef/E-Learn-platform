@@ -20,9 +20,9 @@ const SelectSection = ({selectedSection,setSelectedSection,sectionsList}) => {
                 label={'Section'}
                 onChange={event => setSelectedSection(event.target.value)}
             >
-            {sectionsList.map((item) => {
+            {sectionsList?sectionsList.map((item) => {
                     return <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
-                })}
+                }):''}
             </Select>
         </FormControl>
         </Box>

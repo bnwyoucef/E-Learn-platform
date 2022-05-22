@@ -20,9 +20,9 @@ const SelectSpeciality = ({selectedSpeciality,setSelectedSpeciality,specialities
                 label={'Speciality'}
                 onChange={event => setSelectedSpeciality(event.target.value)}
             >
-            {specialitiesList.map((item) => {
+            {specialitiesList?specialitiesList.map((item) => {
                     return <MenuItem value={item.name} key={item.id}>{item.shortName}</MenuItem>
-                })}
+                }):''}
             </Select>
         </FormControl>
         </Box>
