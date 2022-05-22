@@ -101,6 +101,7 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
             <FormControl style={{width:'350px',}}>
               <InputLabel id="demo-simple-select-label">Module</InputLabel>
               <Select
+              style={{ backgroundColor:'rgba(15,76,117,0.07)',borderRadius:'20px',color:'rgba(15, 76, 117, 0.6)'}}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={moduleOfSession}
@@ -128,7 +129,14 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
                   onChange={(newValue) => {
                     setStartTime(newValue);
                   }}
-                  renderInput={(params) => <TextField {...params} sx={{width: '100%'}}/>}
+                  renderInput={(params) => <TextField 
+                    style={{borderRadius:'10px',backgroundColor: 'rgba(15,76,117,0.07)',flex: 2}}
+                    {...params}
+                    sx={{width: '100%'}}
+                    variant="standard"
+                    InputProps={{
+                      disableUnderline: true,
+                    }}/>}
                 />
               </div>
               <div style={{display:'flex',flexDirection:'row',width:'100%',alignItems: 'center'}}>
@@ -144,7 +152,13 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
                   onChange={(newValue) => {
                     setEndTime(newValue);
                   }}
-                  renderInput={(params) => <TextField {...params} sx={{width: '100%'}}/>}
+                  renderInput={(params) => <TextField
+                    style={{borderRadius:'10px',backgroundColor: 'rgba(15,76,117,0.07)',flex: 2}}
+                    {...params}
+                    sx={{width: '100%'}}
+                    variant="standard"
+                    InputProps={{
+                    disableUnderline: true}}/>}
                 />
               </div>
             </Stack>
@@ -159,6 +173,7 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
                 <FormControl style={{width:'350px',}}>
                   <InputLabel id="demo-simple-select-label">Teacher</InputLabel>
                   <Select
+                  style={{ backgroundColor:'rgba(15,76,117,0.07)',borderRadius:'20px',color:'rgba(15, 76, 117, 0.6)'}}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={teacherOfModule}
@@ -183,6 +198,7 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
             <FormControl style={{width:'290px',}}>
               <InputLabel id="demo-simple-select-label">Group</InputLabel>
               <Select
+              style={{ backgroundColor:'rgba(15,76,117,0.07)',borderRadius:'20px',color:'rgba(15, 76, 117, 0.6)'}}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={groupSession}
@@ -205,6 +221,7 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
               <FormControl style={{width:'290px'}}>
                 <InputLabel id="demo-simple-select-label">Salle</InputLabel>
                 <Select
+                style={{ backgroundColor:'rgba(15,76,117,0.07)',borderRadius:'20px',color:'rgba(15, 76, 117, 0.6)'}}
                   labelId="demo-simple-select-label"
                   id="inSalle"
                   value={salleOfSession}

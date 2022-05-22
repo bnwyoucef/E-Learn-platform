@@ -59,7 +59,7 @@ const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Idd,sect
 
   return (
     <div>
-    <Button variant="contained" disabled = {!enableAddStudent} onClick={handleClickOpen} size="small" style= {{marginRight: 10}}>
+    <Button variant="contained" disabled = {!enableAddStudent} onClick={handleClickOpen} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
       Add Student
     </Button>
     <Dialog open={open} onClose={handleClose}>

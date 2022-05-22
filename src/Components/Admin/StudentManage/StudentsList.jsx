@@ -80,6 +80,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
         setHasSpeciality(response.data.message.hasSpecialities)
         if(response.data.message.hasSpecialities) {
           setListSpeciality(response.data.message.specialities)
+          console.log('>>>>>>>>>>>>>>>>',listSpeciality,response.data.message.specialities)
           setDisplaySection(false)
         }else { 
           if(response.data.message.sections) {

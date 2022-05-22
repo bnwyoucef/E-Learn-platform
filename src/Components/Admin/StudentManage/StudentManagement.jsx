@@ -2,7 +2,8 @@ import React from 'react'
 import {Button,Typography,TextField} from "@mui/material";
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
-import { useState } from 'react'
+import { useState } from 'react';
+import Select from '@mui/material/Select';
 
 const StudentManagement = () => {
   const [group, setGroup] = useState('');
@@ -22,22 +23,19 @@ const StudentManagement = () => {
         </div>
       </div>
       <Box sx={{ minWidth: 120 }}>
-        <TextField
-          size='small'
+        <Select
           sx={{ width: '300px',marginLeft:'10px' }}
           style={{ backgroundColor:'rgba(15,76,117,0.07)',borderRadius:'20px',color:'rgba(15, 76, 117, 0.6)'}}
           labelid="demo-simple-select-label"
           id="demo-simple-select"
           value={group}
-          variant='standard'
-          select
-          label="group"
+          label="Group"
           onChange={handleChange}
         >
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>
-        </TextField>
+        </Select>
 
     </Box>
     </div>

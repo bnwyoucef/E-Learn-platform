@@ -18,6 +18,8 @@ const UpdateModule = ({moduleId,newModule}) => {
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
     const [name,setName] = useState('')
+    const [coef,setCoef] = useState('')
+    const [specialityId,setSpecialityId] = useState(0)
     const [shortName,setShortName] = useState('')
     const [description,setDescription] = useState('')
     const [levelId,setLevelId] = useState(0)
@@ -98,8 +100,19 @@ const UpdateModule = ({moduleId,newModule}) => {
                   value= {description}
                   onChange= {e => setDescription(e.target.value)}
               />
+              <TextField
+                  margin="dense"
+                  id="coef"
+                  label="Coefficient"
+                  type="text"
+                  fullWidth
+                  variant="outlined"
+                  required
+                  value= {coef}
+                  onChange= {e => setCoef(e.target.value)}
+              />
               <SelectSemestre setSemestreNumber={setSemesterNum}/>
-              <SelectLevel setLevelNumber={setLevelId}/>
+              <SelectLevel setLevelNumber={setLevelId} setSpecialityId={setSpecialityId}/>
               
               <Button type="submit" style={{float:'right',marginTop:'30px'}}>Confirm</Button>
               <Button onClick={handleClose} style={{float:'right',marginTop:'30px'}}>Cancel</Button>

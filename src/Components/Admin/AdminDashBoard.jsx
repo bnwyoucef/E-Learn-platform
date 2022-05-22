@@ -26,6 +26,8 @@ const AdminDashBord = () => {
         return <BatchContent />
       case 'Emploi du temps':
         return <EmploiContent />
+      case 'Module management':
+        return <ModuleContent/>
       default: 
         return
     }
@@ -37,8 +39,8 @@ const AdminDashBord = () => {
           <AdminSideBar setBrowse={setBrowse}/>
         </Grid>
         <Grid item xs={9.9}>
-          {/* //{broswsingPage(browse)} */}
-          <EmploiContent />
+          {broswsingPage(browse)}
+          {/*<EmploiContent />*/}
         </Grid>
       </Grid>
     </div>
