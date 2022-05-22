@@ -6,8 +6,7 @@ import { useState,useEffect } from 'react';
 const StudentInfo = ({studentObj,levelSelected}) => {
   const [batchesList,setBatchesList] = useState([])
   const [level,setLevel] = useState('')
-
-  console.log("studentObj: ", studentObj);
+  
   async function getBatches() {
     try {
       const response = await axios.get('batch/all')
@@ -49,6 +48,11 @@ const StudentInfo = ({studentObj,levelSelected}) => {
         <div style={{backgroundColor:'rgba(15, 76, 117, 0.07)',width:'70%',borderRadius:'10px',marginTop:'20px',textAlign:'center'}}>
             <Typography variant="subtitle2" style={{marginLeft:'10px',color:'rgba(15, 76, 117, 0.6)',padding:'5px 0px'}}>
                 {studentObj.section?studentObj.section.name:''}
+            </Typography>
+        </div>
+        <div style={{backgroundColor:'rgba(15, 76, 117, 0.07)',width:'70%',borderRadius:'10px',marginTop:'20px',textAlign:'center'}}>
+            <Typography variant="subtitle2" style={{marginLeft:'10px',color:'rgba(15, 76, 117, 0.6)',padding:'5px 0px'}}>
+                {studentObj.section?studentObj.group.name:''}
             </Typography>
         </div>
       </div>

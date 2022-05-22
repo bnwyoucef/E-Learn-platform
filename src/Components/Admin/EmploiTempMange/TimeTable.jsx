@@ -130,18 +130,13 @@ const TimeTable = ({setSessionClicked,setModulesListUpdate,setGroupsListUpdate})
   return (
     <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '500px',border:'1px solid #E5E5E5'}}>
       <div className={classes.teacherListHeader}>
-<<<<<<< HEAD
       <Typography variant="h6" sx={{marginRight:'10px'}}>
           Schedule
         </Typography>
-        <SelectLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel}/>
-        <SelectSpeciality selectedSpeciality={selectedSpeciality} setSelectedSpeciality={setSelectedSpeciality}/>
-        <SelectSection selectedSection={selectedSection} setSelectedSection={setSelectedSection}/>
-=======
-        <SelectLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel} levelList={levelList}/>
+        <SelectLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel} levelList={levelList} sectionsList={sectionsList}/>
        {hasSpeciality && <SelectSpeciality selectedSpeciality={selectedSpeciality} setSelectedSpeciality={setSelectedSpeciality} specialitiesList={specialitiesList}/>} 
        {(displaySection || !hasSpeciality) && <SelectSection selectedSection={selectedSection} setSelectedSection={setSelectedSection} sectionsList={sectionsList}/>}
->>>>>>> 92a01910541914283cc82a531db4d49a66be62fc
+
       </div>
       {selectedSection?
       <div style= {{overflow: 'hidden',backgroundColor: 'white',height: '430px',border:'1px solid #E5E5E5',display: 'flex',justifyContent: 'center'}}>
