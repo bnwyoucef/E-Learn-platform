@@ -8,7 +8,7 @@ import SelectLevel from './SelectLevel'
 import SelectSpeciality from './SelectSpeciality'
 import SelectSection from './SelectSection'
 
-const TimeTable = () => {
+const TimeTable = ({setSessionClicked,setModulesListUpdate,setGroupsListUpdate}) => {
   const classes = useStyles()
   const [sundayList,setSundayList] = useState([])
   const [mondayList,setMondayList] = useState([])
@@ -58,6 +58,7 @@ const TimeTable = () => {
         setSectionsList(currentLevel.sections)
         setHasSpeciality(false)
         setModulesList(currentLevel.modules)
+        setModulesListUpdate(currentLevel.modules)
       }
     }
   }
@@ -73,11 +74,10 @@ const TimeTable = () => {
 
   async function getSectionOfSpecialities() {
     try {
-      // let levelSelected = levelList.find(item => item.name === selectedLevel)
-      // const response = await axios.get(`section/all/batch_Id=${levelSelected.currentBatch.id}&speciality_Id=${specialityNumber}`)
       const response = await axios.get(`speciality/${specialityNumber}`)
       setSectionsList(response.data.message.sections)
       setModulesList(response.data.message.modules)
+      setModulesListUpdate(response.data.message.modules)
     } catch (error) {
       console.log("error in group fetch",error.message);
     }
@@ -111,6 +111,7 @@ const TimeTable = () => {
     try {
       const response = await axios.get(`section/${sectionNumber}`)
       setGroupsList(response.data.message.groups)
+      setGroupsListUpdate(response.data.message.groups)
     } catch (error) {
       console.log(error.message);
     }
@@ -136,22 +137,27 @@ const TimeTable = () => {
       {selectedSection?
       <div style= {{overflow: 'hidden',backgroundColor: 'white',height: '430px',border:'1px solid #E5E5E5',display: 'flex',justifyContent: 'center'}}>
         <DaySessions dayName={'Sunday'} dayList={sundayList}
+          setSessionClicked={setSessionClicked}
           groupsList={groupsList} modulesList={modulesList}
           section_Id={section_Id} semester={semester}
         /> 
         <DaySessions dayName={'Monday'} dayList={mondayList}
+            setSessionClicked={setSessionClicked}
             groupsList={groupsList} modulesList={modulesList}
             section_Id={section_Id} semester={semester}
         /> 
         <DaySessions dayName={'Tuesday'} dayList={tuesdayList}
+            setSessionClicked={setSessionClicked}
             groupsList={groupsList} modulesList={modulesList}
             section_Id={section_Id} semester={semester}
         /> 
         <DaySessions dayName={'Wednseday'} dayList={wednesdayList}
+            setSessionClicked={setSessionClicked}
             groupsList={groupsList} modulesList={modulesList}
             section_Id={section_Id} semester={semester}
         />  
         <DaySessions dayName={'Thursday'} dayList={thursdayList}
+            setSessionClicked={setSessionClicked}
             groupsList={groupsList} modulesList={modulesList}
             section_Id={section_Id} semester={semester}
         /> 

@@ -58,7 +58,6 @@ const AddSession = ({groupsList,modulesList,section_Id,semester,dayName}) => {
     async function handleConfirm(event) {
       event.preventDefault()
         let newSession ={}
-        console.log(dayName);
         let day = dayList.find(item => item.name === dayName).id
         let sale_Id = salesList.find(item => item.name === saleName).id
         let teacher_Id = parseInt(teachersList.find(item => item.name === teacherName).id)
@@ -67,7 +66,6 @@ const AddSession = ({groupsList,modulesList,section_Id,semester,dayName}) => {
         newSession = {day,lesson_Type,startingTime:startTime.toString().substring(16,21),endingTime:endTime.toString().substring(16,21),sale_Id,teacher_Id,group_Id,module_Id,section_Id,semester}
         
         try {
-          console.log("new session: " + newSession);
             const response = await axios.post('lessons/create', newSession)
             setCreateSuccess(response.data.success)
             setDisplayMsg(true)

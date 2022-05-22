@@ -12,23 +12,73 @@ import Stack from '@mui/material/Stack';
 import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import useStyles from '../../Style'
 import { useState,useEffect} from'react'
+import axios from '../../../Api/Axios'
 
-const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => {
+const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
   const classes = useStyles()
   const [moduleOfSession,setModuleOfSession] = useState('')
-  const [startingTime,setStartingTime] = useState(null)
-  const [endingTime,setEndingTime] = useState(null)
+  const [startTime,setStartTime] = useState(null)
+  const [endTime,setEndTime] = useState(null)
   const [teacherOfModule,setTeacherOfModule] = useState('')
   const [salleOfSession,setSalleOfSession] = useState('')
   const [groupSession,setGroupSession] = useState('');
 
-  const handleUpdateClick = () => {
+  const [sallesList,setSallesList] = useState([])
+  const [teachersList,setTeachersList] = useState([])
+  const [enableUpdateBtn,setEnableUpdateBtn] = useState(false)
 
+  async function getTeachersAndSalles() {
+    try {
+      const response = await axios.get('teacher/all')
+      const response2 = await axios.get('sale/all')
+      setSallesList(response2.data.message)
+      setTeachersList(response.data.message)
+    } catch (error) {
+      
+    }
   }
 
-  const handleChange = (event) => {
-    
-  };
+  useEffect(() => {
+    if(Object.keys(sessionClicked).length !== 0) {
+      getTeachersAndSalles()
+      setEnableUpdateBtn(true)
+    }
+  },[sessionClicked])
+
+   const handleUpdateClick = async () => {
+    console.log("clicked session is:", sessionClicked);
+    let newSession = {day:1,lesson_Type:sessionClicked.lesson_Type}
+    if(moduleOfSession){
+      let module_Id = modulesList.find(item => item.name === moduleOfSession).id
+      newSession.module_Id = module_Id
+    }
+    if(startTime) {
+      newSession.startingTime = startTime.toString().substring(16,21)
+    }
+    if(endTime) {
+      newSession.endingTime = endTime.toString().substring(16,21)
+    }
+    if(teacherOfModule) {
+      let teacher_Id = parseInt(teachersList.find(item => item.name === teacherOfModule).id)
+      newSession.teacher_Id = teacher_Id
+    }
+    if(salleOfSession) {
+      let sale_Id = sallesList.find(item => item.name === salleOfSession).id
+      newSession.sale_Id = sale_Id
+    }
+    if(groupSession) {
+      let group_Id = groupsList.find(item => item.name === groupSession).id
+      newSession.group_Id = group_Id
+    }
+
+    try {
+      const response = await axios.patch(`lessons/update/${sessionClicked.id}`,newSession)
+      console.log("update status:",response.data.message);
+    } catch (error) {
+      
+    }
+  }
+
   return (
     <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: 'auto',border:'1px solid #E5E5E5'}}>
       <div className={classes.teacherListHeader}>
@@ -36,7 +86,9 @@ const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => 
           Session Management
         </Typography>
         <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-          <Button variant="contained" onClick={handleUpdateClick} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>Update</Button>  
+          <Button variant="contained" disabled={!enableUpdateBtn} onClick={handleUpdateClick} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
+            Update
+          </Button>  
         </div>
       </div>
 
@@ -71,10 +123,10 @@ const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => 
                 </label>
                 <DesktopTimePicker
                   label="Starting time"
-                  value={startingTime}
+                  value={startTime}
                   id='startTime'
                   onChange={(newValue) => {
-                    setStartingTime(newValue);
+                    setStartTime(newValue);
                   }}
                   renderInput={(params) => <TextField {...params} sx={{width: '100%'}}/>}
                 />
@@ -88,9 +140,9 @@ const SessionManagement = ({modulesList,teachersList,groupsList,sallesList}) => 
                 <DesktopTimePicker
                   id="endTime"
                   label="Ending time"
-                  value={endingTime}
+                  value={endTime}
                   onChange={(newValue) => {
-                    setEndingTime(newValue);
+                    setEndTime(newValue);
                   }}
                   renderInput={(params) => <TextField {...params} sx={{width: '100%'}}/>}
                 />

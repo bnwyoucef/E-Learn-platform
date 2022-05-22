@@ -8,7 +8,7 @@ import './style.css'
 import DeleteSession from './DeleteSession'
 import AddSession from './AddSession'
 
-const DaySessions = ({dayName,dayList,groupsList,modulesList,section_Id,semester}) => {
+const DaySessions = ({dayName,dayList,groupsList,modulesList,section_Id,semester,setSessionClicked}) => {
   
     return (
       <div style= {{height:'100%',width:'20%',backgroundColor: 'white',border:'1px solid #E5E5E5',overflow: 'hidden',position:'relative'}}>
@@ -35,6 +35,7 @@ const DaySessions = ({dayName,dayList,groupsList,modulesList,section_Id,semester
             <div key={lesson.id}>
               <ListItem
                 disablePadding
+                onClick={() =>setSessionClicked(lesson)}
               >
                 <ListItemButton style={{display: 'flex',flexDirection:'column'}}>
                   <ListItemText style={{textAlign: 'center',color: '#3282B8'}} id={labelId} primary={lesson.group.name} />

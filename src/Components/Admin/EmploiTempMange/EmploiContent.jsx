@@ -7,10 +7,10 @@ import axios from '../../../Api/Axios'
 import {useState,useEffect} from 'react'
 
 function EmploiContent() {
-  const [modulesList,setModulesList] = useState([])
-  const [teachersList,setTeachersList] = useState([])
-  const [groupsList,setGroupsList] = useState([])
-  const [sallesList,setSallesList] = useState([])
+  const [modulesListUpdate,setModulesListUpdate] = useState([])
+  const [groupsListUpdate,setGroupsListUpdate] = useState([])
+
+  const [sessionClicked,setSessionClicked] = useState({})
   
   return (
     <div>
@@ -19,13 +19,16 @@ function EmploiContent() {
           <Header />
         </Grid>
         <Grid item xs={12}>
-          <TimeTable />
+          <TimeTable setSessionClicked={setSessionClicked}
+            setModulesListUpdate={setModulesListUpdate}
+            setGroupsListUpdate={setGroupsListUpdate}
+          />
         </Grid>
         <Grid item xs={12}>
-          <SessionManagement modulesList = {modulesList}
-            teachersList={teachersList}
-            groupsList={groupsList}
-            sallesList={sallesList}
+          <SessionManagement 
+            sessionClicked={sessionClicked}
+            modulesList = {modulesListUpdate}
+            groupsList={groupsListUpdate}
           />
         </Grid>
       </Grid>
