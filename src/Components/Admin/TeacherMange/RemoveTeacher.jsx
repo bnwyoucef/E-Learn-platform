@@ -40,7 +40,7 @@ export default function RemoveTeacher({ teacherId,fullName,type }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Delete teacher"}
+          Delete {type}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

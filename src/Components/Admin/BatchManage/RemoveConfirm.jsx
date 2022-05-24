@@ -46,11 +46,11 @@ const RemoveConfirm = ( {removeId,type,name} ) => {
             aria-describedby="alert-dialog-description"
         >
         <DialogTitle id="alert-dialog-title">
-            {"Delete teacher"}
+            Delete {type}
         </DialogTitle>
         <DialogContent>
             <DialogContentText id="alert-dialog-description">
-                Are you sure to delete {name}?
+                Are you sure to delete {name} {type}?
             </DialogContentText>
         </DialogContent>
         <DialogActions>

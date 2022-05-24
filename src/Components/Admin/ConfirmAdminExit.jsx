@@ -5,9 +5,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import axios from '../../../Api/Axios'
 
-const ApplyConfirm = ({studentGroups,studentSections,studentObj,disableApply,group,section}) => {
+const ConfirmAdminExit = () => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -17,24 +16,14 @@ const ApplyConfirm = ({studentGroups,studentSections,studentObj,disableApply,gro
     const handleClose = () => {
       setOpen(false);
     };
-  
+
     const handleApply = async () => {
-        let group_Id = studentGroups.find(item => item.name === group).id
-        let section_Id = studentSections.find(item => item.name === section).id
-        let student = {section_Id,group_Id}
-        console.log(student);
-        try {
-          const response = await axios.patch(`student/update/${studentObj.id}`,student)
-          console.log("??",student,response);
-          setTimeout(handleClose,500)
-        } catch (error) {
-          
-        }
+        console.log("exit admin");
     }
 
   return (
     <div>
-        <Button onClick={handleClickOpen} variant="contained" size="small" disabled = {disableApply} style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
+        <Button onClick={handleClickOpen} variant="contained" size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
             Apply
         </Button>
       <Dialog
@@ -62,4 +51,4 @@ const ApplyConfirm = ({studentGroups,studentSections,studentObj,disableApply,gro
   )
 }
 
-export default ApplyConfirm
+export default ConfirmAdminExit

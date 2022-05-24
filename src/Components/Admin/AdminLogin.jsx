@@ -4,7 +4,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import{ Link } from 'react-router-dom';
+//import{ Link } from 'react-router-dom'; add it if forget password implemented
 import { useState,useEffect } from 'react';
 import AdminDashBoard from './AdminDashBoard';
 import axios from '../../Api/Axios';
@@ -15,6 +15,12 @@ const AdminSign = () => {
     const [errMsg,setErrMsg] = useState('');
     const [ok,setOk] = useState(false);
     
+    useEffect(() => {
+        if(localStorage.getItem('adminLoginStatus')){
+          const loginStatus = JSON.parse(localStorage.getItem('adminLoginStatus'))
+          setOk(loginStatus.loginSucceeded)
+        }
+    },[])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,8 +31,10 @@ const AdminSign = () => {
                 headers: { 'Content-Type': 'application/json' },   
             })
             setOk(response.data.success)
+            const loginSucceeded = response.data.success
+            localStorage.setItem('adminLoginStatus',JSON.stringify({loginSucceeded}));
             if(!response.data.success) {
-                setErrMsg("wrong password or email")
+                setErrMsg("wrong Email or password")
             }
         }catch (err) {
             setErrMsg(err.message)
@@ -43,10 +51,10 @@ const AdminSign = () => {
     <>
         {ok && <AdminDashBoard />}
         {!ok &&
-        <Container maxWidth="sm" component='main'>
+        <Container maxWidth="sm" component='main' style={{marginTop:'50px',width:'450px'}}>
             <CssBaseline />
-                <Box >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <Box style={{display:'flex',flexDirection: 'column',alignItems: 'center'}}>
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main',textAlign: 'center'}}>
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component='h1' variant='h5'>
@@ -81,7 +89,7 @@ const AdminSign = () => {
                             control={<Checkbox value="remember" color="primary" />}
                             label="Remember me"
                         />
-                        <div>
+                        <div style={{textAlign: 'center'}}>
                             <Typography color='red'>
                                 {errMsg}
                             </Typography>
@@ -95,9 +103,9 @@ const AdminSign = () => {
                         >
                             Sign in
                         </Button>
-                        <Typography >
+                        {/* <Typography >
                             <Link to='/Forget-password' >Forgot Password?</Link>
-                        </Typography>
+                        </Typography> */}
                     </Box>
                 </Box>
         </Container>
