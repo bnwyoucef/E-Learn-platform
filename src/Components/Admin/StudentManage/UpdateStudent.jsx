@@ -8,19 +8,16 @@ import Alert from '@mui/material/Alert';
 import { useState,useEffect } from 'react';
 import axios from '../../../Api/Axios'
 import BasicSelect from '../WilayaChose'
-import SelectGroup from './SelectGroup'
 
-const UpdateStudent = () => {
+const UpdateStudent = ({studentObj}) => {
     const [open, setOpen] = React.useState(false);
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [wilaya,setWilaya] = useState('');
-    const [group,setGroup] = useState('');
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
-    const [groupId,setGroupId] = useState(0);
     
     
     const handleClickOpen = () => {
@@ -33,10 +30,14 @@ const UpdateStudent = () => {
   
     const handleConfirm = async (event) => {
       event.preventDefault();
-      const student = {name:firstName,lastName,email,password,wilaya,group_Id:groupId}
-      console.log(student);
+      let student = {}
+      if(firstName) student.name = firstName
+      if(lastName) student.lastName = lastName
+      if(email) student.email = email
+      if(password) student.password = password
+      if(wilaya) student.wilaya = wilaya
       try {
-          const response = await axios.post(`student/create`,student,{
+          const response = await axios.patch(`student/update/${studentObj.id}`,student,{
               headers: { 'Content-Type': 'application/json' }})
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
@@ -48,11 +49,11 @@ const UpdateStudent = () => {
       }
     }
   
-    useEffect(() => {setDisplayMsg(false)},[firstName,lastName,email,password,group])
+    useEffect(() => {setDisplayMsg(false)},[firstName,lastName,email,password,wilaya])
 
   return (
     <div>
-    <Button variant="contained" disabled = {!enableAddStudent} onClick={handleClickOpen} size="small" style= {{marginRight: 10}}>
+    <Button variant="contained" onClick={handleClickOpen} size="small" style= {{marginRight: 10,marginTop:'30px'}}>
       Update Student
     </Button>
     <Dialog open={open} onClose={handleClose}>
@@ -69,7 +70,6 @@ const UpdateStudent = () => {
                 type="text"
                 fullWidth
                 variant="outlined"
-                required
                 value= {firstName}
                 onChange= {e => setFirstName(e.target.value)}
             />
@@ -80,7 +80,6 @@ const UpdateStudent = () => {
                 type="text"
                 fullWidth
                 variant="outlined"
-                required
                 value= {lastName}
                 onChange= {e => setLastName(e.target.value)}
             />
@@ -91,7 +90,6 @@ const UpdateStudent = () => {
                 type="email"
                 fullWidth
                 variant="outlined"
-                required
                 value= {email}
                 onChange= {e => setEmail(e.target.value)}
             />
@@ -102,12 +100,10 @@ const UpdateStudent = () => {
                 type="password"
                 fullWidth
                 variant="outlined"
-                required
                 value= {password}
                 onChange= {e => setPassword(e.target.value)}
             />
             <BasicSelect wilaya = { wilaya } setWilaya = {setWilaya}/>
-            <SelectGroup groupList = {groupList} group = { group } setGroup = {setGroup} setWilaya = {setGroup} setGroupId={setGroupId}/>
 
             <Button type="submit" style={{float:'right',marginTop:'30px'}}>Confirme</Button>
             <Button onClick={handleClose} style={{float:'right',marginTop:'30px'}}>Cancel</Button>

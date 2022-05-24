@@ -2,6 +2,7 @@ import React from 'react'
 import {Avatar,Typography} from "@mui/material";
 import useStyles from '../../Style'
 import UpdateTeacher from './UpdateTeacher'
+import UpdateStudent from '../StudentManage/UpdateStudent'
 
 const TeacherProfile = ({teacherObj: recievedObj,type}) => {
     const classes = useStyles();
@@ -35,7 +36,7 @@ const TeacherProfile = ({teacherObj: recievedObj,type}) => {
             {recievedObj.email}
         </Typography>
       </div>
-      <UpdateTeacher teacher={recievedObj}/>
+      {type ==='student'?<UpdateStudent studentObj={recievedObj}/>:<UpdateTeacher teacher={recievedObj}/>}
     </div>
   )
 }

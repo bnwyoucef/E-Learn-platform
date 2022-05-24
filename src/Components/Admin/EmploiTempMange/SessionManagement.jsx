@@ -13,6 +13,7 @@ import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import useStyles from '../../Style'
 import { useState,useEffect} from'react'
 import axios from '../../../Api/Axios'
+import ApplyUpdateConfirm from './ApplyUpdateConfirm'
 
 const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
   const classes = useStyles()
@@ -46,7 +47,6 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
   },[sessionClicked])
 
    const handleUpdateClick = async () => {
-    console.log("clicked session is:", sessionClicked);
     let newSession = {day:1,lesson_Type:sessionClicked.lesson_Type}
     if(moduleOfSession){
       let module_Id = modulesList.find(item => item.name === moduleOfSession).id
@@ -85,10 +85,21 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
         <Typography variant="h6">
           Session Management
         </Typography>
-        <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-          <Button variant="contained" disabled={!enableUpdateBtn} onClick={handleUpdateClick} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
-            Update
-          </Button>  
+        <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>  
+          <ApplyUpdateConfirm 
+            sessionClicked = {sessionClicked}
+            moduleOfSession = {moduleOfSession}
+            modulesList = {modulesList}
+            startTime = {startTime}
+            endTime = {endTime}
+            teacherOfModule = {teacherOfModule}
+            teachersList = {teachersList}
+            salleOfSession = {salleOfSession}
+            sallesList = {sallesList}
+            groupSession = {groupSession}
+            groupsList = {groupsList}
+            enableUpdateBtn = {enableUpdateBtn}
+          />
         </div>
       </div>
 
@@ -133,10 +144,7 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
                     style={{borderRadius:'10px',backgroundColor: 'rgba(15,76,117,0.07)',flex: 2}}
                     {...params}
                     sx={{width: '100%'}}
-                    variant="standard"
-                    InputProps={{
-                      disableUnderline: true,
-                    }}/>}
+                    />}
                 />
               </div>
               <div style={{display:'flex',flexDirection:'row',width:'100%',alignItems: 'center'}}>
@@ -156,9 +164,7 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
                     style={{borderRadius:'10px',backgroundColor: 'rgba(15,76,117,0.07)',flex: 2}}
                     {...params}
                     sx={{width: '100%'}}
-                    variant="standard"
-                    InputProps={{
-                    disableUnderline: true}}/>}
+                    />}
                 />
               </div>
             </Stack>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Avatar,Drawer,Typography,Toolbar,List,Divider,ListItem,ListItemIcon,ListItemText} from '@mui/material';
+import {Avatar,Drawer,Typography,Toolbar,List,ListItem,ListItemIcon,ListItemText} from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import SchoolIcon from '@mui/icons-material/School';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
@@ -11,12 +11,35 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import StackedBarChartIcon from '@mui/icons-material/StackedBarChart';
 import BookIcon from '@mui/icons-material/Book';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 const optionListTop = ["Gestion des enseignants","Gestion des étudiants","Gestion des Salles","Batch management","Emploi du temps","Module management"]
-const optionListBtm = ["Logs","Chat","Paramètres","Exit"] 
+const optionListBtm = ["Logs","Chat","Paramètres"] 
 
 const AdminSideBar = ( {setBrowse} ) => {
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    const handleExit = async () => {
+        const loginSucceeded = false
+        localStorage.setItem('adminLoginStatus',JSON.stringify({loginSucceeded}));
+        handleClose();
+        window.location.reload();
+    }
     
     function optionIcon(list,index) {
         switch(index) {
@@ -79,6 +102,13 @@ const AdminSideBar = ( {setBrowse} ) => {
                         color: '#266fff',
                     },
                 },
+                '& .MuiListItem-root:active': {
+                    bgcolor: 'white',
+                    borderRadius: '10px',
+                    '&, & .MuiListItemIcon-root': {
+                        color: '#266fff',
+                    },
+                },
                 }}
             >
                 <ListItem button
@@ -121,13 +151,42 @@ const AdminSideBar = ( {setBrowse} ) => {
               }}
             >
                 {optionListBtm.map((text, index) => (
-                    <ListItem button key={text}>
+                    <ListItem button key={text}
+                    onClick={() => setBrowse(text)}>
                     <ListItemIcon>
                         {optionIcon(false,index)}
                     </ListItemIcon>
                     <ListItemText primary={text} />
                     </ListItem>
                 ))}
+                <ListItem button
+                >
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">
+                            Exit
+                        </DialogTitle>
+                        <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            are you sure to Exit the application?
+                        </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button onClick={handleExit} autoFocus>
+                            Confirm
+                        </Button>
+                        </DialogActions>
+                    </Dialog>
+                    <ListItemIcon >
+                        <LogoutIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={'Exit'} onClick={handleClickOpen}/>
+                </ListItem>
             </List>
         </Drawer>
     </div>

@@ -12,7 +12,7 @@ import AddStudentForm from './AddStudentForm'
 import RemoveTeacher from '../TeacherMange/RemoveTeacher'
 import Select from './Select'
 
-const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
+const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStudentSections} ) => {
     const classes = useStyles()
     const [studentsList,setStudentsList] = useState([])
     const [searchedValue,setSearchedValue] = useState('')
@@ -47,6 +47,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
         const response = await axios.get('student/all')
         setStudentsList(response.data.message.sort(compare))
         setSearchedList(response.data.message.sort(compare))
+        console.log("all students:",response.data.message);
       }catch(err) {
         console.log(err.message);
       }
@@ -73,18 +74,16 @@ const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
     async function getSpecialities() {
       try {
         const response = await axios.get(`level/${batchNumber}`)
-        console.log(">>>>>>>>>>>>><",response.data.message);
         setStudentsList(response.data.message.students.sort(compare))
         setSearchedList(response.data.message.students.sort(compare))
-        console.log(response.data.message.students);
         setHasSpeciality(response.data.message.hasSpecialities)
         if(response.data.message.hasSpecialities) {
           setListSpeciality(response.data.message.specialities)
-          console.log('>>>>>>>>>>>>>>>>',listSpeciality,response.data.message.specialities)
           setDisplaySection(false)
         }else { 
           if(response.data.message.sections) {
             setListSection(response.data.message.sections)
+            setStudentSections(response.data.message.sections)
           }
         }
       } catch (error) {
@@ -108,6 +107,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
         batchNumber = levelSelected.currentBatch.id
         const response = await axios.get(`section/all/batch_Id=${batchNumber}&speciality_Id=${specialityNumber}`)
         setListSection(response.data.message.sections)
+        setStudentSections(response.data.message.sections)
         setStudentsList(response.data.message.students.sort(compare))
         setSearchedList(response.data.message.students.sort(compare))
       } catch (error) {
@@ -119,6 +119,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected} ) => {
       try {
         const response = await axios.get(`section/${sectionNumber}`)
         setGroupList(response.data.message.groups)
+        setStudentGroups(response.data.message.groups)
         setStudentsList(response.data.message.students.sort(compare))
         setSearchedList(response.data.message.students.sort(compare))
       } catch (error) {

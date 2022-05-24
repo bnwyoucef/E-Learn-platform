@@ -140,6 +140,14 @@ const TimeTable = ({setSessionClicked,setModulesListUpdate,setGroupsListUpdate})
         <SelectLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel} levelList={levelList}/>
        {hasSpeciality && <SelectSpeciality selectedSpeciality={selectedSpeciality} setSelectedSpeciality={setSelectedSpeciality} specialitiesList={specialitiesList}/>} 
        {(displaySection || !hasSpeciality) && <SelectSection selectedSection={selectedSection} setSelectedSection={setSelectedSection} sectionsList={sectionsList}/>}
+
+      <Typography variant="h6" sx={{marginRight:'10px'}}>
+          Schedule
+        </Typography>
+        <SelectLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel} levelList={levelList} sectionsList={sectionsList}/>
+       {hasSpeciality && <SelectSpeciality selectedSpeciality={selectedSpeciality} setSelectedSpeciality={setSelectedSpeciality} specialitiesList={specialitiesList}/>} 
+       {(displaySection || !hasSpeciality) && <SelectSection selectedSection={selectedSection} setSelectedSection={setSelectedSection} sectionsList={sectionsList}/>}
+
       </div>
       {selectedSection?
       <div style= {{overflow: 'hidden',backgroundColor: 'white',height: '430px',border:'1px solid #E5E5E5',display: 'flex',justifyContent: 'center'}}>

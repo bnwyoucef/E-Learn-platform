@@ -1,38 +1,31 @@
-import * as React from 'react';
+import React from 'react'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import DeleteIcon from '@mui/icons-material/Delete';
-import axios from '../../../Api/Axios'
 
-export default function RemoveTeacher({ teacherId,fullName,type }) {
-  const [open, setOpen] = React.useState(false);
+const ConfirmAdminExit = () => {
+    const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleApply = async () => {
+        console.log("exit admin");
+    }
 
-  const handleRemove = async () => {
-      try {
-          await axios.delete(`${type}/delete/${teacherId}`)
-          handleClose();
-          window.location.reload();
-      } catch (error) {
-          console.log(error.message);
-      }
-  }
   return (
     <div>
-       <Button variant="outlined" size='small' onClick={handleClickOpen} startIcon={<DeleteIcon />}>
-        Delete
-      </Button>
+        <Button onClick={handleClickOpen} variant="contained" size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
+            Apply
+        </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -40,20 +33,22 @@ export default function RemoveTeacher({ teacherId,fullName,type }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Delete {type}
+          {"are you sure to apply the changes?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure to delete {fullName} ?
+            are you sure to apply the changes?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleRemove} autoFocus>
+          <Button onClick={handleApply} autoFocus>
             Confirm
           </Button>
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }
+
+export default ConfirmAdminExit
