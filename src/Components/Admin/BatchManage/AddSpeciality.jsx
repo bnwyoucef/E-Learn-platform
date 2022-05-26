@@ -9,10 +9,10 @@ import { useState,useEffect } from 'react';
 import axios from '../../../Api/Axios'
 import SelectLevel from './SelectLevel'
 
-const AddSpeciality = () => {
+const AddSpeciality = ({theList,setTheList}) => {
     const [open, setOpen] = useState(false);
     const [name,setName] = useState('')
-    const [description,setDescription] = useState(0)
+    const [description,setDescription] = useState('')
     const [levelNumber,setLevelNumber] = useState('')
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
@@ -23,6 +23,10 @@ const AddSpeciality = () => {
   
     const handleClose = () => {
       setOpen(false);
+      setName('')
+      setDescription('')
+      setLevelNumber('')
+      setDisplayMsg(false)
     };
   
     const handleConfirm = async (event) => {
@@ -36,8 +40,9 @@ const AddSpeciality = () => {
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,1000)
-              console.log(response.data.message);
-              //window.location.reload(); 
+              let newList = [...theList]
+              newList.push(response.data.message)
+              setTheList(newList)
       } catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)
@@ -72,7 +77,7 @@ const AddSpeciality = () => {
               <TextField
                   margin="dense"
                   id="name"
-                  label="Level"
+                  label="Description"
                   type="text"
                   fullWidth
                   variant="outlined"

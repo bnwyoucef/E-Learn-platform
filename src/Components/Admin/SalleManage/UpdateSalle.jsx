@@ -13,7 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import ModeIcon from '@mui/icons-material/Mode';
 import Tooltip from '@mui/material/Tooltip';  
 
-const UpdateSalle = ({roomId,roomNew}) => {
+const UpdateSalle = ({roomId,roomNew,theList,setTheList}) => {
        
     const [open, setOpen] = useState(false);
     const [name,setName] = useState('')
@@ -49,7 +49,9 @@ const UpdateSalle = ({roomId,roomNew}) => {
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,1000)
-              //window.location.reload(); 
+              console.log(response.data.message);
+              let newList = [...theList].map(item => item.id === roomId?response.data.message:item)
+              setTheList(newList) 
       } catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)

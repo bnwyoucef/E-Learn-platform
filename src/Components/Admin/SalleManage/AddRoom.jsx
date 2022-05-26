@@ -10,7 +10,7 @@ import axios from '../../../Api/Axios'
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-const AddRoom = () => {
+const AddRoom = ({theList,setTheList}) => {
 
     const [open, setOpen] = useState(false);
     const [name,setName] = useState('')
@@ -25,6 +25,9 @@ const AddRoom = () => {
   
     const handleClose = () => {
       setOpen(false);
+      setName('')
+      setCapacity('')
+      setDisplayMsg(false)
     };
 
     const handleChange = (event) => {
@@ -40,8 +43,10 @@ const AddRoom = () => {
               headers: { 'Content-Type': 'application/json' }})
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
-              setTimeout(handleClose,1000)
-              window.location.reload(); 
+              setTimeout(handleClose,500)
+              let newList = [...theList]
+              newList.push(response.data.message) 
+              setTheList(newList) 
       } catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)

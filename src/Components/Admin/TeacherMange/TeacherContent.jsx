@@ -9,6 +9,7 @@ import axios from '../../../Api/Axios'
 
 const TeacherContent = () => {
   const [teacherObj,setTeacherObj] = useState({})
+  const [searchedList,setSearchedList] = useState([])
 
   function compare( a, b ) {
     if ( a.name.toUpperCase() < b.name.toUpperCase() ){
@@ -39,10 +40,10 @@ const TeacherContent = () => {
          <Header/>
         </Grid>
         <Grid item xs={8} >
-          <TeacherList setTeacherObj = {setTeacherObj} />
+          <TeacherList setTeacherObj = {setTeacherObj} setSearchedList={setSearchedList} searchedList={searchedList}/>
         </Grid>
         <Grid item xs={4}>
-          <TeacherProfile teacherObj = {teacherObj} type = {"teacher"} />
+          <TeacherProfile teacherObj = {teacherObj} type = {"teacher"} theList={searchedList} setTheList={setSearchedList} />
         </Grid>
         <Grid item xs={12}>
           <ModuleList teacherObj = {teacherObj}/>

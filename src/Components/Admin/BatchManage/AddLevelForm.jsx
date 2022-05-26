@@ -8,7 +8,7 @@ import Alert from '@mui/material/Alert';
 import { useState,useEffect } from 'react';
 import axios from '../../../Api/Axios'
 
-const AddLevelForm = () => {
+const AddLevelForm = ({theList,setTheList}) => {
 
     const [open, setOpen] = useState(false);
     const [name,setName] = useState('')
@@ -22,6 +22,9 @@ const AddLevelForm = () => {
   
     const handleClose = () => {
       setOpen(false);
+      setName('');
+      setLevel(0);
+      setDisplayMsg(false)
     };
   
     const handleConfirm = async (event) => {
@@ -33,8 +36,10 @@ const AddLevelForm = () => {
               headers: { 'Content-Type': 'application/json' }})
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
-              setTimeout(handleClose,1000)
-              window.location.reload(); 
+              setTimeout(handleClose,500)
+              let newList = [...theList]
+              newList.push(response.data.message)
+              setTheList(newList) 
       } catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)
@@ -51,7 +56,7 @@ const AddLevelForm = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Level</DialogTitle>
         <DialogContent>
-            {displayMsg && createSuccess && <Alert severity="success">Room added successfully</Alert>}
+            {displayMsg && createSuccess && <Alert severity="success">Level added successfully</Alert>}
             {displayMsg && !createSuccess && <Alert severity="error">Oops Something went wrong!</Alert>}
             <form onSubmit={handleConfirm}>
               <TextField

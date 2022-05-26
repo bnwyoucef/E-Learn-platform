@@ -4,7 +4,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import {Typography,Divider} from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import axios from '../../../Api/Axios'
 import { useState,useEffect } from 'react'
 import BookIcon from '@mui/icons-material/Book';
@@ -18,6 +17,7 @@ const ModuleList = ( {teacherObj} ) => {
     try {
       if(Object.keys(teacherObj).length !== 0) {
         const response = await axios.get(`teacher/modulesOfTeacher/${teacherObj.id}`)
+        console.log("moduleList line 20:",response.data.message,teacherObj);
         setModuleList(response.data.message)
       }
     }catch(err) {
@@ -40,7 +40,7 @@ const ModuleList = ( {teacherObj} ) => {
     disablePadding
     sx={{ width: "100%",height: "85%",overflow: "auto",bgcolor: "background.paper"}}
   >
-    {moduleList.map((value) => {
+    {moduleList?moduleList.map((value) => {
       const labelId = `checkbox-list-secondary-label-${value.id}`;
       return (
         <div key={value.id}>
@@ -57,7 +57,7 @@ const ModuleList = ( {teacherObj} ) => {
             <Divider style={{margin: '10px'}}/>
         </div>
       );
-    })}
+    }):''}
     </List>
     </div>
 );

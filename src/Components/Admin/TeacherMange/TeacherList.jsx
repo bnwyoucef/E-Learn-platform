@@ -14,12 +14,13 @@ import useStyles from '../../Style'
 import AddTeacherForm from './AddTeacherForm'
 import RemoveTeacher from './RemoveTeacher'
 
-export default function TeacherList( {setTeacherObj} ) {
+export default function TeacherList( {setTeacherObj,searchedList,setSearchedList} ) {
 
   const classes = useStyles()
   const [teacherList,setTeacherList] = useState([])
   const [searchedValue,setSearchedValue] = useState('')
-  const [searchedList,setSearchedList] = useState([])
+  // const [searchedList,setSearchedList] = useState([])
+  const [changedRender,setChangedRender] = useState(false)
 
   function compare( a, b ) {
     if ( a.name.toUpperCase() < b.name.toUpperCase() ){
@@ -41,7 +42,7 @@ export default function TeacherList( {setTeacherObj} ) {
     }
   }
 
-  useEffect(getTeachers,[]) //get teacher from DB when reload the page
+  useEffect(getTeachers,[changedRender]) //get teacher from DB when reload the page
   /** get the searched teacher by name when the user typing in the search field **/
   useEffect(() => {
     const handleSearch = (inputValue) => {
@@ -76,7 +77,7 @@ export default function TeacherList( {setTeacherObj} ) {
           onChange={e => setSearchedValue(e.target.value)}
         />
         <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-          <AddTeacherForm userType = {'teacher'}/>
+          <AddTeacherForm userType = {'teacher'} theList={searchedList} setTheList={setSearchedList}/>
         </div>
       </div>
       <Divider />
@@ -91,13 +92,13 @@ export default function TeacherList( {setTeacherObj} ) {
         },
       }}
     >
-      {searchedList.map((value) => {
+      {searchedList?searchedList.map((value) => {
         const labelId = `checkbox-list-secondary-label-${value.id}`;
         return (
           <ListItem
             key={value.id}
             onClick={e => setTeacherObj(value)}
-            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} type = {"teacher"}/>}
+            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} type = {"teacher"} setTheList={setSearchedList} theList={searchedList} />}
             disablePadding
             
           >
@@ -109,7 +110,7 @@ export default function TeacherList( {setTeacherObj} ) {
             </ListItemButton>
           </ListItem>
         );
-      })}
+      }):''}
     </List>
     </div>
   );

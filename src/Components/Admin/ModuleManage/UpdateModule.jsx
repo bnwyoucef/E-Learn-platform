@@ -13,7 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import ModeIcon from '@mui/icons-material/Mode';
 import Tooltip from '@mui/material/Tooltip'; 
 
-const UpdateModule = ({moduleId,newModule}) => {
+const UpdateModule = ({moduleId,theList,setTheList}) => {
     const [open, setOpen] = useState(false);
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
@@ -30,6 +30,10 @@ const UpdateModule = ({moduleId,newModule}) => {
   
     const handleClose = () => {
       setOpen(false);
+      setName('');
+      setShortName('');
+      setCoef('');
+      setDescription('');
     };
   
     const handleConfirm = async (event) => {
@@ -42,12 +46,12 @@ const UpdateModule = ({moduleId,newModule}) => {
       if(semesterNum) moduleToAdd.semester = semesterNum.toString()
 
       try {
-          console.log(moduleToAdd,moduleId);
           const response = await axios.patch(`module/update/${moduleId}`,moduleToAdd)
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,1000)
-              //window.location.reload(); 
+              let newList = [...theList].map(item => item.id === moduleId?response.data.message:item)
+              setTheList(newList) 
       } catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)
@@ -66,7 +70,7 @@ const UpdateModule = ({moduleId,newModule}) => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Module Room</DialogTitle>
         <DialogContent>
-            {displayMsg && createSuccess && <Alert severity="success">Module added successfully</Alert>}
+            {displayMsg && createSuccess && <Alert severity="success">Module updated successfully</Alert>}
             {displayMsg && !createSuccess && <Alert severity="error">Oops Something went wrong!</Alert>}
             <form onSubmit={handleConfirm}>
             <TextField
@@ -107,7 +111,6 @@ const UpdateModule = ({moduleId,newModule}) => {
                   type="text"
                   fullWidth
                   variant="outlined"
-                  required
                   value= {coef}
                   onChange= {e => setCoef(e.target.value)}
               />

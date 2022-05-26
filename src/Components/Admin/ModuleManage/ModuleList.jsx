@@ -14,14 +14,13 @@ import ModuleOperations from './ModuleOperations'
 
 const ModuleList = () => {
     const classes = useStyles()
-    const [saleList,setSaleList] = useState([])
+    const [modulesList,setModulesList] = useState([])
 
     useEffect(() => {
         const getSalles = async () => {
             try {
                 const response = await axios.get('module/all')
-                console.log(response.data.message);
-                setSaleList(response.data.message)  
+                setModulesList(response.data.message)  
             }catch (e) {
                 console.log(e.message);
             }
@@ -36,7 +35,7 @@ const ModuleList = () => {
                 Modules management
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <AddModule />
+                <AddModule theList={modulesList} setTheList={setModulesList}/>
             </div>
         </div>
         <Divider />
@@ -51,12 +50,12 @@ const ModuleList = () => {
             },
         }}
         >
-        {saleList.map((module) => {
+        {modulesList.map((module) => {
             const labelId = `checkbox-list-secondary-label-${module.id}`;
             return (
             <ListItem
                 key={module.id}
-                secondaryAction={<ModuleOperations module={module} removeId = {module.id} name= {module.name}/>}
+                secondaryAction={<ModuleOperations module={module} removeId = {module.id} name= {module.name} theList={modulesList} setTheList={setModulesList}/>}
                 disablePadding  
             >
                 <ListItemButton>

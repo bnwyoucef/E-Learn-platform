@@ -37,7 +37,7 @@ const RoomStatus = () => {
                 Rooms
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <AddRoom />
+                <AddRoom theList={saleList} setTheList={setSaleList}/>
             </div>
         </div>
         <Divider />
@@ -57,7 +57,7 @@ const RoomStatus = () => {
             return (
             <ListItem
                 key={room.id}
-                secondaryAction={<RoomOperations room={room} removeId = {room.id} type= {'sale'} name= {room.name}/>}
+                secondaryAction={<RoomOperations room={room} removeId = {room.id} type= {'sale'} name= {room.name} theList={saleList} setTheList={setSaleList}/>}
                 disablePadding  
             >
                 <ListItemButton>

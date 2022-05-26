@@ -3,12 +3,11 @@ import DaySessions from './DaySessions'
 import { useState,useEffect } from 'react'
 import axios from '../../../Api/Axios'
 import useStyles from '../../Style'
-import {Typography} from '@mui/material'
 import SelectLevel from './SelectLevel'
 import SelectSpeciality from './SelectSpeciality'
 import SelectSection from './SelectSection'
 
-const TimeTable = ({setSessionClicked,setModulesListUpdate,setGroupsListUpdate}) => {
+const TimeTable = ({setSessionClicked,setModulesListUpdate,setGroupsListUpdate,renderUpdate}) => {
   const classes = useStyles()
   const [sundayList,setSundayList] = useState([])
   const [mondayList,setMondayList] = useState([])
@@ -107,6 +106,8 @@ const TimeTable = ({setSessionClicked,setModulesListUpdate,setGroupsListUpdate})
     }
   }
 
+  useEffect(() =>{getLessons()},[renderUpdate])
+
   async function getGroupsOfSection() {
     try {
       const response = await axios.get(`section/${sectionNumber}`)
@@ -130,20 +131,6 @@ const TimeTable = ({setSessionClicked,setModulesListUpdate,setGroupsListUpdate})
   return (
     <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '500px',border:'1px solid #E5E5E5'}}>
       <div className={classes.teacherListHeader}>
-
-      <Typography variant="h6" sx={{marginRight:'10px'}}>
-          Schedule
-        </Typography>
-        <SelectLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel}/>
-        <SelectSpeciality selectedSpeciality={selectedSpeciality} setSelectedSpeciality={setSelectedSpeciality}/>
-        <SelectSection selectedSection={selectedSection} setSelectedSection={setSelectedSection}/>
-        <SelectLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel} levelList={levelList}/>
-       {hasSpeciality && <SelectSpeciality selectedSpeciality={selectedSpeciality} setSelectedSpeciality={setSelectedSpeciality} specialitiesList={specialitiesList}/>} 
-       {(displaySection || !hasSpeciality) && <SelectSection selectedSection={selectedSection} setSelectedSection={setSelectedSection} sectionsList={sectionsList}/>}
-
-      <Typography variant="h6" sx={{marginRight:'10px'}}>
-          Schedule
-        </Typography>
         <SelectLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel} levelList={levelList} sectionsList={sectionsList}/>
        {hasSpeciality && <SelectSpeciality selectedSpeciality={selectedSpeciality} setSelectedSpeciality={setSelectedSpeciality} specialitiesList={specialitiesList}/>} 
        {(displaySection || !hasSpeciality) && <SelectSection selectedSection={selectedSection} setSelectedSection={setSelectedSection} sectionsList={sectionsList}/>}
@@ -152,26 +139,31 @@ const TimeTable = ({setSessionClicked,setModulesListUpdate,setGroupsListUpdate})
       {selectedSection?
       <div style= {{overflow: 'hidden',backgroundColor: 'white',height: '430px',border:'1px solid #E5E5E5',display: 'flex',justifyContent: 'center'}}>
         <DaySessions dayName={'Sunday'} dayList={sundayList}
+          setDayList={setSundayList}
           setSessionClicked={setSessionClicked}
           groupsList={groupsList} modulesList={modulesList}
           section_Id={section_Id} semester={semester}
         /> 
         <DaySessions dayName={'Monday'} dayList={mondayList}
+            setDayList={setMondayList}
             setSessionClicked={setSessionClicked}
             groupsList={groupsList} modulesList={modulesList}
             section_Id={section_Id} semester={semester}
         /> 
         <DaySessions dayName={'Tuesday'} dayList={tuesdayList}
+            setDayList={setTuesdayList}
             setSessionClicked={setSessionClicked}
             groupsList={groupsList} modulesList={modulesList}
             section_Id={section_Id} semester={semester}
         /> 
-        <DaySessions dayName={'Wednseday'} dayList={wednesdayList}
+        <DaySessions dayName={'Wednesday'} dayList={wednesdayList}
+            setDayList={setWednesdayList}
             setSessionClicked={setSessionClicked}
             groupsList={groupsList} modulesList={modulesList}
             section_Id={section_Id} semester={semester}
         />  
         <DaySessions dayName={'Thursday'} dayList={thursdayList}
+            setDayList={setThursdayList}
             setSessionClicked={setSessionClicked}
             groupsList={groupsList} modulesList={modulesList}
             section_Id={section_Id} semester={semester}

@@ -37,7 +37,7 @@ const LevelsControl = ( {setCurrentLevel} ) => {
                 Levels
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <AddLevelForm />
+                <AddLevelForm theList={levelList} setTheList={setLevelList}/>
             </div>
         </div>
     <List
@@ -56,7 +56,8 @@ const LevelsControl = ( {setCurrentLevel} ) => {
         return (
           <ListItem
             key={value.id}
-            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'level'} name= {value.name}/>}
+            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'level'} name= {value.name}
+              theList={levelList} setTheList={setLevelList}/>}
             disablePadding  
             onClick={() => setCurrentLevel(value)}
           >

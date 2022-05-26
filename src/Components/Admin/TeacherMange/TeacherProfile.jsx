@@ -4,7 +4,7 @@ import useStyles from '../../Style'
 import UpdateTeacher from './UpdateTeacher'
 import UpdateStudent from '../StudentManage/UpdateStudent'
 
-const TeacherProfile = ({teacherObj: recievedObj,type}) => {
+const TeacherProfile = ({teacherObj: recievedObj,type,theList,setTheList}) => {
     const classes = useStyles();
   return (
     <div className={classes.teacherprofile}>
@@ -36,7 +36,8 @@ const TeacherProfile = ({teacherObj: recievedObj,type}) => {
             {recievedObj.email}
         </Typography>
       </div>
-      {type ==='student'?<UpdateStudent studentObj={recievedObj}/>:<UpdateTeacher teacher={recievedObj}/>}
+      {type ==='student'?<UpdateStudent studentObj={recievedObj} theList={theList} setTheList={setTheList}/>:<UpdateTeacher teacher={recievedObj}
+        theList={theList} setTheList={setTheList}/>}
     </div>
   )
 }

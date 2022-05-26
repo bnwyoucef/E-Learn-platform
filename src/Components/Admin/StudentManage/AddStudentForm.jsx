@@ -10,7 +10,7 @@ import axios from '../../../Api/Axios'
 import BasicSelect from '../WilayaChose'
 import SelectGroup from './SelectGroup'
 
-const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Idd,section_Id}) => {
+const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Idd,section_Id,theList,setTheList}) => {
 
     const [open, setOpen] = React.useState(false);
     const [firstName,setFirstName] = useState('');
@@ -30,6 +30,13 @@ const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Idd,sect
   
     const handleClose = () => {
       setOpen(false);
+      setFirstName('')
+      setLastName('')
+      setEmail('')
+      setWilaya('')
+      setGroup('')
+      setPassword('')
+      setDisplayMsg(false)
     };
   
     const handleConfirm = async (event) => {
@@ -41,14 +48,16 @@ const AddStudentForm = ({groupList,enableAddStudent,batch_Id,speciality_Idd,sect
       }else {
         student = {name:firstName,lastName,email,password,dateOfBirth:"2000-06-12",wilaya,group_Id:groupId,batch_Id,speciality_Id:gh,section_Id}
       }
-      console.log(student);
+
       try {
           const response = await axios.post(`student/create`,student,{
               headers: { 'Content-Type': 'application/json' }})
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,1000)
-              //window.location.reload(); 
+              let newList = [...theList]
+              newList.push(response.data.message)
+              setTheList(newList)
       }  catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)

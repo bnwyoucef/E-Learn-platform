@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import axios from '../../../Api/Axios'
 
-const DeleteSession = ({sessionId}) => {
+const DeleteSession = ({sessionId,theList,setTheList}) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -24,7 +24,8 @@ const DeleteSession = ({sessionId}) => {
         try {
             await axios.delete(`lessons/delete/${sessionId}`)
             handleClose();
-            window.location.reload();
+            let newList = [...theList].filter(item => item.id !== sessionId);
+            setTheList(newList);
         } catch (error) {
             console.log(error.message);
         }

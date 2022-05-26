@@ -9,7 +9,7 @@ import { useState,useEffect } from 'react';
 import axios from '../../../Api/Axios'
 import BasicSelect from '../WilayaChose'
 
-const UpdateStudent = ({studentObj}) => {
+const UpdateStudent = ({studentObj,theList,setTheList}) => {
     const [open, setOpen] = React.useState(false);
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
@@ -42,7 +42,8 @@ const UpdateStudent = ({studentObj}) => {
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,1000)
-              window.location.reload(); 
+              let newList = [...theList].map(item => item.id === studentObj.id?response.data.message:item)
+              setTheList(newList)
       }  catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)

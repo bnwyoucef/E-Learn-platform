@@ -12,8 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import CardType from './Card';
 import { useState,useEffect } from 'react';
-import TeacherDashBoard from './Teacher/TeacherDashBoard';
-import StudentDashBoard from './Student/StudentDashBoard';
+// import TeacherDashBoard from './Teacher/TeacherDashBoard';
+// import StudentDashBoard from './Student/StudentDashBoard';
 import axios from '../Api/Axios'
 
 const SignIn = () => {
@@ -72,8 +72,8 @@ const SignIn = () => {
 
   return (
   <>
-    {isOk && isTeacher && <TeacherDashBoard />}
-    {isOk && !isTeacher && <StudentDashBoard />}
+    {/* {isOk && isTeacher && <TeacherDashBoard />} */}
+    {/* {isOk && !isTeacher && <StudentDashBoard />} */}
     {!isOk &&
     <Grid container component="main" sx={{ height: "100vh",overflow: "hidden" }}>
       <CssBaseline />

@@ -41,7 +41,7 @@ const SpecialititesControl = ({currentLevel}) => {
                 Specialitites
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <AddSpeciality />
+                <AddSpeciality theList={specialitiesList} setTheList={setSpecialitiesList}/>
             </div>
         </div>
     <List
@@ -60,7 +60,7 @@ const SpecialititesControl = ({currentLevel}) => {
         return (
           <ListItem
             key={value.id}
-            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'speciality'} name= {value.name}/>}
+            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'speciality'} name= {value.name}theList={specialitiesList} setTheList={setSpecialitiesList}/>}
             disablePadding  
           >
             <ListItemButton>

@@ -12,11 +12,10 @@ import AddStudentForm from './AddStudentForm'
 import RemoveTeacher from '../TeacherMange/RemoveTeacher'
 import Select from './Select'
 
-const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStudentSections} ) => {
+const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStudentSections,searchedList,setSearchedList} ) => {
     const classes = useStyles()
     const [studentsList,setStudentsList] = useState([])
     const [searchedValue,setSearchedValue] = useState('')
-    const [searchedList,setSearchedList] = useState([])
     const [listSpeciality,setListSpeciality] = useState([])
     const [listLevel,setListLevel] = useState([])
     const [listSection,setListSection] = useState([])
@@ -163,7 +162,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
             {(displaySection || !hasSpeciality) && <Select ChoseList = {listSection} choseType={'Section'} setSection = {setSection}/>}
         </div>
         <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-          <AddStudentForm groupList = {groupList} enableAddStudent={enableAddStudent} batch_Id={listLevel.find(item => item.name === level)?listLevel.find(item => item.name === level).currentBatch.id:0}
+          <AddStudentForm groupList = {groupList} enableAddStudent={enableAddStudent} batch_Id={listLevel.find(item => item.name === level)?listLevel.find(item => item.name === level).currentBatch.id:0} theList={searchedList} setTheList={setSearchedList}
           speciality_Idd={listSpeciality.find(item => item.name === speciality)?listSpeciality.find(item => item.name === speciality).id:0}
           section_Id={listSection.find(item => item.name === section)?listSection.find(item => item.name === section).id:0}/>
         </div>
@@ -186,7 +185,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
           <ListItem
             key={value.id}
             onClick={e => setStudentObj(value)}
-            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} type = {"student"}/>}
+            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} type = {"student"} setTheList={setSearchedList} theList={searchedList}/>}
             disablePadding
             
           >

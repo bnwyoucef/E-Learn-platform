@@ -17,7 +17,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Stack from '@mui/material/Stack';
 import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 
-const AddSession = ({groupsList,modulesList,section_Id,semester,dayName}) => {
+const AddSession = ({groupsList,modulesList,section_Id,semester,dayName,theList,setTheList}) => {
 
     const [open, setOpen] = React.useState(false);
     const [lesson_Type,setLessonType] = useState('')
@@ -38,6 +38,14 @@ const AddSession = ({groupsList,modulesList,section_Id,semester,dayName}) => {
   
     const handleClose = () => {
       setOpen(false);
+      setLessonType('')
+      setStartTime(null)
+      setEndTime(null)
+      setSaleName('')
+      setTeacherName('')
+      setModuleName('')
+      setGroupName('')
+      setDisplayMsg(false)
     };
 
     async function getAllTeacherAndSales() {
@@ -69,8 +77,13 @@ const AddSession = ({groupsList,modulesList,section_Id,semester,dayName}) => {
             const response = await axios.post('lessons/create', newSession)
             setCreateSuccess(response.data.success)
             setDisplayMsg(true)
-            setTimeout(handleClose,1000)
-            //window.location.reload(); 
+            setTimeout(handleClose,500)
+            let newList = [...theList]
+            if (typeof response.data.message === 'object'){
+              newList.push(response.data.message)
+              setTheList(newList)
+            }
+             
         } catch (error) {
             setDisplayMsg(true)
         }

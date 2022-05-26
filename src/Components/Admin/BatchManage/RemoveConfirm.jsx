@@ -10,7 +10,7 @@ import { Button } from '@mui/material';
 import axios from '../../../Api/Axios'
 import Tooltip from '@mui/material/Tooltip'; 
 
-const RemoveConfirm = ( {removeId,type,name} ) => {
+const RemoveConfirm = ( {removeId,type,name,theList,setTheList} ) => {
 
     const [open, setOpen] = React.useState(false);
 
@@ -26,7 +26,8 @@ const RemoveConfirm = ( {removeId,type,name} ) => {
         try {
             await axios.delete(`${type}/delete/${removeId}`)
             handleClose();
-            window.location.reload();
+            let newList = [...theList].filter(item => item.id !== removeId)
+            setTheList(newList)
         } catch (error) {
             console.log(error.message);
         }

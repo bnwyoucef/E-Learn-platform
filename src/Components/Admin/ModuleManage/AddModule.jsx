@@ -10,7 +10,7 @@ import axios from '../../../Api/Axios'
 import SelectSemestre from './SelectSemestre'
 import SelectLevel from './SelectLevel'
 
-const AddModule = () => {
+const AddModule = ({theList,setTheList}) => {
 
     const [open, setOpen] = useState(false);
     const [name,setName] = useState('')
@@ -29,6 +29,11 @@ const AddModule = () => {
   
     const handleClose = () => {
       setOpen(false);
+      setName('')
+      setShortName('')
+      setDescription('')
+      setCoef('')
+      setDisplayMsg(false)
     };
   
     const handleConfirm = async (event) => {
@@ -46,8 +51,10 @@ const AddModule = () => {
               headers: { 'Content-Type': 'application/json' }})
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
-              setTimeout(handleClose,1000)
-              window.location.reload(); 
+              setTimeout(handleClose,500)
+              let newList = [...theList]
+              newList.push(response.data.message) 
+              setTheList(newList)
       } catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)

@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from '../../../Api/Axios'
 
-const ApplyUpdateConfirm = ({sessionClicked,moduleOfSession,modulesList,startTime,endTime,  teacherOfModule,teachersList,salleOfSession,sallesList,groupSession,groupsList,enableUpdateBtn}) => {
+const ApplyUpdateConfirm = ({sessionClicked,moduleOfSession,modulesList,startTime,endTime,  teacherOfModule,teachersList,salleOfSession,sallesList,groupSession,groupsList,enableUpdateBtn,renderUpdate,setRenderUpdate}) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -19,8 +19,7 @@ const ApplyUpdateConfirm = ({sessionClicked,moduleOfSession,modulesList,startTim
     };
   
     const handleUpdateClick = async () => {
-        console.log("clicked session is:", sessionClicked);
-        let newSession = {day:1,lesson_Type:sessionClicked.lesson_Type}
+        let newSession = {day:sessionClicked.day,lesson_Type:sessionClicked.lesson_Type}
         if(moduleOfSession){
           let module_Id = modulesList.find(item => item.name === moduleOfSession).id
           newSession.module_Id = module_Id
@@ -48,6 +47,7 @@ const ApplyUpdateConfirm = ({sessionClicked,moduleOfSession,modulesList,startTim
           const response = await axios.patch(`lessons/update/${sessionClicked.id}`,newSession)
           console.log("update status:",response.data.message);
           setTimeout(handleClose,500)
+          setRenderUpdate(!renderUpdate)
         } catch (error) {
           
         }

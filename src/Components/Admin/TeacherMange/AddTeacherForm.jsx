@@ -9,7 +9,7 @@ import { useState,useEffect } from 'react';
 import axios from '../../../Api/Axios'
 import BasicSelect from '../WilayaChose'
 
-export default function AddTeacherForm( {userType} ) {
+export default function AddTeacherForm( {userType,theList,setTheList} ) {
   const [open, setOpen] = React.useState(false);
   const [firstName,setFirstName] = useState('');
   const [lastName,setLastName] = useState('');
@@ -25,19 +25,26 @@ export default function AddTeacherForm( {userType} ) {
 
   const handleClose = () => {
     setOpen(false);
+    setFirstName('')
+    setLastName('')
+    setEmail('')
+    setWilaya('')
+    setPassword('')
+    setDisplayMsg(false)
   };
 
   const handleConfirm = async (event) => {
     event.preventDefault();
     const teacher = {name:firstName,lastName,email,password,wilaya}
-    console.log(teacher);
     try {
         const response = await axios.post(`${userType}/create`,teacher,{
             headers: { 'Content-Type': 'application/json' }})
             setCreateSuccess(response.data.success)
             setDisplayMsg(true)
             setTimeout(handleClose,1000)
-            window.location.reload(); 
+            let newList = [...theList]
+            newList.push(response.data.message)
+            setTheList(newList)
     } catch (error) {
         console.log('there is prblm: ' + error.message);
         setDisplayMsg(true)

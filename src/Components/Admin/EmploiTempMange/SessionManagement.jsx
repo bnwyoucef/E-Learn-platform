@@ -15,7 +15,7 @@ import { useState,useEffect} from'react'
 import axios from '../../../Api/Axios'
 import ApplyUpdateConfirm from './ApplyUpdateConfirm'
 
-const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
+const SessionManagement = ({modulesList,groupsList,sessionClicked,renderUpdate,setRenderUpdate}) => {
   const classes = useStyles()
   const [moduleOfSession,setModuleOfSession] = useState('')
   const [startTime,setStartTime] = useState(null)
@@ -27,6 +27,17 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
   const [sallesList,setSallesList] = useState([])
   const [teachersList,setTeachersList] = useState([])
   const [enableUpdateBtn,setEnableUpdateBtn] = useState(false)
+
+  function clear() {
+    setModuleOfSession('')
+    setStartTime(null)
+    setEndTime(null)
+    setTeacherOfModule('')
+    setSalleOfSession('')
+    setGroupSession('')
+  }
+
+  useEffect(() => {clear()},[renderUpdate])
 
   async function getTeachersAndSalles() {
     try {
@@ -45,40 +56,7 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
       setEnableUpdateBtn(true)
     }
   },[sessionClicked])
-
-   const handleUpdateClick = async () => {
-    let newSession = {day:1,lesson_Type:sessionClicked.lesson_Type}
-    if(moduleOfSession){
-      let module_Id = modulesList.find(item => item.name === moduleOfSession).id
-      newSession.module_Id = module_Id
-    }
-    if(startTime) {
-      newSession.startingTime = startTime.toString().substring(16,21)
-    }
-    if(endTime) {
-      newSession.endingTime = endTime.toString().substring(16,21)
-    }
-    if(teacherOfModule) {
-      let teacher_Id = parseInt(teachersList.find(item => item.name === teacherOfModule).id)
-      newSession.teacher_Id = teacher_Id
-    }
-    if(salleOfSession) {
-      let sale_Id = sallesList.find(item => item.name === salleOfSession).id
-      newSession.sale_Id = sale_Id
-    }
-    if(groupSession) {
-      let group_Id = groupsList.find(item => item.name === groupSession).id
-      newSession.group_Id = group_Id
-    }
-
-    try {
-      const response = await axios.patch(`lessons/update/${sessionClicked.id}`,newSession)
-      console.log("update status:",response.data.message);
-    } catch (error) {
-      
-    }
-  }
-
+    
   return (
     <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: 'auto',border:'1px solid #E5E5E5'}}>
       <div className={classes.teacherListHeader}>
@@ -99,6 +77,8 @@ const SessionManagement = ({modulesList,groupsList,sessionClicked}) => {
             groupSession = {groupSession}
             groupsList = {groupsList}
             enableUpdateBtn = {enableUpdateBtn}
+            renderUpdate={renderUpdate}
+            setRenderUpdate = {setRenderUpdate}
           />
         </div>
       </div>

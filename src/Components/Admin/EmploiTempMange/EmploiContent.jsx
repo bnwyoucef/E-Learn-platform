@@ -10,6 +10,7 @@ function EmploiContent() {
   const [modulesListUpdate,setModulesListUpdate] = useState([])
   const [groupsListUpdate,setGroupsListUpdate] = useState([])
 
+  const [renderUpdate,setRenderUpdate] = useState(false)
   const [sessionClicked,setSessionClicked] = useState({})
   
   return (
@@ -22,6 +23,7 @@ function EmploiContent() {
           <TimeTable setSessionClicked={setSessionClicked}
             setModulesListUpdate={setModulesListUpdate}
             setGroupsListUpdate={setGroupsListUpdate}
+            renderUpdate={renderUpdate}
           />
         </Grid>
         <Grid item xs={12}>
@@ -29,6 +31,8 @@ function EmploiContent() {
             sessionClicked={sessionClicked}
             modulesList = {modulesListUpdate}
             groupsList={groupsListUpdate}
+            renderUpdate={renderUpdate}
+            setRenderUpdate={setRenderUpdate}
           />
         </Grid>
       </Grid>

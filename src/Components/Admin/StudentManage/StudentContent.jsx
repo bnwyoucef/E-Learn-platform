@@ -13,6 +13,7 @@ const StudentContent = () => {
     const [levelSelected,setLevelSelected] = useState('')
     const [studentGroups,setStudentGroups] = useState([])
     const [studentSections,setStudentSections] = useState([])
+    const [searchedList,setSearchedList] = useState([])
 
     function compare( a, b ) {
         if ( a.name.toUpperCase() < b.name.toUpperCase() ){
@@ -43,10 +44,11 @@ const StudentContent = () => {
             </Grid>
             <Grid item xs={8} >
                 <StudentsList  setStudentObj = {setStudentObj} setLevelSelected={setLevelSelected}
-                setStudentGroups={setStudentGroups} setStudentSections={setStudentSections}/>
+                setStudentGroups={setStudentGroups} setStudentSections={setStudentSections}
+                searchedList={searchedList} setSearchedList={setSearchedList}/>
             </Grid>
             <Grid item xs={4}>
-                <TeacherProfile teacherObj = {studentObj} type = {"student"} />
+                <TeacherProfile teacherObj = {studentObj} type = {"student"} theList={searchedList} setTheList={setSearchedList}/>
             </Grid>
             <Grid item xs={8}>
                 <StudentManagement

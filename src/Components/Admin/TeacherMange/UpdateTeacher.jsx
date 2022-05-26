@@ -9,7 +9,7 @@ import { useState,useEffect } from 'react';
 import axios from '../../../Api/Axios'
 import BasicSelect from '../WilayaChose'
 
-const UpdateTeacher = ({teacher}) => {
+const UpdateTeacher = ({teacher,theList,setTheList}) => {
     
     const [open, setOpen] = useState(false);
     const [firstName,setFirstName] = useState('');
@@ -46,13 +46,14 @@ const UpdateTeacher = ({teacher}) => {
       if(wilaya) {
         teacherNew.wilaya = wilaya
       }
-      console.log(teacherNew);
+
       try {
           const response = await axios.patch(`teacher/update/${teacher.id}`,teacherNew)
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,1000)
-              //window.location.reload(); 
+              let newList = [...theList].map(item => item.id === teacher.id?response.data.message:item)
+              setTheList(newList)
       } catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)

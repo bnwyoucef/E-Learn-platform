@@ -8,7 +8,7 @@ import './style.css'
 import DeleteSession from './DeleteSession'
 import AddSession from './AddSession'
 
-const DaySessions = ({dayName,dayList,groupsList,modulesList,section_Id,semester,setSessionClicked}) => {
+const DaySessions = ({dayName,dayList,setDayList,groupsList,modulesList,section_Id,semester,setSessionClicked}) => {
   
     return (
       <div style= {{height:'100%',width:'20%',backgroundColor: 'white',border:'1px solid #E5E5E5',overflow: 'hidden',position:'relative'}}>
@@ -43,7 +43,10 @@ const DaySessions = ({dayName,dayList,groupsList,modulesList,section_Id,semester
                   <ListItemText style={{textAlign: 'center',color: '#3282B8'}} id={labelId} primary={`${lesson.startingTime + ' - ' + lesson.endingTime}`} />
                   <div style={{width:'100%',display: 'flex',marginBottom:'10px' }}>
                     <ListItemText style={{textAlign: 'center',color: '#3282B8'}} id={labelId} primary={lesson.sale.name} />
-                    <DeleteSession sessionId={lesson.id}/>
+                    <DeleteSession sessionId={lesson.id} 
+                      theList={dayList}
+                      setTheList={setDayList}
+                    />
                   </div>
                 </ListItemButton>
               </ListItem>
@@ -59,6 +62,8 @@ const DaySessions = ({dayName,dayList,groupsList,modulesList,section_Id,semester
         section_Id={section_Id}
         semester={1}
         dayName={dayName}
+        theList={dayList}
+        setTheList={setDayList}
       />
 
       </div>
