@@ -72,7 +72,8 @@ const GroupControl = ( {currentSection} ) => {
       <Typography variant="subtitle2">
         No group attached
       </Typography>
-    </div>:<div style={{display: 'flex',justifyContent: 'center'}}>
+      </div>
+      :<div style={{display: 'flex',justifyContent: 'center'}}>
           <Typography variant="subtitle2">
             please select the section
           </Typography>

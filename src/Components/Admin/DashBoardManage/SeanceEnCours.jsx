@@ -32,7 +32,7 @@ const SeanceEnCours = ( {teacherObj} ) => {
   useEffect(getModules,[])
 
   return (
-    <div style={{marginLeft:'10px',border:'1px solid #E5E5E5',width:'100%', height:'400px',backgroundColor: 'white',borderRadius:'4px'}}>
+    <div style={{marginLeft:'10px',border:'1px solid #E5E5E5',width:'100%', height:'450px',backgroundColor: 'white',borderRadius:'4px'}}>
     <div className={classes.teacherListHeader}>
       <Typography variant="h6" style={{flex: 1}}>
         Séances en cours
