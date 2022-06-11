@@ -58,7 +58,7 @@ const StudentContent = () => {
                 />
             </Grid>
             <Grid item xs={4}>
-                <StudentInfo studentObj= {studentObj} levelSelected= {levelSelected}/>
+                <StudentInfo studentObj= {studentObj?studentObj:{}} levelSelected= {levelSelected}/>
             </Grid>
         </Grid>
     </div>

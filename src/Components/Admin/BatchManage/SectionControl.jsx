@@ -7,28 +7,28 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import RemoveConfirm from './RemoveConfirm'
+import AddSection from './AddSection';
 import { useState,useEffect } from 'react'
 import GroupsIcon from '@mui/icons-material/Groups';
 import axios from '../../../Api/Axios'
 
-const SectionControl = ({currentLevel}) => {
+const SectionControl = ( {currentBatch,setCurrentSection} ) => {
     const classes = useStyles()
-    const [levelList,setLevelList] = useState([])
-    console.log("?????? ",currentLevel);
+    const [sectionList,setSectionList] = useState([]);
 
     useEffect(() => {
         const getSections = async () => {
-            try {
-                const response = await axios.get(`sections/all/${1}/${4}`)
-                console.log(response.data.message)
-                setLevelList(response.data.message)
-            }catch (e) {
-                console.log(e.message);
+            if(Object.keys(currentBatch).length > 0) {
+              setSectionList(currentBatch.sections);
             }
         }
 
         getSections();
-    },[])
+    },[currentBatch]);
+
+    useEffect(() => {
+      setCurrentSection({});
+    },[sectionList]);
 
   return (
     <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh',border:'1px solid #E5E5E5'}}>
@@ -36,9 +36,7 @@ const SectionControl = ({currentLevel}) => {
             <Typography variant="h6" style={{flex: 1}}>
                 Sections
             </Typography>
-            <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <Button variant="contained" size="small" style={{borderRadius:'10px',marginRight: 10,backgroundColor:'#007AFF',boxShadow:'0px 4px 8px rgba(0,122,255,0.2)'}}>add Section</Button>
-            </div>
+            <AddSection theList={sectionList} setTheList={setSectionList} currentBatch={currentBatch}/>
         </div>
     <List
       dense
@@ -51,23 +49,35 @@ const SectionControl = ({currentLevel}) => {
         },
       }}
     >
-      {levelList.map((value) => {
+      {Object.keys(currentBatch).length > 0 ? 
+      sectionList.length?sectionList.map((value) => {
         const labelId = `checkbox-list-secondary-label-${value.id}`;
         return (
           <ListItem
             key={value.id}
-            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'section'} name= {value.name}/>}
-            disablePadding  
+            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'section'} name= {value.name}
+            theList={sectionList} setTheList={setSectionList}/> } 
+            disablePadding
+            onClick={e => setCurrentSection(value)}  
           >
             <ListItemButton>
               <ListItemAvatar>
                 <GroupsIcon style = {{color:'#3282B8'}}/>
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`${value.name}`} />
+              <ListItemText id={labelId} primary={`${value.name}`} secondary={value.shortName?currentBatch.level.name+ ' ' +value.shortName:currentBatch.level.name}/>
             </ListItemButton>
           </ListItem>
         );
-      })}
+      }):<div style={{display: 'flex',justifyContent: 'center'}}>
+      <Typography variant="subtitle2">
+        No section attached
+      </Typography>
+      </div>
+      :<div style={{display:'flex',justifyContent: 'center'}}>
+          <Typography variant="subtitle2">
+            please select the batch
+          </Typography>
+        </div>}
     </List>
     </div>
   )

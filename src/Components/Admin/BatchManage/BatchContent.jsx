@@ -9,7 +9,9 @@ import GroupControl from './GroupControl'
 
 function BatchContent() {
 
-    const [currentLevel,setCurrentLevel] = React.useState({}) 
+    const [currentLevel,setCurrentLevel] = React.useState({})
+    const [currentBatch,setCurrentBatch] = React.useState({});
+    const [currentSection,setCurrentSection] = React.useState({}); 
 
   return (
     <div>
@@ -24,13 +26,13 @@ function BatchContent() {
                 <SpecialititesControl currentLevel={currentLevel}/>
             </Grid>
             <Grid item sm={4}>
-                <BatchesControl />
+                <BatchesControl setCurrentBatch={setCurrentBatch}/>
             </Grid>
             <Grid item sm={6}>
-                <SectionControl currentLevel={currentLevel}/>
+                <SectionControl currentBatch={currentBatch} setCurrentSection={setCurrentSection}/>
             </Grid>
             <Grid item sm={6}>
-                <GroupControl />
+                <GroupControl currentSection={currentSection}/>
             </Grid>
         </Grid>
     </div>

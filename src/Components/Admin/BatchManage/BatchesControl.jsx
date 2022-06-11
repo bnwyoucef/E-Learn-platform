@@ -11,16 +11,16 @@ import { useState,useEffect } from 'react'
 import GroupsIcon from '@mui/icons-material/Groups';
 import axios from '../../../Api/Axios'
 
-function BatchesControl() {
+function BatchesControl( {setCurrentBatch} ) {
 
     const classes = useStyles()
-    const [levelList,setLevelList] = useState([])
+    const [batchList,setBatchList] = useState([]);
 
     useEffect(() => {
         const getBatches = async () => {
             try {
                 const response = await axios.get('batch/all')
-                setLevelList(response.data.message)
+                setBatchList(response.data.message)
             }catch (e) {
                 console.log(e.message);
             }
@@ -50,11 +50,12 @@ function BatchesControl() {
         },
       }}
     >
-      {levelList.map((value) => {
+      {batchList.map((value) => {
         const labelId = `checkbox-list-secondary-label-${value.id}`;
         return (
           <ListItem
             key={value.id}
+            onClick={e => setCurrentBatch(value)}
             secondaryAction={<RemoveConfirm removeId = {value.id} type= {'batch'} name= {value.name}/>}
             disablePadding  
           >

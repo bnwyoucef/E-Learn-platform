@@ -61,7 +61,7 @@ const NouvelAprove = ( {teacherObj} ) => {
                                 <ListItemText id={labelId} primary={`${nouvel.object}`}  
                                 secondary={`${nouvel.message}`} /> 
                             </ListItemButton>
-                            <img src={`http://192.168.43.32:3000/news/files/${nouvel.fileUrl}`} alt='nouvel' style={{margin:'5px'}} />
+                            <img src={`https://schooolsystemmanagement-production.up.railway.app/news/files/${nouvel.fileUrl}`} alt='nouvel' style={{margin:'5px'}} />
                         </ListItem>
                         <Button style={{color:'#2196F3',margin:'5px'}} onClick={() => handleAprove(nouvel.new_Id)}>APPROVE</Button>
                     </div>
