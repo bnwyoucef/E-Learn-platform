@@ -22,6 +22,7 @@ const AddModule = ({theList,setTheList}) => {
     const [semesterNum,setSemesterNum] = useState(0)
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
+    const [fileToUpload, setFileToUpload] = useState(null);
     
     const handleClickOpen = () => {
       setOpen(true);
@@ -43,12 +44,12 @@ const AddModule = ({theList,setTheList}) => {
       const coeff = parseInt(coef)
       const speciality_Id = parseInt(specialityId)
       let newModule={};
-      if(speciality_Id) newModule = {level_Id:level_Id,semester,name,shortName,description,coef:coeff,speciality_Id:speciality_Id}
-       else newModule = {level_Id:level_Id,semester,name,shortName,description,coef:coeff}
-      console.log(newModule);
+      if(speciality_Id) newModule = {level_Id:level_Id,semester,name,shortName,description,coef:coeff,speciality_Id:speciality_Id,image:fileToUpload}
+       else newModule = {level_Id:level_Id,semester,name,shortName,description,coef:coeff,image:fileToUpload}
       try {
-          const response = await axios.post(`module/create`,newModule,{
-              headers: { 'Content-Type': 'application/json' }})
+        console.log(newModule);
+          const response = await axios.post(`module/create`,newModule); //application/json multipart/form-data
+              console.log(response.data);
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,500)
@@ -61,7 +62,10 @@ const AddModule = ({theList,setTheList}) => {
       }
     }
   
-    useEffect(() => {setDisplayMsg(false)},[name,shortName,description,levelId,semesterNum])
+    useEffect(() => {setDisplayMsg(false)},[name,shortName,description,levelId,semesterNum]);
+    const handleFileSelect = (event) => {
+      setFileToUpload(event.target.files[0]);
+  }
 
   return (
     <div>
@@ -121,6 +125,19 @@ const AddModule = ({theList,setTheList}) => {
               />
               <SelectSemestre setSemestreNumber={setSemesterNum}/>
               <SelectLevel setLevelNumber={setLevelId} setSpecialityId={setSpecialityId}/>
+              <Button
+                variant="contained"
+                component="label"
+                style={{marginTop: '10px'}}
+                >
+                Choose Image
+                <input
+                    accept="image/*"
+                    type="file"
+                    hidden
+                    onChange={e => handleFileSelect(e)}
+                />
+                </Button>
               
               <Button type="submit" style={{float:'right',marginTop:'30px'}}>Confirm</Button>
               <Button onClick={handleClose} style={{float:'right',marginTop:'30px'}}>Cancel</Button>

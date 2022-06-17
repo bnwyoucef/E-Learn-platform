@@ -11,6 +11,7 @@ import useStyles from '../../Style'
 import AddStudentForm from './AddStudentForm'
 import RemoveTeacher from '../TeacherMange/RemoveTeacher'
 import Select from './Select'
+import ImportStudentsFile from './ImportStudentsFile';
 
 const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStudentSections,searchedList,setSearchedList} ) => {
     const classes = useStyles()
@@ -91,7 +92,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
     }
 
     useEffect(() => {
-      currentLevel = listLevel.find(item => item.name === level)
+      currentLevel = listLevel.find(item => item.name === level);
       if(currentLevel) {
         setLevelSelected(currentLevel.name)
         batchNumber = currentLevel.id
@@ -153,7 +154,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
   return (
     <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '400px',border:'1px solid #E5E5E5'}}>
       <div className={classes.teacherListHeader}>
-        <Typography variant="h6" style={{flex: 1}}>
+        <Typography variant="h6" style={{marginRight: '20px'}}>
           Students
         </Typography>
         <div style={{flex: 2,display: 'flex',}}>
@@ -161,10 +162,11 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
             {hasSpeciality && <Select ChoseList = {listSpeciality} choseType={'speciality'} setSpeciality = {setSpeciality}/>}
             {(displaySection || !hasSpeciality) && <Select ChoseList = {listSection} choseType={'Section'} setSection = {setSection}/>}
         </div>
-        <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
+        <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'center'}}>
           <AddStudentForm groupList = {groupList} enableAddStudent={enableAddStudent} batch_Id={listLevel.find(item => item.name === level)?listLevel.find(item => item.name === level).currentBatch.id:0} theList={searchedList} setTheList={setSearchedList}
           speciality_Idd={listSpeciality.find(item => item.name === speciality)?listSpeciality.find(item => item.name === speciality).id:0}
           section_Id={listSection.find(item => item.name === section)?listSection.find(item => item.name === section).id:0}/>
+          <ImportStudentsFile level={level} listLevel={listLevel}/>
         </div>
       </div>
       <Divider />

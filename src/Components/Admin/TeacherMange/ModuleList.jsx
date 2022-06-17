@@ -17,7 +17,6 @@ const ModuleList = ( {teacherObj} ) => {
     try {
       if(Object.keys(teacherObj).length !== 0) {
         const response = await axios.get(`teacher/modulesOfTeacher/${teacherObj.id}`)
-        console.log("moduleList line 20:",response.data.message,teacherObj);
         setModuleList(response.data.message)
       }
     }catch(err) {

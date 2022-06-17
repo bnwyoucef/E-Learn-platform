@@ -40,7 +40,7 @@ const Calendar = () => {
         <LocalizationProvider dateAdapter={AdapterDateFns} >
             <CalendarPicker date={date} onChange={(newDate) => setDate(newDate)} />
         </LocalizationProvider>
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: 120,margin:'10px'}}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Semester</InputLabel>
             <Select

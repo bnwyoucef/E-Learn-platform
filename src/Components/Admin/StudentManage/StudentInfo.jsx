@@ -21,14 +21,14 @@ const StudentInfo = ({studentObj,levelSelected}) => {
   },[])
 
   useEffect(() =>{
+    console.log(studentObj);
     if(levelSelected) {
       setLevel(levelSelected)
     }else {
       if(Object.keys(studentObj).length !== 0) {
-        let curBatch = batchesList.find(item => item.id == studentObj.section.batch_Id)
-        console.log("problem is:",studentObj.section);
-        if(curBatch)
-        setLevel(curBatch.level.name) 
+        // let curBatch = batchesList.find(item => item.id == studentObj.section.batch_Id)
+        // if(curBatch)
+        setLevel(studentObj.level.name) 
       }
     }
   },[studentObj])

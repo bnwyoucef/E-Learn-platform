@@ -19,13 +19,22 @@ const UpdateStudent = ({studentObj,theList,setTheList}) => {
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
     
+    function initInfo() {
+      setFirstName(studentObj.name);
+      setLastName(studentObj.lastName);
+      setEmail(studentObj.email);
+      setWilaya(studentObj.wilaya);
+    }
     
+    useEffect(initInfo,[studentObj]);
+
     const handleClickOpen = () => {
       setOpen(true);
     };
   
     const handleClose = () => {
       setOpen(false);
+      setDisplayMsg(false);
     };
   
     const handleConfirm = async (event) => {

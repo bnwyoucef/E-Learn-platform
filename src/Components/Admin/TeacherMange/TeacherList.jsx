@@ -13,6 +13,7 @@ import { useState,useEffect } from 'react'
 import useStyles from '../../Style'
 import AddTeacherForm from './AddTeacherForm'
 import RemoveTeacher from './RemoveTeacher'
+import ImportFile from "./ImportFile";
 
 export default function TeacherList( {setTeacherObj,searchedList,setSearchedList} ) {
 
@@ -54,9 +55,9 @@ export default function TeacherList( {setTeacherObj,searchedList,setSearchedList
   },[searchedValue])
 
   return (
-    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh',border:'1px solid #E5E5E5'}}>
+    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '50vh',border:'1px solid #E5E5E5',paddingBottom: '15px'}}>
       <div className={classes.teacherListHeader}>
-        <Typography variant="h6" style={{flex: 1}}>
+        <Typography variant="h6" style={{marginRight: '20px'}}>
           Teachers
         </Typography>
         <TextField
@@ -76,8 +77,9 @@ export default function TeacherList( {setTeacherObj,searchedList,setSearchedList
           value={searchedValue}
           onChange={e => setSearchedValue(e.target.value)}
         />
-        <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
+        <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'center'}}>
           <AddTeacherForm userType = {'teacher'} theList={searchedList} setTheList={setSearchedList}/>
+          <ImportFile theList={searchedList} setTheList={setSearchedList}/>
         </div>
       </div>
       <Divider />
@@ -104,7 +106,7 @@ export default function TeacherList( {setTeacherObj,searchedList,setSearchedList
           >
             <ListItemButton>
               <ListItemAvatar>
-                <Avatar>{value.name.charAt(0).toUpperCase()}</Avatar>
+                <Avatar>{value?value.name?value.name.charAt(0).toUpperCase():'':''}</Avatar>
               </ListItemAvatar>
               <ListItemText id={labelId} primary={`${value.name + ' ' + value.lastName}`} />
             </ListItemButton>

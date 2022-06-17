@@ -4,20 +4,41 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import {Typography,Divider,Button} from "@mui/material";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 import axios from '../../../Api/Axios'
 import { useState,useEffect } from 'react'
 import useStyles from '../../Style'
 
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const NouvelAprove = ( {teacherObj} ) => {
-    const classes = useStyles()
-    const [nouvelList,setNouvelList] = useState([])
+    const classes = useStyles();
+    const [nouvelList,setNouvelList] = useState([]);
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
   async function getNouvelsAprove() {
     try {
-      console.log(teacherObj);
       if(!teacherObj) {
-        const response = await axios.get(`news/news_to_approve`)
-        setNouvelList(response.data.message)
+        const response = await axios.get(`news/news_to_approve`);
+        setNouvelList(response.data.message);
+        console.log(response.data.message);
       }
     }catch(err) {
       console.log(err.message);
@@ -26,7 +47,10 @@ const NouvelAprove = ( {teacherObj} ) => {
 
   async function handleAprove(id) {
     try {
-      const response = await axios.get(`news/approve/${id}`)
+      const response = await axios.get(`news/approve/${id}`);
+      console.log(id,response.data.message);
+      window.location.reload();
+      handleClose();
     } catch (error) {
       console.log(error.message);
     }
@@ -40,7 +64,7 @@ const NouvelAprove = ( {teacherObj} ) => {
     >
         <div className={classes.teacherListHeader}>
         <Typography variant="h6" style={{flex: 1}}>
-            news to approve
+            News to approve
         </Typography>
         </div>
         <Divider />
@@ -52,7 +76,9 @@ const NouvelAprove = ( {teacherObj} ) => {
             {nouvelList.map((nouvel) => {
                 const labelId = `checkbox-list-secondary-label-${nouvel.new_Id}`;
                 return (
-                    <div key={nouvel.new_Id} style={{border: "1px solid #E5E5E5",margin:'5px',borderRadius:'4px'}}>
+                    <div key={nouvel.new_Id} 
+                      style={{border: "1px solid #E5E5E5",margin:'5px',borderRadius:'4px'}}
+                    >
                         <ListItem
                             key={nouvel.new_Id}
                             disablePadding
@@ -61,9 +87,31 @@ const NouvelAprove = ( {teacherObj} ) => {
                                 <ListItemText id={labelId} primary={`${nouvel.object}`}  
                                 secondary={`${nouvel.message}`} /> 
                             </ListItemButton>
-                            <img src={`https://schooolsystemmanagement-production.up.railway.app/news/files/${nouvel.fileUrl}`} alt='nouvel' style={{margin:'5px'}} />
+                            {/* <img src={`https://schooolsystemmanagement-production.up.railway.app/news/files/${nouvel.fileUrl?nouvel.fileUrl:''}`} alt='nouvel' style={{margin:'5px'}} /> */}
                         </ListItem>
-                        <Button style={{color:'#2196F3',margin:'5px'}} onClick={() => handleAprove(nouvel.new_Id)}>APPROVE</Button>
+                        <Button style={{color:'#2196F3',margin:'5px'}} 
+                          onClick={handleClickOpen}
+                        >
+                          APPROVE
+                        </Button>
+                        <Dialog
+                          open={open}
+                          TransitionComponent={Transition}
+                          keepMounted
+                          onClose={handleClose}
+                          aria-describedby="alert-dialog-slide-description"
+                        >
+                          <DialogTitle>{"Approve News"}</DialogTitle>
+                          <DialogContent>
+                            <DialogContentText id="alert-dialog-slide-description">
+                              Are you sure to approve this news..?
+                            </DialogContentText>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={handleClose}>Disagree</Button>
+                            <Button onClick={() => handleAprove(nouvel.new_Id)}>Agree</Button>
+                          </DialogActions>
+                        </Dialog>
                     </div>
                 );
             })}

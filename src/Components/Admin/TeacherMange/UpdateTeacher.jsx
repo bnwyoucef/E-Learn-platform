@@ -19,13 +19,29 @@ const UpdateTeacher = ({teacher,theList,setTheList}) => {
     const [wilaya,setWilaya] = useState('');
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
+
+    function initInfo() {
+      setFirstName(teacher.name);
+      setLastName(teacher.lastName);
+      setEmail(teacher.email);
+      setWilaya(teacher.wilaya);
+    }
+    
+    useEffect(initInfo,[teacher]);
     
     const handleClickOpen = () => {
       setOpen(true);
+      initInfo();
     };
   
     const handleClose = () => {
       setOpen(false);
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPassword('');
+      setWilaya('');
+      setDisplayMsg(false);
     };
   
     const handleConfirm = async (event) => {
