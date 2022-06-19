@@ -9,21 +9,14 @@ import axios from '../../../Api/Axios'
 import { useState,useEffect } from 'react'
 import useStyles from '../../Style'
 
-const SeanceEnCours = ( {teacherObj} ) => {
+const SeanceEnCours = () => {
     const classes = useStyles()
-    const [moduleList,setModuleList] = useState([])
-    const courList = [{module:"Algorithme",teacher:"Mr.Simoh",salle:"salle A1"}
-  ,{module:"Reseaux",teacher:"Mr.Azza",salle:"salle S2"}
-  ,{module:"IGL",teacher:"Mr.Bensliman",salle:"salle S3"}
-  ,{module:"Analyse",teacher:"Mr.Amroune",salle:"salle A2"}]
+    const [courList,setCourList] = useState([]);
 
   async function getModules() {
     try {
-      console.log(teacherObj);
-      if(!teacherObj) {
-        const response = await axios.get(`student/all`)
-        setModuleList(response.data.message)
-      }
+        const response = await axios.get(`lessons/Now`);
+        setCourList(response.data.message);
     }catch(err) {
       console.log(err.message);
     }
@@ -44,24 +37,30 @@ const SeanceEnCours = ( {teacherObj} ) => {
     disablePadding
     sx={{ width: "100%",height: "85%",overflow: "auto",bgcolor: "background.paper"}}
   >
-    {courList.map((value) => {
+    {courList.length > 0?courList.map((value) => {
       const labelId = `checkbox-list-secondary-label-${value.id}`;
       return (
-        <div key={value.salle} >
+        <div key={value.id} >
             <ListItem
                 key={value.id}
                 disablePadding  
             >
                 <ListItemButton>
                     <Brightness1Icon style={{color:'#36A324DE',width:'15px',height:'15px'}}/>
-                    <ListItemText id={labelId} primary={`${value.module}`}  secondary={value.teacher} style = {{marginLeft: '10px',width:'60px'}}/>
-                    <ListItemText id={labelId} style={{textAlign: 'center'}} primary={`${value.salle}`} />  
+                    <ListItemText id={labelId} primary={`${value.module.name}`}  secondary={'Mr.' + ' ' +value.teacher.name + " " + value.teacher.lastName} style = {{marginLeft: '10px',width:'60px'}}/>
+                    <ListItemText id={labelId} style={{textAlign: 'center'}} primary={`Salle ${value.sale.name}`} />  
                 </ListItemButton>
                 </ListItem>
             
         </div>
       );
-    })}
+    }):
+      <div style={{textAlign: 'center',marginTop: '30px'}}>
+        <Typography variant="h6">
+          No session at the moment
+        </Typography>
+      </div>
+    }
     </List>
     </div>
   )

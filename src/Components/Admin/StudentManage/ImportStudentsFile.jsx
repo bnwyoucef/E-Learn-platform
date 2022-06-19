@@ -17,7 +17,7 @@ const ImportStudentsFile = ({theList,setTheList,level,listLevel}) => {
         formData.append("file", file);
         let currentLevel = listLevel.find(item => item.name === level)
       try {
-          const response = await axios.post(`student/addByExcelFile/InLevel=${currentLevel.id}`,formData) //application/json
+          const response = await axios.post(`student/addByExcelFile/InLevel=${currentLevel.id}`,formData)
               let newList = [...theList,...response.data.message]; 
               setTheList(newList);
       } catch (error) {

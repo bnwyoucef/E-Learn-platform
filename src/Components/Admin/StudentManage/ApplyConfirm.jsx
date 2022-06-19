@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from '../../../Api/Axios'
 
-const ApplyConfirm = ({studentGroups,studentSections,studentObj,disableApply,group,section}) => {
+const ApplyConfirm = ({studentGroups,studentSections,studentObj,disableApply,group,section,setStudentObj}) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -22,10 +22,10 @@ const ApplyConfirm = ({studentGroups,studentSections,studentObj,disableApply,gro
         let group_Id = studentGroups.find(item => item.name === group).id
         let section_Id = studentSections.find(item => item.name === section).id
         let student = {section_Id,group_Id}
-        console.log(student);
         try {
-          const response = await axios.patch(`student/update/${studentObj.id}`,student)
-          console.log("??",student,response);
+          const response = await axios.patch(`student/update/${studentObj.id}`,student);
+          setStudentObj(response.data.message)
+          console.log(response.data.message);
           setTimeout(handleClose,500)
         } catch (error) {
           

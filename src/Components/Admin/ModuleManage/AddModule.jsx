@@ -17,7 +17,7 @@ const AddModule = ({theList,setTheList}) => {
     const [shortName,setShortName] = useState('')
     const [description,setDescription] = useState('')
     const [coef,setCoef] = useState('')
-    const [levelId,setLevelId] = useState(0)
+    const [levelId,setLevelId] = useState(0);
     const [specialityId,setSpecialityId] = useState(0)
     const [semesterNum,setSemesterNum] = useState(0)
     const [displayMsg,setDisplayMsg] = useState(false);
@@ -43,13 +43,19 @@ const AddModule = ({theList,setTheList}) => {
       const semester = parseInt(semesterNum)
       const coeff = parseInt(coef)
       const speciality_Id = parseInt(specialityId)
-      let newModule={};
-      if(speciality_Id) newModule = {level_Id:level_Id,semester,name,shortName,description,coef:coeff,speciality_Id:speciality_Id,image:fileToUpload}
-       else newModule = {level_Id:level_Id,semester,name,shortName,description,coef:coeff,image:fileToUpload}
+
+      const fd = new FormData()
+      fd.append("image",fileToUpload);
+      fd.append("level_Id",level_Id.toString())
+      fd.append("semester", semester.toString());
+      fd.append("name", name);
+      fd.append("shortName", shortName);
+      fd.append("description", description);
+      fd.append("coef", coeff.toString());
+      if(speciality_Id) fd.append("speciality_Id", speciality_Id.toString());
+      
       try {
-        console.log(newModule);
-          const response = await axios.post(`module/create`,newModule); //application/json multipart/form-data
-              console.log(response.data);
+          const response = await axios.post(`module/create`,fd);
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
               setTimeout(handleClose,500)
@@ -63,7 +69,7 @@ const AddModule = ({theList,setTheList}) => {
     }
   
     useEffect(() => {setDisplayMsg(false)},[name,shortName,description,levelId,semesterNum]);
-    const handleFileSelect = (event) => {
+    const handleFileSelect = (event) => { 
       setFileToUpload(event.target.files[0]);
   }
 

@@ -8,7 +8,7 @@ import { useState,useEffect } from 'react';
 import Select from '@mui/material/Select';
 import ApplyConfirm from './ApplyConfirm'
 
-const StudentManagement = ({studentGroups,studentSections,studentObj}) => {
+const StudentManagement = ({studentGroups,studentSections,studentObj,setStudentObj}) => {
   const [group, setGroup] = useState('');
   const [section, setSection] = useState('');
   const [disableApply,setDisableApply] = useState(true);
@@ -29,7 +29,7 @@ const StudentManagement = ({studentGroups,studentSections,studentObj}) => {
         </Typography>
         <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
           <ApplyConfirm studentGroups={studentGroups} studentSections={studentSections}
-          studentObj={studentObj} disableApply={disableApply} group={group}
+          studentObj={studentObj} setStudentObj={setStudentObj} disableApply={disableApply} group={group}
           section={section}/>
         </div>
       </div>

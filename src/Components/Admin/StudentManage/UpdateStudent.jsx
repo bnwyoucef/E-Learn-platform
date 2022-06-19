@@ -20,10 +20,10 @@ const UpdateStudent = ({studentObj,theList,setTheList}) => {
     const [createSuccess,setCreateSuccess] = useState(false);
     
     function initInfo() {
-      setFirstName(studentObj.name);
-      setLastName(studentObj.lastName);
-      setEmail(studentObj.email);
-      setWilaya(studentObj.wilaya);
+      setFirstName(studentObj?studentObj.name:'');
+      setLastName(studentObj?studentObj.lastName:'');
+      setEmail(studentObj?studentObj.email:'');
+      setWilaya(studentObj?studentObj.wilaya:'');
     }
     
     useEffect(initInfo,[studentObj]);

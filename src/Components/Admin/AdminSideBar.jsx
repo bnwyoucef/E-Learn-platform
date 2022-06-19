@@ -178,7 +178,7 @@ const AdminSideBar = ( {setBrowse} ) => {
                         <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
                         <Button onClick={handleExit} autoFocus>
-                            Confirm
+                            Confirm 
                         </Button>
                         </DialogActions>
                     </Dialog>

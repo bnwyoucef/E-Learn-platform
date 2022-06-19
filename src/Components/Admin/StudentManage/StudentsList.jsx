@@ -47,7 +47,6 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
         const response = await axios.get('student/all')
         setStudentsList(response.data.message.sort(compare))
         setSearchedList(response.data.message.sort(compare))
-        console.log("all students:",response.data.message);
       }catch(err) {
         console.log(err.message);
       }
@@ -166,7 +165,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
           <AddStudentForm groupList = {groupList} enableAddStudent={enableAddStudent} batch_Id={listLevel.find(item => item.name === level)?listLevel.find(item => item.name === level).currentBatch.id:0} theList={searchedList} setTheList={setSearchedList}
           speciality_Idd={listSpeciality.find(item => item.name === speciality)?listSpeciality.find(item => item.name === speciality).id:0}
           section_Id={listSection.find(item => item.name === section)?listSection.find(item => item.name === section).id:0}/>
-          <ImportStudentsFile level={level} listLevel={listLevel}/>
+          <ImportStudentsFile level={level} theList={searchedList} setTheList={setSearchedList} listLevel={listLevel}/>
         </div>
       </div>
       <Divider />

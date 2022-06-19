@@ -55,6 +55,7 @@ const StudentContent = () => {
                     studentGroups = {studentGroups}
                     studentSections = {studentSections}
                     studentObj = {studentObj}
+                    setStudentObj = {setStudentObj}
                 />
             </Grid>
             <Grid item xs={4}>
