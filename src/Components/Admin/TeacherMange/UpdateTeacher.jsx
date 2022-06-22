@@ -21,10 +21,10 @@ const UpdateTeacher = ({teacher,theList,setTheList}) => {
     const [createSuccess,setCreateSuccess] = useState(false);
 
     function initInfo() {
-      setFirstName(teacher.name);
-      setLastName(teacher.lastName);
-      setEmail(teacher.email);
-      setWilaya(teacher.wilaya);
+      setFirstName(teacher?teacher.name:'');
+      setLastName(teacher?teacher.lastName:'');
+      setEmail(teacher?teacher.email:'');
+      setWilaya(teacher?teacher.wilaya:'');
     }
     
     useEffect(initInfo,[teacher]);

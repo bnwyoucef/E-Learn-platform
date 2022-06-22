@@ -9,6 +9,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import RemoveConfirm from './RemoveConfirm'
 import { useState,useEffect } from 'react'
 import GroupsIcon from '@mui/icons-material/Groups';
+import AddBatch from './AddBatch';
 import axios from '../../../Api/Axios'
 
 function BatchesControl( {setCurrentBatch} ) {
@@ -36,7 +37,7 @@ function BatchesControl( {setCurrentBatch} ) {
                 Batches
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <Button variant="contained" size="small" style={{borderRadius:'10px',marginRight: 10,backgroundColor:'#007AFF',boxShadow:'0px 4px 8px rgba(0,122,255,0.2)'}}>add Batch</Button>
+                <AddBatch theList={batchList} setTheList={setBatchList}/>
             </div>
         </div>
     <List
@@ -56,7 +57,7 @@ function BatchesControl( {setCurrentBatch} ) {
           <ListItem
             key={value.id}
             onClick={e => setCurrentBatch(value)}
-            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'batch'} name= {value.name}/>}
+            secondaryAction={<RemoveConfirm removeId = {value.id} type= {'batch'} name= {value.name} theList={batchList} setBatchList={setBatchList}/>}
             disablePadding  
           >
             <ListItemButton>

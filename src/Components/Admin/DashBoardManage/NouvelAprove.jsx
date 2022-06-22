@@ -38,7 +38,6 @@ const NouvelAprove = ( {teacherObj} ) => {
       if(!teacherObj) {
         const response = await axios.get(`news/news_to_approve`);
         setNouvelList(response.data.message);
-        console.log(response.data.message);
       }
     }catch(err) {
       console.log(err.message);
@@ -59,7 +58,7 @@ const NouvelAprove = ( {teacherObj} ) => {
   useEffect(getNouvelsAprove,[])
 
   return (
-    <div style={{border:'1px solid #E5E5E5' ,height:'400px',border: '1px solid #E5E5E5',
+    <div style={{border:'1px solid #E5E5E5',border: '1px solid #E5E5E5',
         backgroundColor: 'white',marginLeft:'10px',borderRadius:'4px'}}
     >
         <div className={classes.teacherListHeader}>
@@ -84,10 +83,10 @@ const NouvelAprove = ( {teacherObj} ) => {
                             disablePadding
                         >
                             <ListItemButton>
-                                <ListItemText id={labelId} primary={`${nouvel.object}`}  
+                                <ListItemText id={labelId} primary={`${nouvel.teacher.name+ ' ' + nouvel.teacher.lastName}`}  
                                 secondary={`${nouvel.message}`} /> 
                             </ListItemButton>
-                            <img src={`http://192.168.43.32:3000/news/files/${nouvel.fileUrl?nouvel.fileUrl:''}`} alt='nouvel' style={{margin:'5px'}} />
+                            <img src={`https://school-systemmanagement-production.up.railway.app/news/files/${nouvel.fileUrl?nouvel.fileUrl:''}`} alt='news' style={{margin:'5px'}} />
                         </ListItem>
                         <Button style={{color:'#2196F3',margin:'5px'}} 
                           onClick={handleClickOpen}

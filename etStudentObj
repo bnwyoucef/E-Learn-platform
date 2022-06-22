@@ -1,0 +1,36 @@
+[33m9eab196[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m add news Carousel
+[33mfc13254[m select current semester
+[33ma2ad8ab[m section and group control
+[33m1cf7213[m resolve reloading problem
+[33m1de42c2[m link login and logout and confirm time update
+[33m3ebd82d[m[33m ([m[1;32mdev[m[33m)[m link login and add logout and confirm update time
+[33m76020e7[m student management update group and section
+[33mfd59399[m Merge https://github.com/bnwyoucef/E-Learn-platform into HEAD
+[33m729b573[m changes ignore
+[33m519d2c7[m Merge branch 'master' of https://github.com/bnwyoucef/E-Learn-platform into master
+[33m08db94d[m session management
+[33m4c1e642[m add/update module
+[33m71ba53d[m add/update module
+[33m92a0191[m filter time table and add sessions
+[33mf1985ed[m session management
+[33m743d303[m time table
+[33mb536a70[m get student info
+[33m80d8112[m update module
+[33mc2afae2[m module management(diplay modules and add module)
+[33m5b35ae0[m add update room && teacher
+[33ma8728ff[m student filter
+[33m1efddb8[m nouvel header
+[33m735c526[m UI Changes
+[33m824752f[m add batch in the  sidebar
+[33m216878b[m salles management
+[33m76e35e5[m Nouvelles
+[33m7ab9b05[m dashboard
+[33m0df508e[m browse pages
+[33mc0cb5bd[m delete group,section,batch,level,speciality
+[33mfdb0c6a[m display levels and batches
+[33ma3a22bf[m batches management
+[33mee840bd[m student management
+[33m8ca2afe[m display modules and profile
+[33mec6a8fb[m delete teacher
+[33me9a50a3[m teacher management
+[33maa66ba8[m Initialize project using Create React App

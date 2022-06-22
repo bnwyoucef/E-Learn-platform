@@ -38,7 +38,7 @@ const DaySessions = ({dayName,dayList,setDayList,groupsList,modulesList,section_
                 onClick={() =>setSessionClicked(lesson)}
               >
                 <ListItemButton style={{display: 'flex',flexDirection:'column'}}>
-                  <ListItemText style={{textAlign: 'center',color: '#3282B8'}} id={labelId} primary={lesson.group.name} />
+                  {<ListItemText style={{textAlign: 'center',color: '#3282B8'}} id={labelId} primary={lesson.group?lesson.group.name +' ' +lesson.lesson_Type:lesson.lesson_Type} />}
                   <ListItemText style={{textAlign: 'center'}} id={labelId} primary={`${lesson.module.name + ' ' + 'Mr.' +lesson.teacher.name}`} />
                   <ListItemText style={{textAlign: 'center',color: '#3282B8'}} id={labelId} primary={`${lesson.startingTime + ' - ' + lesson.endingTime}`} />
                   <div style={{width:'100%',display: 'flex',marginBottom:'10px' }}>

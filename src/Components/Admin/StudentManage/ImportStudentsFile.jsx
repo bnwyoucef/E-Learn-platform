@@ -4,20 +4,22 @@ import { useState,useEffect } from 'react';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import axios from '../../../Api/Axios'
 
-const ImportStudentsFile = ({theList,setTheList,level,listLevel}) => {
+const ImportStudentsFile = ({theList,setTheList,level,listLevel,setLoading}) => {
     const [fileToUpload, setFileToUpload] = useState(null);
     
     const handleFileSelect = (event) => {
       setFileToUpload(event.target.files[0]);
-      handleConfirm(event.target.files[0]);
+      handleConfirm(event.target.files[0]).then(() => setLoading(false));
     }
     
     const handleConfirm = async (file) => {
+        setLoading(true);
         var formData = new FormData();
         formData.append("file", file);
         let currentLevel = listLevel.find(item => item.name === level)
       try {
           const response = await axios.post(`student/addByExcelFile/InLevel=${currentLevel.id}`,formData)
+              console.log(response.data.message);
               let newList = [...theList,...response.data.message]; 
               setTheList(newList);
       } catch (error) {
@@ -29,7 +31,7 @@ const ImportStudentsFile = ({theList,setTheList,level,listLevel}) => {
   return (
     <div>
         <Button
-            //endIcon={<FileUploadIcon />}
+            endIcon={<FileUploadIcon />}
             variant="contained"
             component="label"
             disabled={level === ''}

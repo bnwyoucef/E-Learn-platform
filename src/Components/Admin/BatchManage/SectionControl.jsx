@@ -50,7 +50,7 @@ const SectionControl = ( {currentBatch,setCurrentSection} ) => {
       }}
     >
       {Object.keys(currentBatch).length > 0 ? 
-      sectionList.length?sectionList.map((value) => {
+      sectionList?sectionList.length?sectionList.map((value) => {
         const labelId = `checkbox-list-secondary-label-${value.id}`;
         return (
           <ListItem
@@ -77,7 +77,7 @@ const SectionControl = ( {currentBatch,setCurrentSection} ) => {
           <Typography variant="subtitle2">
             please select the batch
           </Typography>
-        </div>}
+        </div>:''}
     </List>
     </div>
   )

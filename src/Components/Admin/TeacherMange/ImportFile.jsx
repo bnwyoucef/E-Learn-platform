@@ -17,7 +17,7 @@ const ImportFile = ({theList,setTheList}) => {
         formData.append("file", file);
       try {
           const response = await axios.post(`teacher/addByExcelFile`,formData) //application/json
-              console.log(file,response.data.message);
+              console.log(response.data.message);
               let newList = [...theList,...response.data.message]; 
               setTheList(newList);
       } catch (error) {

@@ -19,8 +19,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
-const optionListTop = ["Gestion des enseignants","Gestion des étudiants","Gestion des Salles","Batch management","Emploi du temps","Module management"]
-const optionListBtm = ["Logs","Chat","Paramètres"] 
+const optionListTop = ["Teachers Management","Students Management","Rooms Management","Batch Management","Time Table","Modules Management"] 
 
 const AdminSideBar = ( {setBrowse} ) => {
 
@@ -150,16 +149,7 @@ const AdminSideBar = ( {setBrowse} ) => {
               },
               }}
             >
-                {optionListBtm.map((text, index) => (
-                    <ListItem button key={text}
-                    onClick={() => setBrowse(text)}>
-                    <ListItemIcon>
-                        {optionIcon(false,index)}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-                <ListItem button
+            <ListItem button
                 >
                     <Dialog
                         open={open}

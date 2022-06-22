@@ -12,6 +12,7 @@ import AddStudentForm from './AddStudentForm'
 import RemoveTeacher from '../TeacherMange/RemoveTeacher'
 import Select from './Select'
 import ImportStudentsFile from './ImportStudentsFile';
+import Reload from '../../Reload';
 
 const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStudentSections,searchedList,setSearchedList} ) => {
     const classes = useStyles()
@@ -31,6 +32,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
     let specialityNumber = 0
     let sectionNumber = 0
     const [enableAddStudent,setEnableAddStudent] = useState(false)
+    const [loading,setLoading] = useState(false);
     
     function compare( a, b ) {
       if ( a.name.toUpperCase() < b.name.toUpperCase() ){
@@ -151,7 +153,7 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
     },[])
 
   return (
-    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '400px',border:'1px solid #E5E5E5'}}>
+    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '400px',border:'1px solid #E5E5E5',paddingBottom:'10px'}}>
       <div className={classes.teacherListHeader}>
         <Typography variant="h6" style={{marginRight: '20px'}}>
           Students
@@ -165,41 +167,50 @@ const StudentsList = ( {setStudentObj,setLevelSelected,setStudentGroups,setStude
           <AddStudentForm groupList = {groupList} enableAddStudent={enableAddStudent} batch_Id={listLevel.find(item => item.name === level)?listLevel.find(item => item.name === level).currentBatch.id:0} theList={searchedList} setTheList={setSearchedList}
           speciality_Idd={listSpeciality.find(item => item.name === speciality)?listSpeciality.find(item => item.name === speciality).id:0}
           section_Id={listSection.find(item => item.name === section)?listSection.find(item => item.name === section).id:0}/>
-          <ImportStudentsFile level={level} theList={searchedList} setTheList={setSearchedList} listLevel={listLevel}/>
+          <ImportStudentsFile 
+            level={level} theList={searchedList} 
+            setTheList={setSearchedList} listLevel={listLevel}
+            setLoading={setLoading}
+          />
         </div>
       </div>
       <Divider />
-    <List
-      dense
-      disablePadding
-      sx={{ width: "100%",height: "85%",overflow: "auto",bgcolor: "background.paper",
-      //change the background color of item when it clicked
-        '& .MuiListItemButton-root:focus': {
-          bgcolor: '#7da9ff',
-          color: 'white',
-        },
-      }}
-    >
-      {searchedList.map((value) => {
-        const labelId = `checkbox-list-secondary-label-${value.id}`;
-        return (
-          <ListItem
-            key={value.id}
-            onClick={e => setStudentObj(value)}
-            secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} type = {"student"} setTheList={setSearchedList} theList={searchedList}/>}
-            disablePadding
-            
-          >
-            <ListItemButton>
-              <ListItemAvatar>
-                <Avatar>{value.name.charAt(0).toUpperCase()}</Avatar>
-              </ListItemAvatar>
-              <ListItemText id={labelId} primary={`${value.name + ' ' + value.lastName}`} />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
-    </List>
+        {loading && 
+          <div style={{display: 'flex',height: '60%',alignItems: 'center',justifyContent: 'center'}}>
+            <Reload />
+          </div>
+        }
+      {!loading && <List
+        dense
+        disablePadding
+        sx={{ width: "100%",height: "88%",overflow: "auto",bgcolor: "background.paper",marginBottom: "10px",
+        //change the background color of item when it clicked
+          '& .MuiListItemButton-root:focus': {
+            bgcolor: '#7da9ff',
+            color: 'white',
+          },
+        }}
+      >
+        {searchedList.map((value) => {
+          const labelId = `checkbox-list-secondary-label-${value.id}`;
+          return (
+            <ListItem
+              key={value.id}
+              onClick={e => setStudentObj(value)}
+              secondaryAction={<RemoveTeacher teacherId={value.id} fullName = {value.name + ' ' + value.lastName} type = {"student"} setTheList={setSearchedList} theList={searchedList}/>}
+              disablePadding
+              
+            >
+              <ListItemButton>
+                <ListItemAvatar>
+                  <Avatar>{value.name?value.name.charAt(0).toUpperCase():'B'}</Avatar>
+                </ListItemAvatar>
+                <ListItemText id={labelId} primary={`${value.name + ' ' + value.lastName}`} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>}
     </div>
   )
 }

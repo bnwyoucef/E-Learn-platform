@@ -10,7 +10,8 @@ import axios from '../../../Api/Axios'
 import SelectSemestre from './SelectSemestre'
 import SelectLevel from './SelectLevel'
 
-const AddModule = ({theList,setTheList}) => {
+
+const AddModule = ({theList,setTheList,setLoading,loading}) => {
 
     const [open, setOpen] = useState(false);
     const [name,setName] = useState('')
@@ -23,6 +24,7 @@ const AddModule = ({theList,setTheList}) => {
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
     const [fileToUpload, setFileToUpload] = useState(null);
+   
     
     const handleClickOpen = () => {
       setOpen(true);
@@ -37,8 +39,9 @@ const AddModule = ({theList,setTheList}) => {
       setDisplayMsg(false)
     };
   
-    const handleConfirm = async (event) => {
+    async function handleConfirm(event){
       event.preventDefault();
+      setLoading(true);
       const level_Id = parseInt(levelId)
       const semester = parseInt(semesterNum)
       const coeff = parseInt(coef)
@@ -58,32 +61,58 @@ const AddModule = ({theList,setTheList}) => {
           const response = await axios.post(`module/create`,fd);
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
-              setTimeout(handleClose,500)
+              //setTimeout(handleClose,500)
               let newList = [...theList]
-              newList.push(response.data.message) 
+              newList.unshift(response.data.message) 
               setTheList(newList)
       } catch (error) {
           console.log('there is prblm: ' + error.message);
           setDisplayMsg(true)
       }
     }
+    
   
     useEffect(() => {setDisplayMsg(false)},[name,shortName,description,levelId,semesterNum]);
     const handleFileSelect = (event) => { 
       setFileToUpload(event.target.files[0]);
   }
 
+
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}>
+      <Button variant="contained" onClick={handleClickOpen} size="small"
+        style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',borderRadius:'10px',marginRight: 10}}
+      >
         Add Module
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Module</DialogTitle>
         <DialogContent>
+            {/* {<Reload 
+                // style={{
+                //   width: '100%',
+                //   height: '100%',
+                //   position: 'absolute',
+                //   top: 0,
+                //   left: 0,
+                //   zIndex: 10,
+                // }}
+            />} */}
             {displayMsg && createSuccess && <Alert severity="success">Module added successfully</Alert>}
             {displayMsg && !createSuccess && <Alert severity="error">Oops Something went wrong!</Alert>}
-            <form onSubmit={handleConfirm}>
+            <form onSubmit={(e) => handleConfirm(e).then(() => {
+              setLoading(false)
+              handleClose();
+              
+              }
+              )}
+              // style={{width: '100%',
+              //   height: '100%',
+              //   position: 'absolute',
+              //   top: 0,
+              //   left: 0,
+              // }}
+              >
               <TextField
                   autoFocus
                   margin="dense"

@@ -61,7 +61,7 @@ const AddSession = ({groupsList,modulesList,section_Id,semester,dayName,theList,
 
     let dayList = [{id:1,name:'Sunday'},{id:2,name:'Monday'},{id:3,name:'Tuesday'},{id:4,name:'Wednesday'},{id:5,name:'Thursday'}]
     let lessonTypeList = [{id:1,name:'COURS'},{id:2,name:'TD'},{id:3,name:'TP'}]
-    let semsterList = [{id:1,name:'semester 1'},{id:2,name:'semester 2'}]
+    //let semsterList = [{id:1,name:'semester 1'},{id:2,name:'semester 2'}]
 
     async function handleConfirm(event) {
       event.preventDefault()
@@ -69,14 +69,18 @@ const AddSession = ({groupsList,modulesList,section_Id,semester,dayName,theList,
         let day = dayList.find(item => item.name === dayName).id
         let sale_Id = salesList.find(item => item.name === saleName).id
         let teacher_Id = parseInt(teachersList.find(item => item.name === teacherName).id)
-        let group_Id = groupsList.find(item => item.name === groupName).id
         let module_Id = modulesList.find(item => item.name === moduleName).id
-        newSession = {day,lesson_Type,startingTime:startTime.toString().substring(16,21),endingTime:endTime.toString().substring(16,21),sale_Id,teacher_Id,group_Id,module_Id,section_Id,semester}
+        newSession = {day,lesson_Type,startingTime:startTime.toString().substring(16,21),endingTime:endTime.toString().substring(16,21),sale_Id,teacher_Id,module_Id,section_Id,semester}
+        if(groupName !== '') {
+          let group_Id = groupsList.find(item => item.name === groupName).id
+          newSession.group_Id = group_Id;
+        }
         
         try {
             const response = await axios.post('lessons/create', newSession)
             setCreateSuccess(response.data.success)
             setDisplayMsg(true)
+            console.log(response.data.message);
             setTimeout(handleClose,500)
             let newList = [...theList]
             if (typeof response.data.message === 'object'){
@@ -182,21 +186,21 @@ const AddSession = ({groupsList,modulesList,section_Id,semester,dayName,theList,
                 </FormControl>
               </Box>
 
-             <Box sx={{ minWidth: 120,marginBottom:'10px' }}>
-                <FormControl style={{width:'350px',}}>
-                  <InputLabel id="demo-simple-select-label">Group</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={groupName}
-                    label="Group"
-                    onChange={(event) => setGroupName(event.target.value)}
-                  >
-                    {groupsList.map(item =>  <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>)
-                    } 
-                  </Select>
-                </FormControl>
-            </Box>
+            {lesson_Type !== 'COURS' && <Box sx={{ minWidth: 120,marginBottom:'10px' }}>
+              <FormControl style={{width:'350px',}}>
+                <InputLabel id="demo-simple-select-label">Group</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={groupName}
+                  label="Group"
+                  onChange={(event) => setGroupName(event.target.value)}
+                >
+                  {groupsList.map(item =>  <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>)
+                  } 
+                </Select>
+              </FormControl>
+          </Box>}
 
               <Box sx={{ minWidth: 120,marginBottom:'10px' }}>
                 <FormControl style={{width:'350px',}}>

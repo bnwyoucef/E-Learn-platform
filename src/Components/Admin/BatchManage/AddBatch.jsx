@@ -12,9 +12,8 @@ import SelectLevel from './SelectLevel'
 const AddSpeciality = ({theList,setTheList}) => {
     const [open, setOpen] = useState(false);
     const [name,setName] = useState('')
-    const [description,setDescription] = useState('');
-    const [levelNumber,setLevelNumber] = useState('');
-    const [shortName,setShortName] = useState('');
+    const [year,setYear] = useState('')
+    const [levelNumber,setLevelNumber] = useState('')
     const [displayMsg,setDisplayMsg] = useState(false);
     const [createSuccess,setCreateSuccess] = useState(false);
     
@@ -25,19 +24,19 @@ const AddSpeciality = ({theList,setTheList}) => {
     const handleClose = () => {
       setOpen(false);
       setName('')
-      setDescription('')
+      setYear('')
       setLevelNumber('')
-      setShortName('')
       setDisplayMsg(false)
     };
   
     const handleConfirm = async (event) => {
       event.preventDefault();
-      const levelNumberr = parseInt(levelNumber)
-      const newLevel = {name,description,shortName,level_Id:levelNumberr}
+      const levelNumberr = parseInt(levelNumber);
+      const year2 = parseInt(year);
+      const newLevel = {name,year:year2,level_id:levelNumberr}
       console.log(newLevel);
       try {
-          const response = await axios.post(`speciality/create`,newLevel,{
+          const response = await axios.post(`batch/create`,newLevel,{
               headers: { 'Content-Type': 'application/json' }})
               setCreateSuccess(response.data.success)
               setDisplayMsg(true)
@@ -51,17 +50,17 @@ const AddSpeciality = ({theList,setTheList}) => {
       }
     }
   
-    useEffect(() => {setDisplayMsg(false)},[name,description])
+    useEffect(() => {setDisplayMsg(false)},[name,year])
 
   return (
     <div>
         <Button variant="contained" onClick={handleClickOpen} size="small" style= {{boxShadow:'0px 4px 8px rgba(0,122,255,0.2)',backgroundColor:'#007AFF',borderRadius:'10px',marginRight: 10}}>
-        Add Speciality
+        Add Batch
         </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Speciality</DialogTitle>
+        <DialogTitle>Add Batch</DialogTitle>
         <DialogContent>
-            {displayMsg && createSuccess && <Alert severity="success">Speciality added successfully</Alert>}
+            {displayMsg && createSuccess && <Alert severity="success">Batch added successfully</Alert>}
             {displayMsg && !createSuccess && <Alert severity="error">Oops Something went wrong!</Alert>}
             <form onSubmit={handleConfirm}>
               <TextField
@@ -78,25 +77,14 @@ const AddSpeciality = ({theList,setTheList}) => {
               />
               <TextField
                   margin="dense"
-                  id="name"
-                  label="Description"
+                  id="Year"
+                  label="Year"
                   type="text"
                   fullWidth
                   variant="outlined"
                   required
-                  value= {description}
-                  onChange= {e => setDescription(e.target.value)}
-              />
-              <TextField
-                  margin="dense"
-                  id="shortName"
-                  label="ShortName"
-                  type="text"
-                  fullWidth
-                  variant="outlined"
-                  required
-                  value= {shortName}
-                  onChange= {e => setShortName(e.target.value)}
+                  value= {year}
+                  onChange= {e => setYear(e.target.value)}
               />
               <SelectLevel setLevelNumber={setLevelNumber}/>
               <Button type="submit" style={{float:'right',marginTop:'30px'}}>Confirm</Button>

@@ -11,16 +11,18 @@ import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import axios from '../../../Api/Axios'
 import AddModule from './AddModule'
 import ModuleOperations from './ModuleOperations'
+import Reload from '../../Reload';
 
 const ModuleList = () => {
     const classes = useStyles()
     const [modulesList,setModulesList] = useState([])
+    const [loading,setLoading] = useState(false);
 
     useEffect(() => {
         const getSalles = async () => {
             try {
                 const response = await axios.get('module/all')
-                setModulesList(response.data.message)  
+                setModulesList(response.data.message.reverse())  
             }catch (e) {
                 console.log(e.message);
             }
@@ -29,20 +31,21 @@ const ModuleList = () => {
         getSalles();
     },[])
   return (
-    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',height: '600px',overflow:'auto',border:'1px solid #E5E5E5'}}>
+    <div style= {{marginLeft:'10px',overflow: 'hidden',borderRadius: '10px',backgroundColor: 'white',overflow:'auto',border:'1px solid #E5E5E5',position:'relative',minHeight:'600px'}}>
         <div className={classes.teacherListHeader}>
             <Typography variant="h6" style={{flex: 1}}>
                 Modules management
             </Typography>
             <div style={{flex: 1,display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
-                <AddModule theList={modulesList} setTheList={setModulesList}/>
+                <AddModule theList={modulesList} setTheList={setModulesList} setLoading={setLoading}
+                loading={loading}/>
             </div>
         </div>
         <Divider />
         <List
         dense
         disablePadding
-        sx={{ width: "100%",height: "85%",overflow: "auto",bgcolor: "background.paper",
+        sx={{ width: "100%",overflow: "auto",bgcolor: "background.paper",
         //change the background color of item when it clicked
             '& .MuiListItemButton-root:focus': {
             bgcolor: '#7da9ff',

@@ -55,7 +55,7 @@ const SpecialititesControl = ({currentLevel}) => {
         },
       }}
     >
-      {specialitiesList.map((value) => {
+      {specialitiesList?specialitiesList.map((value) => {
         const labelId = `checkbox-list-secondary-label-${value.id}`;
         return (
           <ListItem
@@ -71,7 +71,7 @@ const SpecialititesControl = ({currentLevel}) => {
             </ListItemButton>
           </ListItem>
         );
-      })}
+      }):''}
     </List>
     </div>
   )

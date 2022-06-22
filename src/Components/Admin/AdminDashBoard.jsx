@@ -16,17 +16,17 @@ const AdminDashBord = () => {
     switch(page) {
       case 'dashboard':
         return  <DashBoardContent />
-      case 'Gestion des enseignants':
+      case 'Teachers Management':
         return  <TeacherContent />
-      case 'Gestion des étudiants':
+      case 'Students Management':
         return <StudentContent />
-      case 'Gestion des Salles':
+      case 'Rooms Management':
         return <SalleContent />
-      case 'Batch management':
+      case 'Batch Management':
         return <BatchContent />
-      case 'Emploi du temps':
+      case 'Time Table':
         return <EmploiContent />
-      case 'Module management':
+      case 'Modules Management':
         return <ModuleContent/>
       default: 
         return
